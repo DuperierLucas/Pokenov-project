@@ -14,10 +14,11 @@ import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
-import TabOneScreen from '../screens/TabOneScreen';
-import TabTwoScreen from '../screens/TabTwoScreen';
+import Favorites from '../screens/Favorites';
+import Home from '../screens/Home';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
+import Profile from "../screens/Profile";
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
@@ -58,39 +59,47 @@ function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="TabOne"
+      initialRouteName="Home"
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint,
       }}>
       <BottomTab.Screen
-        name="TabOne"
-        component={TabOneScreen}
-        options={({ navigation }: RootTabScreenProps<'TabOne'>) => ({
-          title: 'Tab One',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-          headerRight: () => (
-            <Pressable
-              onPress={() => navigation.navigate('Modal')}
-              style={({ pressed }) => ({
-                opacity: pressed ? 0.5 : 1,
-              })}>
-              <FontAwesome
-                name="info-circle"
-                size={25}
-                color={Colors[colorScheme].text}
-                style={{ marginRight: 15 }}
-              />
-            </Pressable>
-          ),
+        name="Favorites"
+        component={Favorites}
+        options={({ navigation }: RootTabScreenProps<'Favorites'>) => ({
+          title: 'Favoris',
+          tabBarIcon: ({ color }) => <TabBarIcon name="star" color={color} />
         })}
       />
       <BottomTab.Screen
-        name="TabTwo"
-        component={TabTwoScreen}
+        name="Home"
+        component={Home}
         options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: 'Accueil',
+          tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
         }}
+      />
+      <BottomTab.Screen
+        name="Profile"
+        component={Profile}
+        options={({ navigation }: RootTabScreenProps<'Profile'>) => ({
+          title: 'Profil',
+          tabBarIcon: ({ color }) => <TabBarIcon name="user" color={color} />,
+            headerRight: () => (
+                <Pressable
+                    onPress={() => navigation.navigate('Modal')}
+                    style={({ pressed }) => ({
+                        opacity: pressed ? 0.5 : 1,
+                    })}>
+                    <FontAwesome
+                        name="arrow-circle-o-left"
+                        size={25}
+                        color={Colors[colorScheme].text}
+                        style={{ marginRight: 15 }}
+                    />
+                </Pressable>
+            ),
+        })}
       />
     </BottomTab.Navigator>
   );
