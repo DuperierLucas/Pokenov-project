@@ -4,7 +4,7 @@ import {styles} from "../styles/screens/Home.style";
 import {ScrollView} from "react-native";
 import RecipeCarouselThumbnail from "../components/RecipeCarouselThumbnail";
 import {useEffect, useState} from "react";
-import {Recipe} from "../types";
+import {Recipe, RecipeCategory} from "../types";
 import SearchBar from "../components/SearchBar";
 import CategoryThumbnail from "../components/CategoryThumbnail";
 
@@ -77,7 +77,7 @@ const RANDOM_CATEGORIES = [
 
 export default function Home() {
     const [recipes, setRecipes] = useState<Recipe[]>([]);
-    const [categories, setCategories] = useState<[]>([]);
+    const [categories, setCategories] = useState<RecipeCategory[]>([]);
 
     useEffect(()=> {
         setRecipes(RANDOM_RECIPES)

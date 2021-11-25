@@ -19,6 +19,7 @@ import Home from '../screens/Home';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 import Profile from "../screens/Profile";
+import Login from "../screens/Login";
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
@@ -44,6 +45,7 @@ function RootNavigator() {
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen name="Modal" component={ModalScreen} />
       </Stack.Group>
+        <Stack.Screen name="Login" component={Login} options={{ title: 'Connexion' }} />
     </Stack.Navigator>
   );
 }
