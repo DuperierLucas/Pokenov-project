@@ -7,10 +7,10 @@ import useLogin from "../hooks/useLogin";
 import {useState} from "react";
 
 export default function Login() {
-    const [email, setEmail] = useState<string>('');
-    const [password, setPassword] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
 
-    const { connectWithGoogle, connectWithEmail, logout }= useLogin();
+  const { connectWithGoogle, connectWithEmail, logout }= useLogin();
 
   return (
     <View style={styles.container}>
