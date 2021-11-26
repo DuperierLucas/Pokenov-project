@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { Text, View } from '../components/Themed';
-import { ScrollView } from 'react-native';
+import { ScrollView, Image, TouchableOpacity } from 'react-native';
 import { useEffect, useState } from 'react';
 
 import MarmitonPokemon from '../components/MarmitonPokemon';
@@ -12,7 +12,7 @@ import usePokemonApi from '../hooks/usePokemonApi';
 import { styles } from '../styles/screens/Favorites.style';
 
 export default function Favorites({}: RootTabScreenProps<'Favorites'>) {
-    const { getPokemon } = usePokemonApi;
+    const { getPokemons, getUpdatedPokemon } = usePokemonApi;
 
     const [pokemons, setPokemons] = useState<pokemonList>();
 
@@ -20,10 +20,13 @@ export default function Favorites({}: RootTabScreenProps<'Favorites'>) {
         fetchPokemons();
     }, []);
 
-    async function fetchPokemons() {
+    async function fetchPokemons(url = '') {
         try {
             console.log('all');
-            const allPokemons = await getPokemon();
+            let allPokemons;
+            url === ''
+                ? (allPokemons = await getPokemons())
+                : (allPokemons = await getUpdatedPokemon(url));
 
             console.log(allPokemons);
             setPokemons(allPokemons);
@@ -43,6 +46,40 @@ export default function Favorites({}: RootTabScreenProps<'Favorites'>) {
             );
     }
 
+    const previousButton = () => {
+        return pokemons?.previous ? (
+            <TouchableOpacity
+                onPress={() => {
+                    fetchPokemons(pokemons.previous);
+                }}
+            >
+                <Image
+                    style={[styles.image, styles.arrowLeft]}
+                    source={require('../assets/images/arrow-down.png')}
+                />
+            </TouchableOpacity>
+        ) : (
+            <View></View>
+        );
+    };
+
+    const nextButton = () => {
+        return pokemons?.next ? (
+            <TouchableOpacity
+                onPress={() => {
+                    fetchPokemons(pokemons.next);
+                }}
+            >
+                <Image
+                    style={[styles.image, styles.arrowRight]}
+                    source={require('../assets/images/arrow-down.png')}
+                />
+            </TouchableOpacity>
+        ) : (
+            <View></View>
+        );
+    };
+
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Mes favoris</Text>
@@ -53,6 +90,10 @@ export default function Favorites({}: RootTabScreenProps<'Favorites'>) {
             >
                 {getPokemonList()}
             </ScrollView>
+            <View style={styles.footer}>
+                {previousButton()}
+                {nextButton()}
+            </View>
         </View>
     );
 }

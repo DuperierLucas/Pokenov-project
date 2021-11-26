@@ -11,10 +11,15 @@ type Props = {
 
 const MarmitonPokemon = (props: Props) => {
     const { pokemon } = props;
-    console.log(pokemon);
 
-    const { getPokemon } = usePokemonApi;
+    const { getPokemons } = usePokemonApi;
     const [currentPokemon, setCurrentPokemon] = useState<PokemonDetail>();
+    const [currentPokemonImg, switchCurrentPokemonImg] =
+        useState<Boolean>(true);
+
+    setTimeout(() => {
+        switchCurrentPokemonImg(!currentPokemonImg);
+    }, 1000);
 
     useEffect(() => {
         fetchPokemonInfos();
@@ -22,7 +27,7 @@ const MarmitonPokemon = (props: Props) => {
 
     async function fetchPokemonInfos() {
         try {
-            const currentPokemon = await getPokemon(pokemon.name);
+            const currentPokemon = await getPokemons(pokemon.name);
 
             setCurrentPokemon(currentPokemon);
         } catch (err) {
@@ -33,10 +38,24 @@ const MarmitonPokemon = (props: Props) => {
     return (
         <View style={styles.container}>
             <Text style={styles.title}>{pokemon.name}</Text>
-            <Image
-                style={styles.image}
-                source={{ uri: currentPokemon?.sprites.front_default }}
-            />
+            <View style={styles.imageContainer}>
+                <Image
+                    style={[
+                        currentPokemonImg ? styles.hideImage : styles.image,
+                    ]}
+                    source={{
+                        uri: currentPokemon?.sprites.front_default,
+                    }}
+                />
+                <Image
+                    style={[
+                        currentPokemonImg ? styles.image : styles.hideImage,
+                    ]}
+                    source={{
+                        uri: currentPokemon?.sprites.back_default,
+                    }}
+                />
+            </View>
         </View>
     );
 };

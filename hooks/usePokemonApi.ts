@@ -1,6 +1,6 @@
 const base_url = 'https://pokeapi.co/api/v2';
 
-function getPokemon(id: string | number = '') {
+function getPokemons(id: string | number = '') {
     const allPokemons = fetch(base_url + '/pokemon/' + id).then((res) =>
         res.json(),
     );
@@ -8,4 +8,10 @@ function getPokemon(id: string | number = '') {
     return allPokemons;
 }
 
-export default { getPokemon };
+function getUpdatedPokemon(url: string) {
+    const allPokemons = fetch(url).then((res) => res.json());
+
+    return allPokemons;
+}
+
+export default { getPokemons, getUpdatedPokemon };
