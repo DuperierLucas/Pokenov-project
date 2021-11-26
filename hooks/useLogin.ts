@@ -1,28 +1,7 @@
-import {auth, authProvider} from "../utils/firebase";
-
+import {auth} from "../utils/firebase";
+import * as GoogleSignIn from 'expo-google-sign-in';
 
 const useLogin = () => {
-    function connectWithGoogle() {
-        auth.signInWithPopup(auth, auth.provider)
-            .then((result) => {
-                // This gives you a Google Access Token. You can use it to access the Google API.
-                const credential = auth.GoogleAuthProvider.credentialFromResult(result);
-                const token = credential.accessToken;
-                // The signed-in user info.
-                const user = result.user;
-                // ...
-            }).catch((error) => {
-            // Handle Errors here.
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            // The email of the user's account used.
-            const email = error.email;
-            // The AuthCredential type that was used.
-            const credential = auth.GoogleAuthProvider.credentialFromError(error);
-            // ...
-        });
-    }
-
     function connectWithEmail(email: string, password: string) {
         console.log(email)
         auth.signInWithEmailAndPassword(email, password)
@@ -31,6 +10,34 @@ const useLogin = () => {
     function logout() {
         auth.signOut();
     }
+
+    const initAsync = async () => {
+        await GoogleSignIn.initAsync({
+        });
+        syncUserWithStateAsync();
+    };
+
+    const syncUserWithStateAsync = async () => {
+        const user = await GoogleSignIn.signInSilentlyAsync();
+        console.log(user);
+    };
+
+    const signOutAsync = async (id: string|number|null = null) => {
+        await GoogleSignIn.signOutAsync();
+    };
+
+    const connectWithGoogle = async () => {
+        try {
+            await GoogleSignIn.askForPlayServicesAsync();
+            const { type, user } = await GoogleSignIn.signInAsync();
+            if (type === 'success') {
+                syncUserWithStateAsync();
+            }
+            console.log(user);
+        } catch ({ message }) {
+            alert('login: Error:' + message);
+        }
+    };
 
     return {
         connectWithGoogle,

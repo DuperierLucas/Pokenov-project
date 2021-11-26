@@ -12,13 +12,13 @@ import { ColorSchemeName, Pressable } from 'react-native';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
-import ModalScreen from '../screens/ModalScreen';
+import Catch from '../screens/Catch';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import Favorites from '../screens/Favorites';
 import Home from '../screens/Home';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
-import Profile from "../screens/Profile";
+import Team from "../screens/Team";
 import Login from "../screens/Login";
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
@@ -43,7 +43,7 @@ function RootNavigator() {
       <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
-        <Stack.Screen name="Modal" component={ModalScreen} />
+        <Stack.Screen name="Catch" component={Catch} />
       </Stack.Group>
         <Stack.Screen name="Login" component={Login} options={{ title: 'Connexion' }} />
     </Stack.Navigator>
@@ -82,14 +82,14 @@ function BottomTabNavigator() {
         }}
       />
       <BottomTab.Screen
-        name="Profile"
-        component={Profile}
-        options={({ navigation }: RootTabScreenProps<'Profile'>) => ({
-          title: 'Profil',
+        name="Team"
+        component={Team}
+        options={({ navigation }: RootTabScreenProps<'Team'>) => ({
+          title: 'Équipe',
           tabBarIcon: ({ color }) => <TabBarIcon name="user" color={color} />,
             headerRight: () => (
                 <Pressable
-                    onPress={() => navigation.navigate('Modal')}
+                    onPress={() => navigation.navigate('Catch')}
                     style={({ pressed }) => ({
                         opacity: pressed ? 0.5 : 1,
                     })}>

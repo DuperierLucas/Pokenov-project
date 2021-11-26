@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Text, View } from 'react-native';
+import {Text, TouchableOpacity, View} from 'react-native';
 import {styles} from "../styles/screens/Login.style";
 import {Button, TextInput} from "react-native";
 import useLogin from "../hooks/useLogin";
