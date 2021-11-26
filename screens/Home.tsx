@@ -10,98 +10,56 @@ import CategoryThumbnail from "../components/CategoryThumbnail";
 
 const RANDOM_RECIPES = [
     {
-        title: 'Recette 1',
+        title: 'Équipe 1',
         imageUrl: 'https://source.unsplash.com/random'
     },{
-        title: 'Recette 2',
+        title: 'Équipe 2',
         imageUrl: 'https://source.unsplash.com/random'
     },{
-        title: 'Recette 3',
+        title: 'Équipe 3',
         imageUrl: 'https://source.unsplash.com/random'
     },{
-        title: 'Recette 4',
+        title: 'Équipe 4',
         imageUrl: 'https://source.unsplash.com/random'
     },{
-        title: 'Recette 5',
+        title: 'Équipe 5',
         imageUrl: 'https://source.unsplash.com/random'
     },{
-        title: 'Recette 6',
+        title: 'Équipe 6',
         imageUrl: 'https://source.unsplash.com/random'
     },{
-        title: 'Recette 7',
+        title: 'Équipe 7',
         imageUrl: 'https://source.unsplash.com/random'
     },{
-        title: 'Recette 8',
+        title: 'Équipe 8',
         imageUrl: 'https://source.unsplash.com/random'
     },{
-        title: 'Recette 9',
+        title: 'Équipe 9',
         imageUrl: 'https://source.unsplash.com/random'
     },{
-        title: 'Recette 10',
+        title: 'Équipe 10',
         imageUrl: 'https://source.unsplash.com/random'
     },
-]
-
-const RANDOM_CATEGORIES = [
-    {
-        id: 'desserts',
-        name: 'Desserts',
-        thumbnailUrl: 'https://img.cuisineaz.com/680x357/2016/03/21/i47098-recettes-de-desserts-legers-et-printaniers.jpg'
-    },
-    {
-        id: 'entrees',
-        name: 'Entrées',
-        thumbnailUrl: 'https://recettes.de/images/blogs/kamika/salade-aux-pois-chiches-et-aux-sardines-entree-ou-plat-kamika.320x240.jpg'
-    },
-    {
-        id: 'carnivores',
-        name: 'Carnivores',
-        thumbnailUrl: 'https://static.actu.fr/uploads/2021/11/table-du-boucher.jpeg'
-    },
-    {
-        id: 'vegetarien',
-        name: 'Végétariens',
-        thumbnailUrl: 'http://www.pourquoidocteur.fr/media/article/ggl1200_istock-802266868-plateresca-bol-brocolis-1582556122.jpg'
-    },
-    {
-        id: 'vegetarien',
-        name: 'Végétariens',
-        thumbnailUrl: 'http://www.pourquoidocteur.fr/media/article/ggl1200_istock-802266868-plateresca-bol-brocolis-1582556122.jpg'
-    },
-    {
-        id: 'vegetarien',
-        name: 'Végétariens',
-        thumbnailUrl: 'http://www.pourquoidocteur.fr/media/article/ggl1200_istock-802266868-plateresca-bol-brocolis-1582556122.jpg'
-    }
 ]
 
 export default function Home() {
     const [recipes, setRecipes] = useState<Recipe[]>([]);
-    const [categories, setCategories] = useState<RecipeCategory[]>([]);
 
-    useEffect(()=> {
+    useEffect(() => {
         setRecipes(RANDOM_RECIPES)
-        setCategories(RANDOM_CATEGORIES)
     }, [])
 
     function getCarousel() {
-        return recipes.map(recipe => <RecipeCarouselThumbnail recipe={recipe} />)
+        return recipes.map((recipe, index) => <RecipeCarouselThumbnail recipe={recipe} key={index}/>)
     }
 
-  return (
-    <View style={styles.container}>
-        <Text style={styles.title}>À la une</Text>
-        <ScrollView horizontal={true} contentContainerStyle={styles.carouselContainer} showsHorizontalScrollIndicator={false}>
-            {getCarousel()}
-        </ScrollView>
-        <ScrollView contentContainerStyle={styles.innerContainer} showsVerticalScrollIndicator={false}>
-        <Text style={styles.title}>Rechercher une recette</Text>
-        <SearchBar />
-        <Text style={styles.title}>Catégories</Text>
-        <View style={styles.categoriesContainer}>
-        {categories.map((category) => <CategoryThumbnail category={category} />)}
+    return (
+        <View style={styles.container}>
+            <Text style={styles.title}>Classement</Text>
+            <ScrollView horizontal={true} contentContainerStyle={styles.carouselContainer}
+                        showsHorizontalScrollIndicator={false}>
+                {getCarousel()}
+            </ScrollView>
         </View>
-        </ScrollView>
-    </View>
-  );
+    );
 }
