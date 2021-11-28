@@ -5,7 +5,6 @@ import usePokemonApi from '../hooks/usePokemonApi';
 import { useEffect, useState } from 'react';
 
 import { NamedAPIResource, Pokemon } from 'pokenode-ts';
-import useGame from '../hooks/GameProvider';
 type Props = {
     pokemon: NamedAPIResource;
 };
@@ -14,7 +13,6 @@ const MarmitonPokemon = (props: Props): JSX.Element => {
     const { pokemon } = props;
 
     const { getFromUrl } = usePokemonApi();
-    const { catchPokemon } = useGame();
     const [currentPokemon, setCurrentPokemon] = useState<Pokemon>();
     const [currentPokemonImg, switchCurrentPokemonImg] =
         useState<boolean>(true);
@@ -39,7 +37,6 @@ const MarmitonPokemon = (props: Props): JSX.Element => {
 
     async function onPressPokemon(): Promise<void> {
         console.log(currentPokemon);
-        catchPokemon(currentPokemon);
     }
 
     return (
