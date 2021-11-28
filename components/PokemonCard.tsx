@@ -46,8 +46,9 @@ const PokemonCard = (props: Props): JSX.Element => {
                 onPress={() => {
                     onPress();
                 }}
+                style={styles.containerCard}
             >
-                <Text style={styles.title}>{pokemon.name}</Text>
+                <Text style={styles.title}>{pokemon.name.toUpperCase()}</Text>
                 <View style={styles.imageContainer}>
                     <Image
                         style={[

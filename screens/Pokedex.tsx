@@ -6,12 +6,13 @@ import {
     Text,
     View,
     Modal,
-    Button,
 } from 'react-native';
 import { useEffect, useState } from 'react';
 import PokemonCard from '../components/PokemonCard';
+import PokedexPokemonDetails from '../modals/PokedexPokemonDetails';
 
-import { styles } from '../styles/screens/Favorites.style';
+import { styles } from '../styles/screens/Pokedex.style';
+
 import usePokemonAPI from '../hooks/usePokemonApi';
 import { NamedAPIResourceList, Pokemon } from 'pokenode-ts';
 
@@ -28,13 +29,11 @@ export default function Pokedex(): JSX.Element {
 
     async function fetchPokemons(url = '') {
         try {
-            console.log('all');
             let allPokemons;
             url === ''
                 ? (allPokemons = await getPokemons())
                 : (allPokemons = await getFromUrl(url));
 
-            console.log(allPokemons);
             setPokemons(allPokemons);
         } catch (err) {
             console.log(err);
@@ -42,17 +41,8 @@ export default function Pokedex(): JSX.Element {
     }
 
     function openModal(pokemon: Pokemon) {
-        console.log(pokemon.types);
         setModalVisible(!modalVisible);
         setCurrentDetailPokemon(pokemon);
-
-        console.log(pokemon.types);
-    }
-
-    function getCurrentPokemonTypes() {
-        return currentDetailPokemon?.types?.map((type) => (
-            <Text style={styles.currentPokemonTypes}>{type.type.name}</Text>
-        ));
     }
 
     function getPokemonList() {
@@ -126,26 +116,10 @@ export default function Pokedex(): JSX.Element {
                     setModalVisible(!modalVisible);
                 }}
             >
-                <View style={styles.modalView}>
-                    <View style={styles.containerModalView}>
-                        <Image
-                            style={styles.currentPokemonImg}
-                            source={{
-                                uri: currentDetailPokemon?.sprites
-                                    .front_default,
-                            }}
-                        />
-                        <Text>{currentDetailPokemon?.name}</Text>
-                        <View style={styles.containerCurrentPokemonTypes}>
-                            {getCurrentPokemonTypes()}
-                        </View>
-                        <Button
-                            onPress={() => setModalVisible(!modalVisible)}
-                            title="Close details"
-                            accessibilityLabel="Close the pokemon modal"
-                        />
-                    </View>
-                </View>
+                <PokedexPokemonDetails
+                    pokemon={currentDetailPokemon}
+                    close={() => setModalVisible(false)}
+                />
             </Modal>
         </View>
     );

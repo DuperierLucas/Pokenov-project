@@ -11,6 +11,9 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: colors.main.color,
     },
+    containerCard: {
+        alignItems: 'center',
+    },
     imageContainer: {
         position: 'relative',
     },
