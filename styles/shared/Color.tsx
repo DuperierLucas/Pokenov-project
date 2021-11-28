@@ -6,6 +6,8 @@ export const colors = {
         pink: '#FF6F91',
         orange: '#FF9671',
         yellow: '#F9F871',
+        white: '#FFFFFF',
+        black: '#000000',
     },
 
     light: {

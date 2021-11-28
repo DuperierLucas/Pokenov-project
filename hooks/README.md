@@ -1,5 +1,8 @@
 # Utilisation de l'API pokeapi
 
+## Ids de pokémons
+De 1 à 898 inclus
+
 ## Typage
 * Liste de pokémons : NamedApiResourceList
 * Pokémon dans une liste de pokémons : NameApiResource

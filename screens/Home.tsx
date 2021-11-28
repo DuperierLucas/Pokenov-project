@@ -1,8 +1,9 @@
 import React from 'react';
 import { styles } from '../styles/screens/Home.style';
-import { ScrollView, View, Text } from 'react-native';
+import { ScrollView, View, Text, TouchableOpacity } from 'react-native';
 import RecipeCarouselThumbnail from '../components/RecipeCarouselThumbnail';
 import { useEffect, useState } from 'react';
+import useGame from '../hooks/GameProvider';
 
 const RANDOM_RECIPES = [
     {
@@ -48,6 +49,7 @@ const RANDOM_RECIPES = [
 ];
 
 export default function Home() {
+    const { resetGame } = useGame();
     const [recipes, setRecipes] = useState<any[]>([]);
     useEffect(() => {
         setRecipes(RANDOM_RECIPES);
@@ -69,6 +71,12 @@ export default function Home() {
             >
                 {getCarousel()}
             </ScrollView>
+            <TouchableOpacity
+                onPress={resetGame}
+                style={{ backgroundColor: 'red' }}
+            >
+                <Text>Remettre à 0 le jeu</Text>
+            </TouchableOpacity>
         </View>
     );
 }
