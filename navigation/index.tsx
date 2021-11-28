@@ -55,7 +55,13 @@ function RootNavigator() {
                 options={{ title: 'Oops!' }}
             />
             <Stack.Group screenOptions={{ presentation: 'modal' }}>
-                <Stack.Screen name="Catch" component={Catch} />
+                <Stack.Screen
+                    name="Catch"
+                    component={Catch}
+                    options={() => ({
+                        title: 'Capturer',
+                    })}
+                />
             </Stack.Group>
             <Stack.Screen
                 name="Login"
