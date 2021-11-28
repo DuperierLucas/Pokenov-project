@@ -2,13 +2,12 @@ import React from 'react';
 import { ScrollView, Image, TouchableOpacity, Text, View } from 'react-native';
 import { useEffect, useState } from 'react';
 import MarmitonPokemon from '../components/MarmitonPokemon';
-import { RootTabScreenProps } from '../types';
 
 import { styles } from '../styles/screens/Favorites.style';
 import usePokemonAPI from '../hooks/usePokemonApi';
 import { NamedAPIResourceList } from 'pokenode-ts';
 
-export default function Favorites({}: RootTabScreenProps<'Favorites'>) {
+export default function Pokedex(): JSX.Element {
     const { getPokemons, getFromUrl } = usePokemonAPI();
 
     const [pokemons, setPokemons] = useState<NamedAPIResourceList>();
@@ -79,7 +78,7 @@ export default function Favorites({}: RootTabScreenProps<'Favorites'>) {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Mes favoris</Text>
+            <Text style={styles.title}>Pokédex</Text>
 
             <ScrollView
                 contentContainerStyle={styles.innerContainer}

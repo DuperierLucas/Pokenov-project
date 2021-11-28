@@ -5,6 +5,12 @@ export const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
+        paddingHorizontal: 20,
+        //backgroundColor: 'red',
+    },
+    rowContainer: {
+        alignItems: 'center',
+        flexDirection: 'row',
     },
     title: {
         fontSize: 20,

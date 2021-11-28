@@ -13,7 +13,7 @@ import { Pressable } from 'react-native';
 import Colors from '../constants/Colors';
 import Catch from '../screens/Catch';
 import NotFoundScreen from '../screens/NotFoundScreen';
-import Favorites from '../screens/Favorites';
+import Pokedex from '../screens/Pokedex';
 import Home from '../screens/Home';
 import {
     RootStackParamList,
@@ -82,9 +82,9 @@ function BottomTabNavigator() {
         >
             <BottomTab.Screen
                 name="Favorites"
-                component={Favorites}
+                component={Pokedex}
                 options={({}: RootTabScreenProps<'Favorites'>) => ({
-                    title: 'Favoris',
+                    title: 'Pokédex',
                     tabBarIcon: ({ color }) => (
                         <TabBarIcon name="star" color={color} />
                     ),
@@ -104,7 +104,7 @@ function BottomTabNavigator() {
                 name="Team"
                 component={Team}
                 options={({ navigation }: RootTabScreenProps<'Team'>) => ({
-                    title: 'Équipe',
+                    title: 'Mon Équipe',
                     tabBarIcon: ({ color }) => (
                         <TabBarIcon name="user" color={color} />
                     ),

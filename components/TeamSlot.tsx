@@ -1,36 +1,43 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Image, Text, View } from 'react-native';
 import { Pokemon } from 'pokenode-ts';
+import { styles, THUMBNAIL_SIZE } from '../styles/components/TeamSlot.style';
 
 type Props = {
     pokemon?: Pokemon;
-    type?: 'disabled' | 'empty' | 'occupied';
 };
 
+import AddIcon from '../assets/images/plus-icon.svg';
+import { colors } from '../styles/shared/Color';
+
 const TeamSlot = (props: Props): JSX.Element => {
-    const { type } = props;
+    const { pokemon } = props;
     let content;
 
-    if (type === 'disabled') {
+    if (!pokemon) {
         content = (
-            <View>
-                <Text>disabled</Text>
-            </View>
-        );
-    } else if (type === 'empty') {
-        content = (
-            <View>
-                <Text>empty</Text>
-            </View>
+            <AddIcon
+                height={THUMBNAIL_SIZE * 0.75}
+                width={THUMBNAIL_SIZE * 0.75}
+                fill={colors.main.orange}
+            />
         );
     } else {
         content = (
-            <View>
-                <Text>pokemon</Text>
-            </View>
+            <>
+                <Image
+                    style={styles.thumbnail}
+                    source={{ uri: pokemon.sprites.front_default }}
+                />
+                <Text style={styles.title}>{pokemon.name}</Text>
+            </>
         );
     }
-    return <View>{content}</View>;
+    return (
+        <View style={styles.container}>
+            <View style={styles.containerInner}>{content}</View>
+        </View>
+    );
 };
 
 export default TeamSlot;

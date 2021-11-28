@@ -9,6 +9,7 @@ import {
     NavigatorScreenParams,
 } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { Pokemon } from 'pokenode-ts';
 
 declare global {
     namespace ReactNavigation {
