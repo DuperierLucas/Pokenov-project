@@ -30,8 +30,8 @@ const TeamSlot = (props: Props): JSX.Element => {
     if (!pokemon) {
         content = (
             <AddIcon
-                height={THUMBNAIL_SIZE * 0.75}
-                width={THUMBNAIL_SIZE * 0.75}
+                height={THUMBNAIL_SIZE * 0.5}
+                width={THUMBNAIL_SIZE * 0.5}
                 fill={colors.main.orange}
             />
         );
