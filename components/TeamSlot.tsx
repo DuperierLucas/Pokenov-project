@@ -1,17 +1,30 @@
 import React from 'react';
-import { Image, Text, View } from 'react-native';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { Pokemon } from 'pokenode-ts';
 import { styles, THUMBNAIL_SIZE } from '../styles/components/TeamSlot.style';
 
 type Props = {
-    pokemon?: Pokemon;
+    pokemon: Pokemon;
+    index: number;
+    onPress: ({
+        index,
+        pokemon,
+    }: {
+        index?: number;
+        pokemon?: Pokemon;
+    }) => void;
 };
 
 import AddIcon from '../assets/images/plus-icon.svg';
 import { colors } from '../styles/shared/Color';
 
 const TeamSlot = (props: Props): JSX.Element => {
-    const { pokemon } = props;
+    const { pokemon, index, onPress } = props;
+
+    function onPressSlot() {
+        onPress({ index, pokemon });
+    }
+
     let content;
 
     if (!pokemon) {
@@ -35,7 +48,13 @@ const TeamSlot = (props: Props): JSX.Element => {
     }
     return (
         <View style={styles.container}>
-            <View style={styles.containerInner}>{content}</View>
+            <TouchableOpacity
+                style={styles.containerInner}
+                activeOpacity={0.7}
+                onPress={onPressSlot}
+            >
+                {content}
+            </TouchableOpacity>
         </View>
     );
 };

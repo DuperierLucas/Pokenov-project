@@ -10,7 +10,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 import { Pressable } from 'react-native';
 
-import Colors from '../constants/Colors';
 import Catch from '../screens/Catch';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import Pokedex from '../screens/Pokedex';
@@ -23,6 +22,7 @@ import {
 import LinkingConfiguration from './LinkingConfiguration';
 import Team from '../screens/Team';
 import Login from '../screens/Login';
+import { colors } from '../styles/shared/Color';
 
 export default function Navigation() {
     return (
@@ -77,13 +77,13 @@ function BottomTabNavigator() {
         <BottomTab.Navigator
             initialRouteName="Home"
             screenOptions={{
-                tabBarActiveTintColor: Colors.light.tint,
+                tabBarActiveTintColor: colors.main.pink,
             }}
         >
             <BottomTab.Screen
                 name="Favorites"
                 component={Pokedex}
-                options={({}: RootTabScreenProps<'Favorites'>) => ({
+                options={() => ({
                     title: 'Pokédex',
                     tabBarIcon: ({ color }) => (
                         <TabBarIcon name="star" color={color} />
@@ -118,7 +118,7 @@ function BottomTabNavigator() {
                             <FontAwesome
                                 name="arrow-circle-o-left"
                                 size={25}
-                                color={Colors.light.text}
+                                color={colors.main.background}
                                 style={{ marginRight: 15 }}
                             />
                         </Pressable>

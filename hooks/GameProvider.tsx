@@ -6,6 +6,7 @@ type Game = {
     capturedPokemons: Pokemon[];
     catchPokemon: (pokemon: Pokemon) => void;
     addPokemonToTeam: (pokemon: Pokemon, slotIndex: number) => boolean;
+    deletePokemonFromTeam: (slotIndex: number) => void;
 };
 
 const GameContext = createContext<Game>({} as any);
@@ -51,11 +52,18 @@ const Provider = ({ children }: Props): JSX.Element => {
         return true;
     }
 
+    function deletePokemonFromTeam(index: number) {
+        const newTeam = [...pokemonTeam];
+        newTeam[index] = undefined;
+        setPokemonTeam(newTeam);
+    }
+
     const providerValues: Game = {
         pokemonTeam,
         capturedPokemons,
         catchPokemon,
         addPokemonToTeam,
+        deletePokemonFromTeam,
     };
 
     return (
