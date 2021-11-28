@@ -9,10 +9,11 @@ import {
     NavigatorScreenParams,
 } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { Pokemon } from 'pokenode-ts';
 
 declare global {
     namespace ReactNavigation {
-        interface RootParamList extends RootStackParamList {}
+        type RootParamList = RootStackParamList;
     }
 }
 
@@ -21,15 +22,16 @@ export type RootStackParamList = {
     Modal: undefined;
     NotFound: undefined;
     Login: undefined;
+    Catch: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
     NativeStackScreenProps<RootStackParamList, Screen>;
 
 export type RootTabParamList = {
-  Favorites: undefined;
-  Home: undefined;
-  Team: undefined;
+    Favorites: undefined;
+    Home: undefined;
+    Team: undefined;
 };
 
 export type RootTabScreenProps<Screen extends keyof RootTabParamList> =
@@ -38,33 +40,8 @@ export type RootTabScreenProps<Screen extends keyof RootTabParamList> =
         NativeStackScreenProps<RootStackParamList>
     >;
 
-export type Recipe = {
-    title: string;
-    imageUrl: string;
-};
-
-export type RecipeCategory = {
-    name: string;
-    thumbnailUrl: string;
-};
-
-export type pokemonList = {
-    count: number;
-    next: string;
-    previous: string;
-    results: Array<Pokemon>;
-};
-
-export type Pokemon = {
-    name: string;
-    url: string;
-};
-
-export type PokemonDetail = {
-    id: number;
-    name: string;
-    sprites: {
-        front_default: string;
-        back_default: string;
-    };
+export type PokemonToCapture = {
+    pokemon: Pokemon;
+    apparitionDate: number;
+    disparitionDate: number;
 };

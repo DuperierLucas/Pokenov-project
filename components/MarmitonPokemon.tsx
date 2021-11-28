@@ -1,21 +1,23 @@
 import React from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { styles } from '../styles/components/MarmitonPokemon.style';
 import usePokemonApi from '../hooks/usePokemonApi';
 import { useEffect, useState } from 'react';
 
-import { Pokemon, PokemonDetail } from '../types';
+import { NamedAPIResource, Pokemon } from 'pokenode-ts';
+import useGame from '../hooks/GameProvider';
 type Props = {
-    pokemon: Pokemon;
+    pokemon: NamedAPIResource;
 };
 
-const MarmitonPokemon = (props: Props) => {
+const MarmitonPokemon = (props: Props): JSX.Element => {
     const { pokemon } = props;
 
-    const { getPokemons } = usePokemonApi;
-    const [currentPokemon, setCurrentPokemon] = useState<PokemonDetail>();
+    const { getFromUrl } = usePokemonApi();
+    const { catchPokemon } = useGame();
+    const [currentPokemon, setCurrentPokemon] = useState<Pokemon>();
     const [currentPokemonImg, switchCurrentPokemonImg] =
-        useState<Boolean>(true);
+        useState<boolean>(true);
 
     setTimeout(() => {
         switchCurrentPokemonImg(!currentPokemonImg);
@@ -27,7 +29,7 @@ const MarmitonPokemon = (props: Props) => {
 
     async function fetchPokemonInfos() {
         try {
-            const currentPokemon = await getPokemons(pokemon.name);
+            const currentPokemon = await getFromUrl(pokemon.url);
 
             setCurrentPokemon(currentPokemon);
         } catch (err) {
@@ -35,27 +37,34 @@ const MarmitonPokemon = (props: Props) => {
         }
     }
 
+    async function onPressPokemon(): Promise<void> {
+        console.log(currentPokemon);
+        catchPokemon(currentPokemon);
+    }
+
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>{pokemon.name}</Text>
-            <View style={styles.imageContainer}>
-                <Image
-                    style={[
-                        currentPokemonImg ? styles.hideImage : styles.image,
-                    ]}
-                    source={{
-                        uri: currentPokemon?.sprites.front_default,
-                    }}
-                />
-                <Image
-                    style={[
-                        currentPokemonImg ? styles.image : styles.hideImage,
-                    ]}
-                    source={{
-                        uri: currentPokemon?.sprites.back_default,
-                    }}
-                />
-            </View>
+            <TouchableOpacity onPress={onPressPokemon}>
+                <Text style={styles.title}>{pokemon.name}</Text>
+                <View style={styles.imageContainer}>
+                    <Image
+                        style={[
+                            currentPokemonImg ? styles.hideImage : styles.image,
+                        ]}
+                        source={{
+                            uri: currentPokemon?.sprites.front_default,
+                        }}
+                    />
+                    <Image
+                        style={[
+                            currentPokemonImg ? styles.image : styles.hideImage,
+                        ]}
+                        source={{
+                            uri: currentPokemon?.sprites.back_default,
+                        }}
+                    />
+                </View>
+            </TouchableOpacity>
         </View>
     );
 };

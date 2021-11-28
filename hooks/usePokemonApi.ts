@@ -1,17 +1,32 @@
-const base_url = 'https://pokeapi.co/api/v2';
+import {
+    NamedAPIResourceList,
+    Pokemon,
+    PokemonClient,
+    UtilityClient,
+} from 'pokenode-ts';
 
-function getPokemons(id: string | number = '') {
-    const allPokemons = fetch(base_url + '/pokemon/' + id).then((res) =>
-        res.json(),
-    );
+const api = new PokemonClient();
+const utilsAPI = new UtilityClient();
 
-    return allPokemons;
-}
+type PokeApiHelper = {
+    getPokemons: () => Promise<NamedAPIResourceList>;
+    getPokemonById: (id: number) => Promise<Pokemon>;
+    getFromUrl: (url: string) => Promise<any>;
+};
 
-function getUpdatedPokemon(url: string) {
-    const allPokemons = fetch(url).then((res) => res.json());
+const usePokemonAPI = (): PokeApiHelper => {
+    function getPokemons(): Promise<NamedAPIResourceList> {
+        return api.listPokemons();
+    }
 
-    return allPokemons;
-}
+    function getPokemonById(id: number): Promise<Pokemon> {
+        return api.getPokemonById(id);
+    }
 
-export default { getPokemons, getUpdatedPokemon };
+    function getFromUrl(url: string): Promise<any> {
+        return utilsAPI.getResourceByUrl(url);
+    }
+
+    return { getPokemons, getPokemonById, getFromUrl };
+};
+export default usePokemonAPI;
