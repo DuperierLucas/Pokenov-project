@@ -43,4 +43,36 @@ export const styles = StyleSheet.create({
     arrowRight: {
         transform: [{ rotate: '270deg' }],
     },
+    modalView: {
+        backgroundColor: colors.main.color,
+
+        margin: 20,
+        borderRadius: 20,
+        padding: 35,
+        alignItems: 'center',
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5,
+    },
+    containerModalView: {
+        alignItems: 'center',
+        backgroundColor: colors.main.color,
+    },
+    currentPokemonImg: {
+        width: 100,
+        height: 100,
+    },
+    containerCurrentPokemonTypes: {
+        backgroundColor: colors.main.color,
+        display: 'flex',
+        flexDirection: 'row',
+    },
+    currentPokemonTypes: {
+        marginHorizontal: 5,
+    },
 });

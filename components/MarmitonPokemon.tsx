@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { View, Text, Image, Pressable } from 'react-native';
 import { styles } from '../styles/components/MarmitonPokemon.style';
 import usePokemonApi from '../hooks/usePokemonApi';
 import { useEffect, useState } from 'react';
@@ -7,10 +7,11 @@ import { useEffect, useState } from 'react';
 import { NamedAPIResource, Pokemon } from 'pokenode-ts';
 type Props = {
     pokemon: NamedAPIResource;
+    openModal: Function;
 };
 
 const MarmitonPokemon = (props: Props): JSX.Element => {
-    const { pokemon } = props;
+    const { pokemon, openModal } = props;
 
     const { getFromUrl } = usePokemonApi();
     const [currentPokemon, setCurrentPokemon] = useState<Pokemon>();
@@ -35,13 +36,17 @@ const MarmitonPokemon = (props: Props): JSX.Element => {
         }
     }
 
-    async function onPressPokemon(): Promise<void> {
-        console.log(currentPokemon);
+    function onPress() {
+        openModal(currentPokemon);
     }
 
     return (
         <View style={styles.container}>
-            <TouchableOpacity onPress={onPressPokemon}>
+            <Pressable
+                onPress={() => {
+                    onPress();
+                }}
+            >
                 <Text style={styles.title}>{pokemon.name}</Text>
                 <View style={styles.imageContainer}>
                     <Image
@@ -61,7 +66,7 @@ const MarmitonPokemon = (props: Props): JSX.Element => {
                         }}
                     />
                 </View>
-            </TouchableOpacity>
+            </Pressable>
         </View>
     );
 };
