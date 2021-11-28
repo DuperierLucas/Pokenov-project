@@ -17,7 +17,6 @@ const TeamPokemonDetails = ({ index, close, pokemon }: Props): JSX.Element => {
         Alert.alert("Supprimer ce pokémon de l'équipe ?", '', [
             {
                 text: 'Annuler',
-                onPress: () => console.log('Cancel Pressed'),
                 style: 'cancel',
             },
             {

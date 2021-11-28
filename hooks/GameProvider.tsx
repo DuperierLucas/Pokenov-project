@@ -1,5 +1,6 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import { Pokemon } from 'pokenode-ts';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type Game = {
     pokemonTeam: Pokemon[];
@@ -25,12 +26,43 @@ const DEFAULT_TEAM_STATE: Pokemon[] = [
 ];
 
 const Provider = ({ children }: Props): JSX.Element => {
-    const [username, setUsername] = useState<string>('Anonyme');
     const [pokemonTeam, setPokemonTeam] =
         useState<Pokemon[]>(DEFAULT_TEAM_STATE);
+    const [capturedPokemons, setCapturedPokemons] = useState<Pokemon[]>([]);
     const [wildsPokemons, setWildPokemons] = useState<Pokemon[]>([]);
     const [topTeams, setTopTeams] = useState([]);
-    const [capturedPokemons, setCapturedPokemons] = useState<Pokemon[]>([]);
+    const [username, setUsername] = useState<string>('Anonyme');
+
+    useEffect(() => {
+        getData();
+    }, []);
+
+    useEffect(() => {
+        saveData();
+    }, [pokemonTeam, capturedPokemons, wildsPokemons, topTeams, username]);
+
+    async function getData() {
+        const data = await AsyncStorage.getItem('game');
+        if (data) {
+            const parsedData = JSON.parse(data);
+            setPokemonTeam(parsedData.pokemonTeam);
+            setCapturedPokemons(parsedData.capturedPokemons);
+            setWildPokemons(parsedData.wildsPokemons);
+            setTopTeams(parsedData.topTeams);
+            setUsername(parsedData.username);
+        }
+    }
+
+    async function saveData() {
+        const data = JSON.stringify({
+            pokemonTeam,
+            capturedPokemons,
+            username,
+            wildsPokemons,
+            topTeams,
+        });
+        await AsyncStorage.setItem('game', data);
+    }
 
     function catchPokemon(pokemon: Pokemon) {
         const newCapturedPokemons = [...capturedPokemons, pokemon];

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Alert, Modal, View } from 'react-native';
+import { Modal, View } from 'react-native';
 import { styles } from '../styles/screens/Team.style';
 import useGame from '../hooks/GameProvider';
 import TeamSlot from '../components/TeamSlot';
@@ -8,7 +8,7 @@ import AddToTeam from '../modals/AddToTeam';
 import { Pokemon } from 'pokenode-ts';
 
 export default function Team(): JSX.Element {
-    const { pokemonTeam, deletePokemonFromTeam } = useGame();
+    const { pokemonTeam } = useGame();
     const [pokemonDetailVisible, setPokemonDetailVisible] = useState(false);
     const [addPokemonVisible, setAddPokemonVisible] = useState(false);
     const [pokemonIndex, setPokemonIndex] = useState(0);
@@ -21,7 +21,7 @@ export default function Team(): JSX.Element {
         pokemon?: Pokemon;
     }) {
         setPokemonIndex(index);
-        if (pokemon !== undefined) {
+        if (pokemon) {
             setPokemonDetailVisible(true);
         } else {
             setAddPokemonVisible(true);

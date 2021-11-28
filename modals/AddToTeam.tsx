@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, Text, TouchableOpacity, View } from 'react-native';
+import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import useGame from '../hooks/GameProvider';
 import { styles } from '../styles/modals/AddToTeam.style';
 import CloseIcon from '../assets/images/close.svg';
@@ -37,9 +37,13 @@ const AddToTeam = ({ index, close }: Props): JSX.Element => {
                     </View>
                 </TouchableOpacity>
             </View>
-            {capturedPokemons
-                .filter((poke) => !pokemonTeam.find((p) => p?.id === poke.id))
-                .map(renderPokemon)}
+            <ScrollView>
+                {capturedPokemons
+                    .filter(
+                        (poke) => !pokemonTeam.find((p) => p?.id === poke.id),
+                    )
+                    .map(renderPokemon)}
+            </ScrollView>
         </View>
     );
 };
