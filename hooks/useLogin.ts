@@ -1,10 +1,10 @@
-import {auth} from "../utils/firebase";
+import { auth } from '../utils/firebase';
 import * as GoogleSignIn from 'expo-google-sign-in';
 
 const useLogin = () => {
     function connectWithEmail(email: string, password: string) {
-        console.log(email)
-        auth.signInWithEmailAndPassword(email, password)
+        console.log(email);
+        auth.signInWithEmailAndPassword(email, password);
     }
 
     function logout() {
@@ -12,8 +12,7 @@ const useLogin = () => {
     }
 
     const initAsync = async () => {
-        await GoogleSignIn.initAsync({
-        });
+        await GoogleSignIn.initAsync({});
         syncUserWithStateAsync();
     };
 
@@ -22,7 +21,7 @@ const useLogin = () => {
         console.log(user);
     };
 
-    const signOutAsync = async (id: string|number|null = null) => {
+    const signOutAsync = async (id: string | number | null = null) => {
         await GoogleSignIn.signOutAsync();
     };
 
@@ -42,8 +41,8 @@ const useLogin = () => {
     return {
         connectWithGoogle,
         connectWithEmail,
-        logout
-    }
+        logout,
+    };
 };
 
 export default useLogin;

@@ -1,16 +1,11 @@
-import * as React from 'react';
-import { Text, View } from '../components/Themed';
-import {styles} from "../styles/screens/Team.style";
-import {useNavigation} from "@react-navigation/native";
+import React from 'react';
+import { Text, View } from 'react-native';
+import { styles } from '../styles/screens/Team.style';
 
 export default function Team() {
-const navigation = useNavigation();
-
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Mon équipe</Text>
-    </View>
-  );
+    return (
+        <View style={styles.container}>
+            <Text style={styles.title}>Mon équipe</Text>
+        </View>
+    );
 }
-
-

@@ -4,18 +4,19 @@ import { styles } from '../styles/components/MarmitonPokemon.style';
 import usePokemonApi from '../hooks/usePokemonApi';
 import { useEffect, useState } from 'react';
 
-import { Pokemon, PokemonDetail } from '../types';
+import { PokemonDetail } from '../types';
+import { NamedAPIResource } from 'pokenode-ts';
 type Props = {
-    pokemon: Pokemon;
+    pokemon: NamedAPIResource;
 };
 
 const MarmitonPokemon = (props: Props) => {
     const { pokemon } = props;
 
-    const { getPokemons } = usePokemonApi;
+    const { getFromUrl } = usePokemonApi();
     const [currentPokemon, setCurrentPokemon] = useState<PokemonDetail>();
     const [currentPokemonImg, switchCurrentPokemonImg] =
-        useState<Boolean>(true);
+        useState<boolean>(true);
 
     setTimeout(() => {
         switchCurrentPokemonImg(!currentPokemonImg);
@@ -27,7 +28,7 @@ const MarmitonPokemon = (props: Props) => {
 
     async function fetchPokemonInfos() {
         try {
-            const currentPokemon = await getPokemons(pokemon.name);
+            const currentPokemon = await getFromUrl(pokemon.url);
 
             setCurrentPokemon(currentPokemon);
         } catch (err) {

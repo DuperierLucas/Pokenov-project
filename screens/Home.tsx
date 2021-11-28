@@ -1,12 +1,8 @@
-import * as React from 'react';
-import { Text, View } from '../components/Themed';
+import React from 'react';
 import { styles } from '../styles/screens/Home.style';
-import { ScrollView } from 'react-native';
+import { ScrollView, View, Text } from 'react-native';
 import RecipeCarouselThumbnail from '../components/RecipeCarouselThumbnail';
 import { useEffect, useState } from 'react';
-import { Recipe } from '../types';
-
-console.disableYellowBox = true;
 
 const RANDOM_RECIPES = [
     {
@@ -52,8 +48,7 @@ const RANDOM_RECIPES = [
 ];
 
 export default function Home() {
-    const [recipes, setRecipes] = useState<Recipe[]>([]);
-
+    const [recipes, setRecipes] = useState<any[]>([]);
     useEffect(() => {
         setRecipes(RANDOM_RECIPES);
     }, []);

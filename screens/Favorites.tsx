@@ -1,20 +1,17 @@
-import * as React from 'react';
-
-import { Text, View } from '../components/Themed';
-import { ScrollView, Image, TouchableOpacity } from 'react-native';
+import React from 'react';
+import { ScrollView, Image, TouchableOpacity, Text, View } from 'react-native';
 import { useEffect, useState } from 'react';
-
 import MarmitonPokemon from '../components/MarmitonPokemon';
-import { RootTabScreenProps, pokemonList } from '../types';
-
-import usePokemonApi from '../hooks/usePokemonApi';
+import { RootTabScreenProps } from '../types';
 
 import { styles } from '../styles/screens/Favorites.style';
+import usePokemonAPI from '../hooks/usePokemonApi';
+import { NamedAPIResourceList } from 'pokenode-ts';
 
 export default function Favorites({}: RootTabScreenProps<'Favorites'>) {
-    const { getPokemons, getUpdatedPokemon } = usePokemonApi;
+    const { getPokemons, getFromUrl } = usePokemonAPI();
 
-    const [pokemons, setPokemons] = useState<pokemonList>();
+    const [pokemons, setPokemons] = useState<NamedAPIResourceList>();
 
     useEffect(() => {
         fetchPokemons();
@@ -26,7 +23,7 @@ export default function Favorites({}: RootTabScreenProps<'Favorites'>) {
             let allPokemons;
             url === ''
                 ? (allPokemons = await getPokemons())
-                : (allPokemons = await getUpdatedPokemon(url));
+                : (allPokemons = await getFromUrl(url));
 
             console.log(allPokemons);
             setPokemons(allPokemons);
