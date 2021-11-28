@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, Image, Pressable } from 'react-native';
-import { styles } from '../styles/components/MarmitonPokemon.style';
+import { styles } from '../styles/components/PokemonCard.style';
 import usePokemonApi from '../hooks/usePokemonApi';
 import { useEffect, useState } from 'react';
 
@@ -10,7 +10,7 @@ type Props = {
     openModal: Function;
 };
 
-const MarmitonPokemon = (props: Props): JSX.Element => {
+const PokemonCard = (props: Props): JSX.Element => {
     const { pokemon, openModal } = props;
 
     const { getFromUrl } = usePokemonApi();
@@ -71,4 +71,4 @@ const MarmitonPokemon = (props: Props): JSX.Element => {
     );
 };
 
-export default MarmitonPokemon;
+export default PokemonCard;

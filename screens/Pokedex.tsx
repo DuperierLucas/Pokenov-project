@@ -9,7 +9,7 @@ import {
     Button,
 } from 'react-native';
 import { useEffect, useState } from 'react';
-import MarmitonPokemon from '../components/MarmitonPokemon';
+import PokemonCard from '../components/PokemonCard';
 
 import { styles } from '../styles/screens/Favorites.style';
 import usePokemonAPI from '../hooks/usePokemonApi';
@@ -59,7 +59,7 @@ export default function Pokedex(): JSX.Element {
         if (pokemons)
             return pokemons.results.length > 0 ? (
                 pokemons.results.map((pokemon) => (
-                    <MarmitonPokemon
+                    <PokemonCard
                         key={pokemon.name}
                         pokemon={pokemon}
                         openModal={openModal}
