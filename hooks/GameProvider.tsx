@@ -63,7 +63,7 @@ const Provider = ({ children }: Props): JSX.Element => {
                 };
             }),
         );
-    }, [wildsPokemons]);
+    }, [mounted, wildsPokemons]);
 
     useEffect(() => {
         saveData();
