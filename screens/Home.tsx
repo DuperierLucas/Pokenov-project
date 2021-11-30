@@ -4,6 +4,7 @@ import { ScrollView, View, Text, TouchableOpacity } from 'react-native';
 import RecipeCarouselThumbnail from '../components/RecipeCarouselThumbnail';
 import { useEffect, useState } from 'react';
 import useGame from '../hooks/GameProvider';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const RANDOM_RECIPES = [
     {
@@ -76,6 +77,12 @@ export default function Home() {
                 style={{ backgroundColor: 'red' }}
             >
                 <Text>Remettre à 0 le jeu</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+                style={{ backgroundColor: 'red' }}
+                onPress={() => AsyncStorage.clear()}
+            >
+                <Text>Clear</Text>
             </TouchableOpacity>
         </View>
     );

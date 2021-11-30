@@ -122,6 +122,9 @@ export default function Catch(): JSX.Element {
     }
 
     function displayWaitingTimer() {
+        if(!wildsPokemons[0]) {
+            return;
+        }
         const apparitionDate = Math.floor(
             (wildsPokemons[0].apparitionDate - Date.now()) / 1000 / 60,
         );

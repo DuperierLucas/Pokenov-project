@@ -63,7 +63,7 @@ const Provider = ({ children }: Props): JSX.Element => {
                 };
             }),
         );
-    }, [wildsPokemons]);
+    }, [mounted, wildsPokemons]);
 
     useEffect(() => {
         saveData();
@@ -123,11 +123,20 @@ const Provider = ({ children }: Props): JSX.Element => {
     }
 
     function getPokemonToCapture() {
-        return wildsPokemons.find(
+        let pokemon = wildsPokemons.find(
             (wildPokemon) =>
                 wildPokemon.apparitionDate <= Date.now() &&
                 wildPokemon.disparitionDate >= Date.now(),
         );
+        if(!pokemon && (wildsPokemons.length < 1 || wildsPokemons[wildsPokemons.length - 1].disparitionDate < Date.now())){
+            generatePokemonsToCapture();
+            pokemon = wildsPokemons.find(
+                (wildPokemon) =>
+                    wildPokemon.apparitionDate <= Date.now() &&
+                    wildPokemon.disparitionDate >= Date.now(),
+            );
+        }
+        return pokemon;
     }
 
     function catchPokemon() {
