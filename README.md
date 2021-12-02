@@ -16,5 +16,8 @@ Une fois les pokémons capturés, sélectionne les plus vaillants qui feront par
 
 ## Composants natifs
 * Async storage pour conserver les données sur l'appareil et permettre le jeu en solo
+
 * Notifications de pokémon rare à capturer (à venir)
-* Podomètre pour faire évoluer les pokémons (à venir)
+
+* Podomètre pour faire évoluer les pokémons
+** Le podomètre se lance dès qu'on clique sur "LEVEL UP". Il faut marcher jusqu'à atteindre le nombre de pas total pour faire monter le pokémon au niveau suivant. Attention ! Pour regarder le nombre de pas effectués, il faut s'arrêter.
