@@ -1,10 +1,8 @@
 import React from 'react';
 import { styles } from '../styles/screens/Home.style';
-import { ScrollView, View, Text, TouchableOpacity } from 'react-native';
+import { ScrollView, View, Text, Image, ImageBackground } from 'react-native';
 import RecipeCarouselThumbnail from '../components/RecipeCarouselThumbnail';
 import { useEffect, useState } from 'react';
-import useGame from '../hooks/GameProvider';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const RANDOM_RECIPES = [
     {
@@ -50,7 +48,6 @@ const RANDOM_RECIPES = [
 ];
 
 export default function Home() {
-    const { resetGame } = useGame();
     const [recipes, setRecipes] = useState<any[]>([]);
     useEffect(() => {
         setRecipes(RANDOM_RECIPES);
@@ -64,26 +61,39 @@ export default function Home() {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Classement</Text>
-            <ScrollView
-                horizontal={true}
-                contentContainerStyle={styles.carouselContainer}
-                showsHorizontalScrollIndicator={false}
+            <ImageBackground
+                source={require('../assets/images/home-background.jpg')}
+                style={styles.background}
             >
-                {getCarousel()}
-            </ScrollView>
-            <TouchableOpacity
-                onPress={resetGame}
-                style={{ backgroundColor: 'red' }}
-            >
-                <Text>Remettre à 0 le jeu</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-                style={{ backgroundColor: 'red' }}
-                onPress={() => AsyncStorage.clear()}
-            >
-                <Text>Clear</Text>
-            </TouchableOpacity>
+                <Text style={styles.title}>Classement</Text>
+
+                <ScrollView
+                    horizontal={true}
+                    contentContainerStyle={styles.carouselContainer}
+                    showsHorizontalScrollIndicator={false}
+                >
+                    {getCarousel()}
+                </ScrollView>
+
+                <Image
+                    source={require('../assets/gif/cat-front.gif')}
+                    style={styles.pokemonFront}
+                />
+                <Image
+                    source={require('../assets/gif/drake-back.gif')}
+                    style={styles.pokemonBack}
+                />
+                <View style={styles.innerButton}>
+                    <View style={styles.battleButton}>
+                        <Image
+                            source={require('../assets/images/battle-icon.png')}
+                            style={{ width: 60, height: 60 }}
+                        />
+
+                        <Text style={styles.battleButtonText}>Fight</Text>
+                    </View>
+                </View>
+            </ImageBackground>
         </View>
     );
 }
