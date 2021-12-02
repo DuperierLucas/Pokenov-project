@@ -18,7 +18,11 @@ const AddToTeam = ({ index, close }: Props): JSX.Element => {
     }
     function renderPokemon(pokemon, i) {
         return (
-            <TouchableOpacity onPress={() => onPress(pokemon)} key={i}>
+            <TouchableOpacity
+                style={styles.pokemonCard}
+                onPress={() => onPress(pokemon)}
+                key={i}
+            >
                 <Image
                     style={styles.thumbnail}
                     source={{ uri: pokemon.sprites.front_default }}
@@ -38,11 +42,14 @@ const AddToTeam = ({ index, close }: Props): JSX.Element => {
                 </TouchableOpacity>
             </View>
             <ScrollView>
-                {capturedPokemons
-                    .filter(
-                        (poke) => !pokemonTeam.find((p) => p?.id === poke.id),
-                    )
-                    .map(renderPokemon)}
+                <View style={styles.pokemonCardList}>
+                    {capturedPokemons
+                        .filter(
+                            (poke) =>
+                                !pokemonTeam.find((p) => p?.id === poke.id),
+                        )
+                        .map(renderPokemon)}
+                </View>
             </ScrollView>
         </View>
     );

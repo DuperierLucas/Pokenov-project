@@ -1,5 +1,7 @@
 import { StyleSheet } from 'react-native';
 import { colors } from './../shared/Color';
+import { viewportHeight, viewportWidth } from '../metrics.style';
+
 import chroma from 'chroma-js';
 
 export const styles = StyleSheet.create({
@@ -43,14 +45,14 @@ export const styles = StyleSheet.create({
         height: 130,
 
         position: 'absolute',
-        right: 40,
-        bottom: 300,
+        right: viewportWidth * 0.12,
+        bottom: viewportHeight * 0.48,
     },
 
     pokemonBack: {
         position: 'absolute',
-        left: -150,
-        bottom: 50,
+        left: viewportWidth * -0.4,
+        bottom: viewportHeight * 0.14,
     },
 
     innerButton: {

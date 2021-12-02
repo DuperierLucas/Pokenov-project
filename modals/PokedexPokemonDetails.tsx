@@ -2,7 +2,6 @@ import React from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 
 import { styles } from '../styles/modals/PokedexPokemonDetails.style';
-import { colors } from '../styles/shared/Color';
 import CloseIcon from '../assets/images/close.svg';
 
 import { Pokemon } from 'pokenode-ts';
