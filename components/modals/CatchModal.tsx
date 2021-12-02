@@ -155,8 +155,8 @@ export default function CatchModal({ close }: Props): JSX.Element {
                     style={styles.backgroundImage}
                 />
                 {wildPokemon ? displayPokemon() : displayWaitingTimer()}
-                <TouchableOpacity onPress={close}>
-                    <Text>Retour</Text>
+                <TouchableOpacity style={styles.closeButton} onPress={close}>
+                    <Text style={styles.closeButtonLabel}>Retour</Text>
                 </TouchableOpacity>
             </View>
 

@@ -65,4 +65,22 @@ export const styles = StyleSheet.create({
         textShadowRadius: 10,
         padding: 10,
     },
+    closeButton: {
+        backgroundColor: colors.main.black,
+        padding: 20,
+        borderRadius: 40,
+        shadowColor: colors.main.white,
+        shadowOffset: {
+            width: 0,
+            height: 5,
+        },
+        shadowOpacity: 0.3,
+        shadowRadius: 4,
+        elevation: 5,
+    },
+    closeButtonLabel: {
+        color: colors.main.white,
+        fontWeight: 'bold',
+        textTransform: 'uppercase',
+    },
 });
