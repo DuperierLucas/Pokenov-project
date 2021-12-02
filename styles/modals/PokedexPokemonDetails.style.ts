@@ -33,11 +33,10 @@ export const styles = StyleSheet.create({
     modalView: {
         position: 'relative',
 
-        backgroundColor: colors.main.color,
+        backgroundColor: colors.main.modal,
 
         padding: 35,
         height: '100%',
-        opacity: 0.8,
         alignItems: 'center',
         justifyContent: 'center',
         shadowColor: '#000',
@@ -57,7 +56,6 @@ export const styles = StyleSheet.create({
         height: 100,
     },
     containerCurrentPokemonTypes: {
-        backgroundColor: colors.main.color,
         display: 'flex',
         flexDirection: 'row',
     },

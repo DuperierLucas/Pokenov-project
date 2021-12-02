@@ -32,7 +32,7 @@ const TeamSlot = (props: Props): JSX.Element => {
             <AddIcon
                 height={THUMBNAIL_SIZE * 0.5}
                 width={THUMBNAIL_SIZE * 0.5}
-                fill={colors.main.orange}
+                fill={colors.main.color}
             />
         );
     } else {

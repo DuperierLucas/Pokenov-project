@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { colors } from '../shared/Color';
 
 export const styles = StyleSheet.create({
     container: {
@@ -6,7 +7,7 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         paddingHorizontal: 20,
-        //backgroundColor: 'red',
+        backgroundColor: colors.main.background,
     },
     rowContainer: {
         alignItems: 'center',

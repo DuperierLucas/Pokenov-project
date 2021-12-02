@@ -13,7 +13,7 @@ export const styles = StyleSheet.create({
         borderTopEndRadius: 20,
         borderTopStartRadius: 20,
         height: viewportHeight * 0.8,
-        backgroundColor: chroma(colors.main.orange).alpha(0.9).css(),
+        backgroundColor: colors.main.modal,
     },
     header: {
         flexDirection: 'row',
@@ -34,7 +34,7 @@ export const styles = StyleSheet.create({
         marginVertical: 20,
         width: 175,
         height: 175,
-        backgroundColor: chroma('white').alpha(0.2).css(),
+        backgroundColor: chroma(colors.main.grey1).alpha(0.2).css(),
         borderRadius: 175 / 4,
     },
     closeIconContainer: {

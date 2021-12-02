@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
-import { Modal, View } from 'react-native';
+import { Modal, View, Text, TouchableOpacity } from 'react-native';
 import { styles } from '../styles/screens/Team.style';
 import useGame from '../hooks/GameProvider';
 import TeamSlot from '../components/TeamSlot';
 import TeamPokemonDetails from '../modals/TeamPokemonDetails';
 import AddToTeam from '../modals/AddToTeam';
 import { Pokemon } from 'pokenode-ts';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Team(): JSX.Element {
+    const { resetGame } = useGame();
+
     const { pokemonTeam } = useGame();
     const [pokemonDetailVisible, setPokemonDetailVisible] = useState(false);
     const [addPokemonVisible, setAddPokemonVisible] = useState(false);
@@ -89,6 +92,18 @@ export default function Team(): JSX.Element {
                     close={() => setAddPokemonVisible(false)}
                 />
             </Modal>
+            <TouchableOpacity
+                onPress={resetGame}
+                style={{ backgroundColor: 'red' }}
+            >
+                <Text>Remettre à 0 le jeu</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+                style={{ backgroundColor: 'red' }}
+                onPress={() => AsyncStorage.clear()}
+            >
+                <Text>Clear</Text>
+            </TouchableOpacity>
         </View>
     );
 }

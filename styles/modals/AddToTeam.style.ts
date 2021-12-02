@@ -13,7 +13,7 @@ export const styles = StyleSheet.create({
         borderTopEndRadius: 20,
         borderTopStartRadius: 20,
         height: viewportHeight * 0.8,
-        backgroundColor: chroma(colors.main.orange).alpha(0.9).css(),
+        backgroundColor: chroma(colors.main.color).alpha(0.9).css(),
     },
     header: {
         flexDirection: 'row',
