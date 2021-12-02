@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { colors } from './../shared/Color';
+import chroma from 'chroma-js';
 
 export const styles = StyleSheet.create({
     container: {
@@ -11,6 +12,7 @@ export const styles = StyleSheet.create({
     },
     innerContainer: {
         alignItems: 'center',
+
         paddingBottom: 175,
     },
     categoriesContainer: {
@@ -59,20 +61,26 @@ export const styles = StyleSheet.create({
     },
 
     battleButton: {
-        borderWidth: 1,
-
         alignItems: 'center',
         padding: 20,
-        borderRadius: 30,
-
-        backgroundColor: colors.main.modal,
+        borderRadius: 20,
+        shadowColor: colors.main.black,
+        shadowOffset: {
+            width: 0,
+            height: 5,
+        },
+        shadowOpacity: 0.5,
+        shadowRadius: 2.62,
+        borderWidth: 1,
+        backgroundColor: chroma(colors.main.white).alpha(0.3).css(),
     },
 
     battleButtonText: {
         fontWeight: 'bold',
         fontSize: 30,
-
         color: colors.main.white,
         textTransform: 'uppercase',
+        textShadowRadius: 5,
+        textShadowColor: colors.main.white,
     },
 });
