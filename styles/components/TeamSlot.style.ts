@@ -1,17 +1,13 @@
 import { StyleSheet } from 'react-native';
 import chroma from 'chroma-js';
 import { colors } from '../shared/Color';
-import { viewportHeight, viewportWidth } from '../metrics.style';
+import { viewportHeight } from '../metrics.style';
 
 export const THUMBNAIL_SIZE = viewportHeight * 0.15;
 
 export const styles = StyleSheet.create({
     container: {
-        width: viewportWidth / 2 - 20,
         marginVertical: 20,
-        alignItems: 'center',
-        justifyContent: 'center',
-        //backgroundColor: 'blue',
     },
     containerInner: {
         alignItems: 'center',

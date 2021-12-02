@@ -8,15 +8,19 @@ import {
     TouchableOpacity,
     Animated,
 } from 'react-native';
-import useGame from '../hooks/GameProvider';
-import { PokemonToCapture } from '../types';
-import { styles } from '../styles/screens/Catch.style';
+import useGame from '../../hooks/GameProvider';
+import { PokemonToCapture } from '../../types';
+import { styles } from '../../styles/screens/Catch.style';
 import { useNavigation } from '@react-navigation/native';
-const background = require('../assets/images/catch_background.jpeg');
+const background = require('../../assets/images/catch_background.jpeg');
 
 let timer;
 
-export default function Catch(): JSX.Element {
+type Props = {
+    close: () => void;
+};
+
+export default function CatchModal({ close }: Props): JSX.Element {
     const {
         getPokemonToCapture,
         catchPokemon,
@@ -35,15 +39,9 @@ export default function Catch(): JSX.Element {
         };
     }, []);
 
-    useEffect(() => {
-        fetchPokemonToCapture();
-        return () => {
-            clearInterval(timer);
-        };
-    }, [wildsPokemons]);
-
     function fetchPokemonToCapture() {
         const wPokemon = getPokemonToCapture();
+        console.log(wPokemon);
         setWildPokemon(wPokemon);
     }
 
@@ -52,28 +50,30 @@ export default function Catch(): JSX.Element {
     }, [wildPokemon]);
 
     function launchCountDown() {
+        clearInterval(timer);
         timer = setInterval(() => {
             const disparitionTime = Math.floor(
                 (wildPokemon.disparitionDate - Date.now()) / 1000,
             );
+            console.log(wildsPokemons);
+            console.log(disparitionTime);
             if (disparitionTime < 1) {
                 fetchPokemonToCapture();
+            } else {
+                setTimeToDisparition(
+                    `Disparait dans ${Math.floor(disparitionTime / 60)}min ${
+                        disparitionTime % 60
+                    }s`,
+                );
             }
-            setTimeToDisparition(
-                `Disparait dans ${Math.floor(disparitionTime / 60)}min ${
-                    disparitionTime % 60
-                }s`,
-            );
         }, 1000);
     }
 
     function onPressCapture() {
-        const win = Math.floor(Math.random() * 0) === 0;
-        console.log(win);
+        const win = Math.floor(Math.random() * 2) === 0;
         if (win) {
             catchPokemon();
-            // @ts-ignore rip ts, amateur
-            navigation.navigate('Team');
+            close();
         } else {
             skipWildPokemon();
             setFailed(true);
@@ -129,7 +129,7 @@ export default function Catch(): JSX.Element {
     }
 
     function displayWaitingTimer() {
-        if(!wildsPokemons[0]) {
+        if (!wildsPokemons[0]) {
             return;
         }
         const apparitionDate = Math.floor(
@@ -153,6 +153,9 @@ export default function Catch(): JSX.Element {
                     style={styles.backgroundImage}
                 />
                 {wildPokemon ? displayPokemon() : displayWaitingTimer()}
+                <TouchableOpacity style={styles.closeButton} onPress={close}>
+                    <Text style={styles.closeButtonLabel}>Retour</Text>
+                </TouchableOpacity>
             </View>
 
             {/* Use a light status bar on iOS to account for the black space above the modal */}
