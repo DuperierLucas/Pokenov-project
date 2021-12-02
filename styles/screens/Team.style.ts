@@ -9,16 +9,14 @@ export const styles = StyleSheet.create({
     },
     header: {
         flexDirection: 'row',
-        alignItems: 'center',
         justifyContent: 'space-between',
         backgroundColor: chroma(colors.main.black).alpha(0.9).css(),
-        paddingHorizontal: 10,
         paddingTop: 35,
         paddingBottom: 10,
     },
     innerContainer: {
         flex: 1,
-        justifyContent: 'center',
+        justifyContent: 'space-around',
     },
     rowContainer: {
         justifyContent: 'space-around',
