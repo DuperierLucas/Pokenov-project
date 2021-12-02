@@ -17,6 +17,7 @@ export const styles = StyleSheet.create({
     innerContainer: {
         flex: 1,
         justifyContent: 'space-around',
+        paddingBottom: 100,
     },
     rowContainer: {
         justifyContent: 'space-around',

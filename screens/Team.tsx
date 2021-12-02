@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Modal, View, Text, TouchableOpacity } from 'react-native';
+import { Modal, View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { styles } from '../styles/screens/Team.style';
 import useGame from '../hooks/GameProvider';
 import TeamSlot from '../components/TeamSlot';
@@ -35,7 +35,7 @@ export default function Team(): JSX.Element {
     return (
         <View style={styles.container}>
             <TeamHeader />
-            <View style={styles.innerContainer}>
+            <ScrollView contentContainerStyle={styles.innerContainer}>
                 <View style={styles.rowContainer}>
                     <TeamSlot
                         pokemon={pokemonTeam[0]}
@@ -107,7 +107,7 @@ export default function Team(): JSX.Element {
                 >
                     <Text>Clear</Text>
                 </TouchableOpacity>
-            </View>
+            </ScrollView>
         </View>
     );
 }
