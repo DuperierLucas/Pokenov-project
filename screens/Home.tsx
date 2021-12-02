@@ -1,6 +1,13 @@
 import React from 'react';
 import { styles } from '../styles/screens/Home.style';
-import { ScrollView, View, Text, Image, ImageBackground } from 'react-native';
+import {
+    ScrollView,
+    View,
+    Text,
+    Image,
+    ImageBackground,
+    TouchableOpacity,
+} from 'react-native';
 import RecipeCarouselThumbnail from '../components/RecipeCarouselThumbnail';
 import { useEffect, useState } from 'react';
 
@@ -83,7 +90,10 @@ export default function Home() {
                     source={require('../assets/gif/drake-back.gif')}
                     style={styles.pokemonBack}
                 />
-                <View style={styles.innerButton}>
+                <TouchableOpacity
+                    activeOpacity={0.7}
+                    style={styles.innerButton}
+                >
                     <View style={styles.battleButton}>
                         <Image
                             source={require('../assets/images/battle-icon.png')}
@@ -92,7 +102,7 @@ export default function Home() {
 
                         <Text style={styles.battleButtonText}>Fight</Text>
                     </View>
-                </View>
+                </TouchableOpacity>
             </ImageBackground>
         </View>
     );
