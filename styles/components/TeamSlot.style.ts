@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import chroma from 'chroma-js';
 import { colors } from '../shared/Color';
-import {viewportHeight, viewportWidth} from '../metrics.style';
+import { viewportHeight } from '../metrics.style';
 
 export const THUMBNAIL_SIZE = viewportHeight * 0.15;
 

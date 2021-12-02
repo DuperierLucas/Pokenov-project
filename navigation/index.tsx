@@ -8,9 +8,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
-import { Image, TouchableOpacity, View } from 'react-native';
 
-import Catch from '../screens/Catch';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import Pokedex from '../screens/Pokedex';
 import Home from '../screens/Home';
@@ -23,9 +21,6 @@ import LinkingConfiguration from './LinkingConfiguration';
 import Team from '../screens/Team';
 import Login from '../screens/Login';
 import { colors } from '../styles/shared/Color';
-import styles from '../styles/navigation.style'
-
-const GRASS_ICON = require('../assets/images/grass.png')
 
 export default function Navigation() {
     return (
@@ -57,15 +52,6 @@ function RootNavigator() {
                 component={NotFoundScreen}
                 options={{ title: 'Oops!' }}
             />
-            <Stack.Group screenOptions={{ presentation: 'modal' }}>
-                <Stack.Screen
-                    name="Catch"
-                    component={Catch}
-                    options={() => ({
-                        title: 'Capturer',
-                    })}
-                />
-            </Stack.Group>
             <Stack.Screen
                 name="Login"
                 component={Login}
@@ -113,21 +99,14 @@ function BottomTabNavigator() {
                 name="Team"
                 component={Team}
                 options={({ navigation }: RootTabScreenProps<'Team'>) => ({
-                    title: 'Mon Équipe',
+                    headerShown: false,
                     tabBarIcon: ({ color }) => (
-                        <MaterialCommunityIcons name="pokeball" size={30} color={color} />
+                        <MaterialCommunityIcons
+                            name="pokeball"
+                            size={30}
+                            color={color}
+                        />
                     ),
-                    headerRight: () => (
-                        <TouchableOpacity
-                            onPress={() => navigation.navigate('Catch')}
-                            style={styles.iconContainer}
-                            activeOpacity={0.7}
-                        >
-                            <Image source={GRASS_ICON} style={styles.icon}/>
-                        </TouchableOpacity>
-                    ),
-                    headerStyle: styles.headerRightContainer,
-
                 })}
             />
         </BottomTab.Navigator>
