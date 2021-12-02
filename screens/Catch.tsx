@@ -35,15 +35,10 @@ export default function Catch(): JSX.Element {
         };
     }, []);
 
-    useEffect(() => {
-        fetchPokemonToCapture();
-        return () => {
-            clearInterval(timer);
-        };
-    }, [wildsPokemons]);
 
     function fetchPokemonToCapture() {
         const wPokemon = getPokemonToCapture();
+        console.log(wPokemon)
         setWildPokemon(wPokemon);
     }
 
@@ -52,18 +47,22 @@ export default function Catch(): JSX.Element {
     }, [wildPokemon]);
 
     function launchCountDown() {
+        clearInterval(timer)
         timer = setInterval(() => {
             const disparitionTime = Math.floor(
                 (wildPokemon.disparitionDate - Date.now()) / 1000,
             );
+        console.log(wildsPokemons)
+        console.log(disparitionTime)
             if (disparitionTime < 1) {
                 fetchPokemonToCapture();
-            }
+            } else {
             setTimeToDisparition(
                 `Disparait dans ${Math.floor(disparitionTime / 60)}min ${
                     disparitionTime % 60
                 }s`,
             );
+            }
         }, 1000);
     }
 

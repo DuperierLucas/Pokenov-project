@@ -123,18 +123,25 @@ const Provider = ({ children }: Props): JSX.Element => {
     }
 
     function getPokemonToCapture() {
-        let pokemon = wildsPokemons.find(
+        const pokemonIndex = wildsPokemons.findIndex(
             (wildPokemon) =>
                 wildPokemon.apparitionDate <= Date.now() &&
                 wildPokemon.disparitionDate >= Date.now(),
         );
-        if(!pokemon && (wildsPokemons.length < 1 || wildsPokemons[wildsPokemons.length - 1].disparitionDate < Date.now())){
+        let pokemon = null;
+        console.log(pokemonIndex)
+        if(!pokemonIndex && (wildsPokemons?.length < 1) || wildsPokemons[wildsPokemons.length - 1].disparitionDate < Date.now()){
             generatePokemonsToCapture();
             pokemon = wildsPokemons.find(
                 (wildPokemon) =>
                     wildPokemon.apparitionDate <= Date.now() &&
                     wildPokemon.disparitionDate >= Date.now(),
             );
+        }
+        if(pokemonIndex > 0) {
+            console.log({pokemonIndex})
+            const newWildsPokemons = wildsPokemons.slice(pokemonIndex)
+            setWildPokemons(newWildsPokemons);
         }
         return pokemon;
     }
