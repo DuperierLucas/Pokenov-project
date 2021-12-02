@@ -3,12 +3,12 @@
  * https://reactnavigation.org/docs/getting-started
  *
  */
-import { FontAwesome } from '@expo/vector-icons';
+import { FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
-import { Pressable } from 'react-native';
+import { Image, TouchableOpacity, View } from 'react-native';
 
 import Catch from '../screens/Catch';
 import NotFoundScreen from '../screens/NotFoundScreen';
@@ -23,6 +23,9 @@ import LinkingConfiguration from './LinkingConfiguration';
 import Team from '../screens/Team';
 import Login from '../screens/Login';
 import { colors } from '../styles/shared/Color';
+import styles from '../styles/navigation.style'
+
+const GRASS_ICON = require('../assets/images/grass.png')
 
 export default function Navigation() {
     return (
@@ -112,23 +115,19 @@ function BottomTabNavigator() {
                 options={({ navigation }: RootTabScreenProps<'Team'>) => ({
                     title: 'Mon Équipe',
                     tabBarIcon: ({ color }) => (
-                        <TabBarIcon name="user" color={color} />
+                        <MaterialCommunityIcons name="pokeball" size={30} color={color} />
                     ),
                     headerRight: () => (
-                        <Pressable
+                        <TouchableOpacity
                             onPress={() => navigation.navigate('Catch')}
-                            style={({ pressed }) => ({
-                                opacity: pressed ? 0.5 : 1,
-                            })}
+                            style={styles.iconContainer}
+                            activeOpacity={0.7}
                         >
-                            <FontAwesome
-                                name="arrow-circle-o-left"
-                                size={25}
-                                color={colors.main.background}
-                                style={{ marginRight: 15 }}
-                            />
-                        </Pressable>
+                            <Image source={GRASS_ICON} style={styles.icon}/>
+                        </TouchableOpacity>
                     ),
+                    headerStyle: styles.headerRightContainer,
+
                 })}
             />
         </BottomTab.Navigator>
