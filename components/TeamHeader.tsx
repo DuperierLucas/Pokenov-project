@@ -10,7 +10,6 @@ const TeamHeader = (): JSX.Element => {
 
     function onPressCatch() {
         setCatchVisible(true);
-        console.log('oui');
     }
 
     return (
@@ -26,9 +25,11 @@ const TeamHeader = (): JSX.Element => {
                     <Image source={GRASS_ICON} style={styles.icon} />
                 </TouchableOpacity>
             </View>
-            <Modal animationType="fade" visible={catchVisible}>
-                <CatchModal close={() => setCatchVisible(false)} />
-            </Modal>
+            {catchVisible && (
+                <Modal animationType="fade" visible={catchVisible}>
+                    <CatchModal close={() => setCatchVisible(false)} />
+                </Modal>
+            )}
         </>
     );
 };

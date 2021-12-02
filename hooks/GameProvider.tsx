@@ -129,8 +129,13 @@ const Provider = ({ children }: Props): JSX.Element => {
                 wildPokemon.disparitionDate >= Date.now(),
         );
         let pokemon = null;
-        console.log(pokemonIndex)
-        if(!pokemonIndex && (wildsPokemons?.length < 1) || wildsPokemons[wildsPokemons.length - 1].disparitionDate < Date.now()){
+        console.log(pokemonIndex);
+        console.log(wildsPokemons);
+        if (
+            (pokemonIndex === -1 && wildsPokemons?.length < 1) ||
+            wildsPokemons[wildsPokemons.length - 1].disparitionDate < Date.now()
+        ) {
+            console.log('generate');
             generatePokemonsToCapture();
             pokemon = wildsPokemons.find(
                 (wildPokemon) =>
@@ -138,12 +143,12 @@ const Provider = ({ children }: Props): JSX.Element => {
                     wildPokemon.disparitionDate >= Date.now(),
             );
         }
-        if(pokemonIndex > 0) {
-            console.log({pokemonIndex})
-            const newWildsPokemons = wildsPokemons.slice(pokemonIndex)
+        if (pokemonIndex > 0) {
+            console.log({ pokemonIndex });
+            const newWildsPokemons = wildsPokemons.slice(pokemonIndex);
             setWildPokemons(newWildsPokemons);
         }
-        return pokemon;
+        return wildsPokemons[pokemonIndex];
     }
 
     function catchPokemon() {

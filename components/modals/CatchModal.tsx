@@ -70,12 +70,10 @@ export default function CatchModal({ close }: Props): JSX.Element {
     }
 
     function onPressCapture() {
-        const win = Math.floor(Math.random() * 0) === 0;
-        console.log(win);
+        const win = Math.floor(Math.random() * 2) === 0;
         if (win) {
             catchPokemon();
-            // @ts-ignore rip ts, amateur
-            navigation.navigate('Team');
+            close();
         } else {
             skipWildPokemon();
             setFailed(true);
