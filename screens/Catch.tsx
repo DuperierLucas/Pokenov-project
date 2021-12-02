@@ -35,6 +35,13 @@ export default function Catch(): JSX.Element {
         };
     }, []);
 
+    useEffect(() => {
+        fetchPokemonToCapture();
+        return () => {
+            clearInterval(timer);
+        };
+    }, [wildsPokemons]);
+
     function fetchPokemonToCapture() {
         const wPokemon = getPokemonToCapture();
         setWildPokemon(wPokemon);
@@ -61,7 +68,7 @@ export default function Catch(): JSX.Element {
     }
 
     function onPressCapture() {
-        const win = Math.floor(Math.random() * 5) === 0;
+        const win = Math.floor(Math.random() * 0) === 0;
         console.log(win);
         if (win) {
             catchPokemon();
