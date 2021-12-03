@@ -7,6 +7,7 @@
 * Envoie une pokéball pour tenter de le capturer.
 
 
+
 ### 2.Créer son équipe
 Une fois les pokémons capturés, sélectionne les plus vaillants qui feront partis de ton équipe !
 * Cliques sur le + pour ajouter un pokémon à ton équipe à l'emplacement désiré.
@@ -14,19 +15,21 @@ Une fois les pokémons capturés, sélectionne les plus vaillants qui feront par
 
 
 ### 3.Faire gagner de l'expérience à ses pokémons
-* Sélectionne un pokémon et marche pour lui faire prendre de l'expérience !
-* Tes pokémons ayant de l'expérience sont susceptibles d'évoluer ...
+* Sélectionne un pokémon et marche avec ton téléphone en main pour lui faire prendre de l'expérience !
+* Tes pokémons ayant de l'expérience sont susceptibles d'évoluer :
+* Va dans le détail du pokémon que tu souhaites faire évoluser.
+* Clique sur "Level up".
+* Marche avec ton téléphone en main (ou secoue-le légèrement) pour le faire monter en niveau.
+* Dès qu'il atteint le niveau nécessaire pour évoluer, ton petit pokémon deviendra grand !
 
 
 ### 4.Combattre les autres dresseurs (à venir)
 
 
+
 ### 5.Évolution du pokémon
 Elle a lieu lorsque le niveau du pokémon actuel atteint le niveau de son évolution.
-* Va dans le détail du pokémon que tu souhaites faire évoluser.
-* Clique sur "Level up".
-* Marche avec ton téléphone en main (ou secoue-le légèrement) pour le faire monter en niveau.
-* Dès qu'il atteint le niveau nécessaire pour évoluer, ton pokémon évoluera donc.
+
 
 
 ## Composants natifs
