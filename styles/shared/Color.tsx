@@ -10,6 +10,8 @@ export const colors = {
         black: '#000000',
         modal: '#A2AF9F',
         grey1: '#3F4A3C',
+        buttonSuccess: '#1FC040',
+        buttonDanger: '#EE0608',
     },
 
     light: {

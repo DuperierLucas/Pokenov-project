@@ -3,13 +3,14 @@ import { Pokemon } from 'pokenode-ts';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getRandomPokemon } from '../utils/pokemons';
 import usePokemonAPI from './usePokemonApi';
-import { PokemonToCapture } from '../types';
+import { PokemonToCapture, PokemonFull } from '../types';
 
 type Game = {
-    pokemonTeam: Pokemon[];
+    pokemonTeam: PokemonFull[];
     capturedPokemons: Pokemon[];
     catchPokemon: () => void;
-    addPokemonToTeam: (pokemon: Pokemon, slotIndex: number) => boolean;
+    addPokemonToTeam: (pokemon: PokemonFull, slotIndex: number) => boolean;
+    setPokemonLevel: (pokemon: PokemonFull, slotIndex: number) => boolean;
     deletePokemonFromTeam: (slotIndex: number) => void;
     resetGame: () => void;
     getPokemonToCapture: () => PokemonToCapture | undefined;
@@ -68,7 +69,7 @@ const Provider = ({ children }: Props): JSX.Element => {
     useEffect(() => {
         saveData();
     }, [pokemonTeam, capturedPokemons, wildsPokemons, topTeams, username]);
-
+    
     async function getData() {
         const data = await AsyncStorage.getItem('game');
         if (data) {
@@ -164,7 +165,7 @@ const Provider = ({ children }: Props): JSX.Element => {
         setWildPokemons(wildsPokemons.slice(1));
     }
 
-    function addPokemonToTeam(pokemon: Pokemon, slotIndex) {
+    function addPokemonToTeam(pokemon: PokemonFull, slotIndex) {
         if (
             pokemonTeam.find((poke) => poke?.id === pokemon.id) ||
             slotIndex > 5 ||
@@ -174,8 +175,20 @@ const Provider = ({ children }: Props): JSX.Element => {
         }
 
         const newTeam = [...pokemonTeam];
+        pokemon.lvl = 1;
+        pokemon.currentSteps = 0;
+        pokemon.stepsToReach = 10;
+
         newTeam[slotIndex] = pokemon;
         setPokemonTeam(newTeam);
+        return true;
+    }
+
+    function setPokemonLevel(pokemon: PokemonFull, slotIndex){
+        const newTeam = [...pokemonTeam];
+        newTeam[slotIndex] = pokemon;
+        setPokemonTeam(newTeam);
+
         return true;
     }
 
@@ -190,12 +203,15 @@ const Provider = ({ children }: Props): JSX.Element => {
         capturedPokemons,
         catchPokemon,
         addPokemonToTeam,
+        setPokemonLevel,
         deletePokemonFromTeam,
         resetGame,
         getPokemonToCapture,
         wildsPokemons,
         skipWildPokemon,
     };
+
+    
 
     return (
         <GameContext.Provider value={providerValues}>
