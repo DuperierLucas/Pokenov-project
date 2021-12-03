@@ -21,6 +21,7 @@ import LinkingConfiguration from './LinkingConfiguration';
 import Team from '../screens/Team';
 import Login from '../screens/Login';
 import { colors } from '../styles/shared/Color';
+import styles from '../styles/navigation.style';
 
 export default function Navigation() {
     return (
@@ -79,6 +80,7 @@ function BottomTabNavigator() {
                 name="Favorites"
                 component={Pokedex}
                 options={() => ({
+                    headerShown: false,
                     title: 'Pokédex',
                     tabBarIcon: ({ color }) => (
                         <TabBarIcon name="star" color={color} />
@@ -89,6 +91,7 @@ function BottomTabNavigator() {
                 name="Home"
                 component={Home}
                 options={{
+                    headerShown: false,
                     title: 'Accueil',
                     tabBarIcon: ({ color }) => (
                         <TabBarIcon name="home" color={color} />
@@ -107,6 +110,7 @@ function BottomTabNavigator() {
                             color={color}
                         />
                     ),
+                    headerStyle: styles.headerRightContainer,
                 })}
             />
         </BottomTab.Navigator>

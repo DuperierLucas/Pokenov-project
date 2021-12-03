@@ -13,7 +13,7 @@ export const styles = StyleSheet.create({
         borderTopEndRadius: 20,
         borderTopStartRadius: 20,
         height: viewportHeight * 0.8,
-        backgroundColor: chroma(colors.main.color).alpha(0.9).css(),
+        backgroundColor: colors.main.modal,
     },
     header: {
         flexDirection: 'row',
@@ -43,5 +43,15 @@ export const styles = StyleSheet.create({
         textTransform: 'capitalize',
         fontWeight: 'bold',
         color: colors.main.orange,
+    },
+
+    pokemonCardList: {
+        display: 'flex',
+    },
+
+    pokemonCard: {
+        borderWidth: 1,
+        width: 100,
+        alignItems: 'center',
     },
 });
