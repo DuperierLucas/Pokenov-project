@@ -6,12 +6,20 @@ import {
     Image,
     ImageBackground,
     TouchableOpacity,
+    Modal,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import FightHistory from '../components/home/FightHistory';
 import { Audio } from 'expo-av';
 
 const sound = new Audio.Sound();
+import DisplayStats from '../modals/DisplayStats';
+
+const [statsVisible, setStatshVisible] = useState(false);
+
+function onPressDisplayStats() {
+    setStatshVisible(true);
+}
 
 export default function Home(): JSX.Element {
     const navigation = useNavigation();
@@ -21,19 +29,24 @@ export default function Home(): JSX.Element {
             allowsRecordingIOS: false,
             interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX,
             playsInSilentModeIOS: true,
-            interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DUCK_OTHERS,
+            interruptionModeAndroid:
+                Audio.INTERRUPTION_MODE_ANDROID_DUCK_OTHERS,
             shouldDuckAndroid: true,
             staysActiveInBackground: true,
-            playThroughEarpieceAndroid: true
+            playThroughEarpieceAndroid: true,
         });
 
-        sound.loadAsync(require('../assets/sounds/billycrawford.mp3'), {
-            shouldPlay: true
-        }, false);
-        sound.setStatusAsync({ isLooping: false })
+        sound.loadAsync(
+            require('../assets/sounds/billycrawford.mp3'),
+            {
+                shouldPlay: true,
+            },
+            false,
+        );
+        sound.setStatusAsync({ isLooping: false });
 
         sound.playAsync();
-    }, [])
+    }, []);
 
     function openFight() {
         sound.stopAsync();
@@ -48,6 +61,17 @@ export default function Home(): JSX.Element {
             >
                 <Text style={styles.title}>Classement</Text>
                 <FightHistory />
+
+                <TouchableOpacity
+                    onPress={() => onPressDisplayStats}
+                    style={styles.statButton}
+                >
+                    <Image
+                        style={styles.statIcon}
+                        source={require('../assets/images/stats-icon.png')}
+                    />
+                </TouchableOpacity>
+
                 <Image
                     source={require('../assets/gif/cat-front.gif')}
                     style={styles.pokemonFront}
@@ -70,6 +94,11 @@ export default function Home(): JSX.Element {
                     </View>
                 </TouchableOpacity>
             </ImageBackground>
+            {statsVisible && (
+                <Modal animationType="fade" visible={statsVisible}>
+                    <DisplayStats close={() => setStatshVisible(false)} />
+                </Modal>
+            )}
         </View>
     );
 }

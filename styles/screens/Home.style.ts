@@ -89,4 +89,26 @@ export const styles = StyleSheet.create({
         textShadowRadius: 5,
         textShadowColor: colors.main.white,
     },
+
+    statButton: {
+        position: 'absolute',
+        left: viewportWidth * 0.1,
+        top: viewportHeight * 0.25,
+        shadowColor: colors.main.black,
+        shadowOffset: {
+            width: 0,
+            height: 5,
+        },
+        shadowOpacity: 0.5,
+        shadowRadius: 2.62,
+        backgroundColor: colors.main.yellow,
+        padding: 10,
+        borderRadius: 50,
+        alignItems: 'center',
+    },
+
+    statIcon: {
+        width: 30,
+        height: 30,
+    },
 });
