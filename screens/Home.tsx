@@ -22,6 +22,11 @@ function onPressDisplayStats() {
 }
 
 export default function Home(): JSX.Element {
+    const [statsVisible, setStatshVisible] = useState(false);
+
+    function onPressDisplayStats() {
+        setStatshVisible(true);
+    }
     const navigation = useNavigation();
 
     useEffect(() => {
@@ -63,7 +68,7 @@ export default function Home(): JSX.Element {
                 <FightHistory />
 
                 <TouchableOpacity
-                    onPress={() => onPressDisplayStats}
+                    onPress={onPressDisplayStats}
                     style={styles.statButton}
                 >
                     <Image
