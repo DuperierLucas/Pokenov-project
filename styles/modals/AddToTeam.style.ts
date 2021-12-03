@@ -47,9 +47,12 @@ export const styles = StyleSheet.create({
 
     pokemonCardList: {
         display: 'flex',
+        marginLeft: '10%',
+        marginRight: '10%',
     },
 
     pokemonCard: {
+        borderRadius: 20,
         borderWidth: 1,
         width: 100,
         alignItems: 'center',
