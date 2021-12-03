@@ -27,15 +27,15 @@ export const styles = StyleSheet.create({
         fontSize: 18,
     },
     spritesContainer: {
-        flex: 1,
+        flex: 2,
         justifyContent: 'space-around',
     },
     spriteImage: {
         marginVertical: 20,
-        width: 175,
-        height: 175,
+        width: 160,
+        height: 160,
         backgroundColor: chroma(colors.main.grey1).alpha(0.2).css(),
-        borderRadius: 175 / 4,
+        borderRadius: 100 / 4,
     },
     closeIconContainer: {
         justifyContent: 'center',
@@ -48,15 +48,23 @@ export const styles = StyleSheet.create({
     },
     deleteContainer: {
         borderWidth: 1,
-        borderColor: 'red',
-        borderRadius: 50,
-        alignSelf: 'center',
-        padding: 5,
-        margin: 5,
-        marginLeft: 20,
+        borderColor: '#CF0A0B',
+        backgroundColor: '#EE0608',
+        borderRadius: 10,
+        padding: 12,
+        margin: 0,
     },
-    deleteLabel: {
-        color: 'red',
+    levelUpContainer: {
+        borderWidth: 1,
+        borderColor: '#0E992A',
+        backgroundColor: '#1FC040',
+        borderRadius: 10,
+        padding: 12,
+        margin: 0,
+        marginLeft: 5
+    },
+    buttonLabel: {
+        color: 'white',
         textTransform: 'uppercase',
     },
     thumbnail: {
@@ -70,6 +78,13 @@ export const styles = StyleSheet.create({
     },
     detailsContainer: {
         flexDirection: 'row',
+    },
+    buttonContainer: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignContent: 'center',
+        alignItems: 'center',
+        textAlign: 'center',
     },
     statContainer: {
         justifyContent: 'center',

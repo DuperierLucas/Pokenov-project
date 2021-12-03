@@ -1,17 +1,24 @@
-import React from 'react';
-import { Alert, Image, Text, TouchableOpacity, View } from 'react-native';
+import React, { useState } from 'react';
+import { Alert, Image, Modal, Text, TouchableOpacity, View } from 'react-native';
 import { styles } from '../styles/modals/TeamPokemonDetails.style';
 import CloseIcon from '../assets/images/close.svg';
 import useGame from '../hooks/GameProvider';
 import { Pokemon } from 'pokenode-ts';
+import PedometerDetails from './PedometerDetails';
+import { PokemonFull } from 'types';
 
 type Props = {
-    pokemon: Pokemon;
+    pokemon: PokemonFull;
     index: number;
     close: () => void;
 };
 const TeamPokemonDetails = ({ index, close, pokemon }: Props): JSX.Element => {
     const { deletePokemonFromTeam } = useGame();
+    const [pedometerVisible, setPedometerVisible] = useState(false);
+
+    function onPressLevelUp(){
+        setPedometerVisible(true);
+    }
 
     function onPressDelete() {
         Alert.alert("Supprimer ce pokémon de l'équipe ?", '', [
@@ -31,6 +38,10 @@ const TeamPokemonDetails = ({ index, close, pokemon }: Props): JSX.Element => {
 
     function getStats() {
         const stats = [
+            {
+                title: 'Level',
+                value: `${pokemon.lvl}`,
+            },
             {
                 title: 'Taille',
                 value: `${pokemon.height}cm`,
@@ -81,12 +92,31 @@ const TeamPokemonDetails = ({ index, close, pokemon }: Props): JSX.Element => {
                     />
                 </View>
             </View>
-            <TouchableOpacity onPress={onPressDelete}>
-                <View style={styles.deleteContainer}>
-                    {/* eslint-disable-next-line react/no-unescaped-entities */}
-                    <Text style={styles.deleteLabel}>Retirer de l'équipe</Text>
-                </View>
-            </TouchableOpacity>
+            <Modal
+                animationType="fade"
+                transparent={true}
+                visible={pedometerVisible}
+                onRequestClose={() => setPedometerVisible(false)}
+            >
+                <PedometerDetails
+                    index={index}
+                    pokemon={pokemon}
+                    close={() => setPedometerVisible(false)}
+                />
+            </Modal>
+            <View style={styles.buttonContainer}>
+                <TouchableOpacity onPress={onPressDelete}>
+                    <View style={styles.deleteContainer}>
+                        {/* eslint-disable-next-line react/no-unescaped-entities */}
+                        <Text style={styles.buttonLabel}>Retirer de l'équipe</Text>
+                    </View>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={onPressLevelUp}>
+                    <View style={styles.levelUpContainer}>
+                        <Text style={styles.buttonLabel}>Level up</Text>
+                    </View>
+                </TouchableOpacity>
+            </View>
         </View>
     );
 };

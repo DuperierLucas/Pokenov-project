@@ -45,3 +45,9 @@ export type PokemonToCapture = {
     apparitionDate: number;
     disparitionDate: number;
 };
+
+export interface PokemonFull extends Pokemon {
+    lvl?: number;
+    currentSteps?: number;
+    stepsToReach?: number;
+};
