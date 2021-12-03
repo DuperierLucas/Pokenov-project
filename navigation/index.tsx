@@ -80,6 +80,7 @@ function BottomTabNavigator() {
                 name="Favorites"
                 component={Pokedex}
                 options={() => ({
+                    headerShown: false,
                     title: 'Pokédex',
                     tabBarIcon: ({ color }) => (
                         <TabBarIcon name="star" color={color} />
