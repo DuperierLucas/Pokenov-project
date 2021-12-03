@@ -26,12 +26,6 @@ Une fois les pokémons capturés, sélectionne les plus vaillants qui feront par
 ### 4.Combattre les autres dresseurs (à venir)
 
 
-
-### 5.Évolution du pokémon
-Elle a lieu lorsque le niveau du pokémon actuel atteint le niveau de son évolution.
-
-
-
 ## Composants natifs
 * Async storage pour conserver les données sur l'appareil et permettre le jeu en solo
 
