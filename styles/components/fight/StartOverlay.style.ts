@@ -10,12 +10,24 @@ export default StyleSheet.create({
         backgroundColor: chroma(colors.main.black).alpha(0.7).css(),
     },
     button: {
-        padding: 20,
+        padding: 15,
         borderRadius: 20,
         backgroundColor: colors.main.yellow,
     },
+    backButton: {
+        marginTop: 10,
+        padding: 10,
+        borderRadius: 20,
+        backgroundColor: colors.main.white,
+    },
     buttonLabel: {
         textTransform: 'uppercase',
+        fontWeight: 'bold',
+        fontSize: 17,
+    },
+    backButtonLabel: {
+        textTransform: 'uppercase',
+        fontSize: 10,
     },
     loader: {
         marginTop: 5,

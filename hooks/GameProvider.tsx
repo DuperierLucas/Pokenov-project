@@ -124,14 +124,15 @@ const Provider = ({ children }: Props): JSX.Element => {
         for (let i = 0; i < limit; i++) {
             fetchDetailsRequests.push(getPokemonById(getRandomPokemon()));
         }
-        const pokemons = await Promise.all(fetchDetailsRequests);
-        while (pokemons.length < 6) {
-            pokemons.push(null);
-        }
-        return pokemons.map((p) => {
+        let pokemons = await Promise.all(fetchDetailsRequests);
+        pokemons = pokemons.map((p) => {
             const lvl = Math.floor(Math.random() * 100) + 1;
             return { ...p, isAlive: true, lvl };
         });
+        while (pokemons.length < 6) {
+            pokemons.push(null);
+        }
+        return pokemons;
     }
 
     function getPokemonToCapture() {
