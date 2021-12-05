@@ -7,7 +7,6 @@ import TeamPokemonDetails from '../modals/TeamPokemonDetails';
 import AddToTeam from '../modals/AddToTeam';
 import { Pokemon } from 'pokenode-ts';
 import TeamHeader from '../components/TeamHeader';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Team(): JSX.Element {
     const { resetGame } = useGame();
@@ -100,12 +99,6 @@ export default function Team(): JSX.Element {
                     style={{ backgroundColor: 'red' }}
                 >
                     <Text>Remettre à 0 le jeu</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    style={{ backgroundColor: 'red' }}
-                    onPress={() => AsyncStorage.clear()}
-                >
-                    <Text>Clear</Text>
                 </TouchableOpacity>
             </ScrollView>
         </View>

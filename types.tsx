@@ -21,7 +21,7 @@ export type RootStackParamList = {
     Root: NavigatorScreenParams<RootTabParamList> | undefined;
     Modal: undefined;
     NotFound: undefined;
-    Login: undefined;
+    Fight: undefined;
     Catch: undefined;
 };
 
@@ -50,4 +50,9 @@ export interface PokemonFull extends Pokemon {
     lvl?: number;
     currentSteps?: number;
     stepsToReach?: number;
+}
+
+export type TeamRecapPokemon = {
+    imageUrl: string;
+    isAlive: boolean;
 };
