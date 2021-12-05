@@ -52,7 +52,6 @@ export interface PokemonFull extends Pokemon {
     stepsToReach?: number;
 }
 
-export type TeamRecapPokemon = {
-    imageUrl: string;
+export interface TeamRecapPokemon extends PokemonFull {
     isAlive: boolean;
-};
+}

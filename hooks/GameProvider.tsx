@@ -16,6 +16,7 @@ type Game = {
     getPokemonToCapture: () => PokemonToCapture | undefined;
     wildsPokemons: PokemonToCapture[];
     skipWildPokemon: () => void;
+    username: string;
 };
 
 const GameContext = createContext<Game>({} as any);
@@ -56,20 +57,12 @@ const Provider = ({ children }: Props): JSX.Element => {
         if (wildsPokemons.length < 1 && mounted) {
             generatePokemonsToCapture();
         }
-        console.log(
-            wildsPokemons.map((w) => {
-                return {
-                    apparition: new Date(w.apparitionDate),
-                    disparition: new Date(w.disparitionDate),
-                };
-            }),
-        );
     }, [mounted, wildsPokemons]);
 
     useEffect(() => {
         saveData();
     }, [pokemonTeam, capturedPokemons, wildsPokemons, topTeams, username]);
-    
+
     async function getData() {
         const data = await AsyncStorage.getItem('game');
         if (data) {
@@ -130,8 +123,6 @@ const Provider = ({ children }: Props): JSX.Element => {
                 wildPokemon.disparitionDate >= Date.now(),
         );
         let pokemon = null;
-        console.log(pokemonIndex);
-        console.log(wildsPokemons);
         if (
             (pokemonIndex === -1 && wildsPokemons?.length < 1) ||
             wildsPokemons[wildsPokemons.length - 1].disparitionDate < Date.now()
@@ -143,9 +134,9 @@ const Provider = ({ children }: Props): JSX.Element => {
                     wildPokemon.apparitionDate <= Date.now() &&
                     wildPokemon.disparitionDate >= Date.now(),
             );
+            return pokemon;
         }
         if (pokemonIndex > 0) {
-            console.log({ pokemonIndex });
             const newWildsPokemons = wildsPokemons.slice(pokemonIndex);
             setWildPokemons(newWildsPokemons);
         }
@@ -184,7 +175,7 @@ const Provider = ({ children }: Props): JSX.Element => {
         return true;
     }
 
-    function setPokemonLevel(pokemon: PokemonFull, slotIndex){
+    function setPokemonLevel(pokemon: PokemonFull, slotIndex) {
         const newTeam = [...pokemonTeam];
         newTeam[slotIndex] = pokemon;
         setPokemonTeam(newTeam);
@@ -209,9 +200,8 @@ const Provider = ({ children }: Props): JSX.Element => {
         getPokemonToCapture,
         wildsPokemons,
         skipWildPokemon,
+        username,
     };
-
-    
 
     return (
         <GameContext.Provider value={providerValues}>

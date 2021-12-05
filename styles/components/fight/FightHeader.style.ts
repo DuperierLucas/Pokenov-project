@@ -14,7 +14,7 @@ export default StyleSheet.create({
     container: {},
     title: {
         paddingTop: 35,
-        paddingBottom: 15,
+        paddingBottom: 50,
         textTransform: 'uppercase',
         color: colors.main.white,
         fontSize: 30,

@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import RecipeCarouselThumbnail from '../components/RecipeCarouselThumbnail';
 import { useEffect, useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
 
 const RANDOM_RECIPES = [
     {
@@ -54,8 +55,10 @@ const RANDOM_RECIPES = [
     },
 ];
 
-export default function Home() {
+export default function Home(): JSX.Element {
     const [recipes, setRecipes] = useState<any[]>([]);
+    const navigation = useNavigation();
+
     useEffect(() => {
         setRecipes(RANDOM_RECIPES);
     }, []);
@@ -66,6 +69,9 @@ export default function Home() {
         ));
     }
 
+    function openFight() {
+        navigation.navigate('Fight' as any);
+    }
     return (
         <View style={styles.container}>
             <ImageBackground
@@ -93,6 +99,7 @@ export default function Home() {
                 <TouchableOpacity
                     activeOpacity={0.7}
                     style={styles.innerButton}
+                    onPress={openFight}
                 >
                     <View style={styles.battleButton}>
                         <Image

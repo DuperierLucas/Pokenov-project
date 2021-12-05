@@ -12,16 +12,12 @@ import React from 'react';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import Pokedex from '../screens/Pokedex';
 import Home from '../screens/Home';
-import {
-    RootStackParamList,
-    RootTabParamList,
-    RootTabScreenProps,
-} from '../types';
+import { RootStackParamList, RootTabParamList } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 import Team from '../screens/Team';
-import Login from '../screens/Login';
 import { colors } from '../styles/shared/Color';
 import styles from '../styles/navigation.style';
+import FightModal from '../modals/FightModal';
 
 export default function Navigation() {
     return (
@@ -54,9 +50,11 @@ function RootNavigator() {
                 options={{ title: 'Oops!' }}
             />
             <Stack.Screen
-                name="Login"
-                component={Login}
-                options={{ title: 'Connexion' }}
+                name={'Fight'}
+                component={FightModal}
+                options={() => ({
+                    headerShown: false,
+                })}
             />
         </Stack.Navigator>
     );
@@ -101,7 +99,7 @@ function BottomTabNavigator() {
             <BottomTab.Screen
                 name="Team"
                 component={Team}
-                options={({ navigation }: RootTabScreenProps<'Team'>) => ({
+                options={() => ({
                     headerShown: false,
                     tabBarIcon: ({ color }) => (
                         <MaterialCommunityIcons

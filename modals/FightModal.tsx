@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { ImageBackground, View } from 'react-native';
+import { ImageBackground, View, Text } from 'react-native';
 import FightHeader from '../components/fight/FightHeader';
 import TeamRecap from '../components/fight/TeamRecap';
 import useGame from '../hooks/GameProvider';
 import styles from '../styles/modals/FightModal.style';
 import { viewportHeight } from '../styles/metrics.style';
+import FightDuel from '../components/fight/FightDuel';
 
 const FightModal = (): JSX.Element => {
     const { pokemonTeam } = useGame();
@@ -22,7 +23,7 @@ const FightModal = (): JSX.Element => {
             if (p) {
                 mt.push({
                     isAlive: true,
-                    imageUrl: p.sprites.front_default,
+                    ...p,
                 });
             }
         });
@@ -37,8 +38,8 @@ const FightModal = (): JSX.Element => {
         pokemonTeam.forEach((p) => {
             if (p) {
                 et.push({
-                    isAlive: false,
-                    imageUrl: p.sprites.front_default,
+                    isAlive: true,
+                    ...p,
                 });
             }
         });
@@ -46,6 +47,30 @@ const FightModal = (): JSX.Element => {
             et.push(null);
         }
         setEnnemyTeam(et);
+    }
+
+    function getMyPokemon() {
+        return myTeam.filter((pokemon) => pokemon?.isAlive)[0];
+    }
+
+    function getEnnemyPokemon() {
+        return ennemyTeam.filter((pokemon) => pokemon?.isAlive)[0];
+    }
+
+    function getFightDuel() {
+        const ennemyPokemon = getEnnemyPokemon();
+        const myPokemon = getMyPokemon();
+
+        if (!ennemyPokemon) {
+            return <Text>Vous avez gagné !</Text>;
+        }
+        if (!myPokemon) {
+            return <Text>Vous avez perdu !</Text>;
+        }
+
+        return (
+            <FightDuel ennemyPokemon={ennemyPokemon} myPokemon={myPokemon} />
+        );
     }
 
     return (
@@ -58,6 +83,7 @@ const FightModal = (): JSX.Element => {
                 <FightHeader />
                 <View style={styles.fightContainer}>
                     <TeamRecap team={ennemyTeam} align={'left'} />
+                    {getFightDuel()}
                     <TeamRecap team={myTeam} align={'right'} />
                 </View>
             </View>
