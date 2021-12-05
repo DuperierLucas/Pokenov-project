@@ -12,14 +12,25 @@ export const GRADIENT_COLORS = [
 
 export default StyleSheet.create({
     container: {},
-    title: {
+    gradient: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
         paddingTop: 35,
         paddingBottom: 50,
+    },
+    backButton: {
+        position: 'absolute',
+        top: 35,
+        left: 10,
+    },
+    title: {
+        alignSelf: 'center',
         textTransform: 'uppercase',
         color: colors.main.white,
         fontSize: 30,
-        fontWeight: 'bold',
         textAlign: 'center',
+        fontWeight: 'bold',
         textShadowColor: colors.main.white,
         textShadowRadius: 2,
         letterSpacing: 1.5,
