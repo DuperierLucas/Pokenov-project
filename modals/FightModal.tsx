@@ -6,11 +6,15 @@ import useGame from '../hooks/GameProvider';
 import styles from '../styles/modals/FightModal.style';
 import { viewportHeight } from '../styles/metrics.style';
 import FightDuel from '../components/fight/FightDuel';
+import StartOverlay from '../components/fight/StartOverlay';
+
+const PLACEHOLDER_TEAM = [null, null, null, null, null, null];
 
 const FightModal = (): JSX.Element => {
     const { pokemonTeam, getRandomEnnemyTeam } = useGame();
-    const [ennemyTeam, setEnnemyTeam] = useState(null);
-    const [myTeam, setMyTeam] = useState([]);
+    const [ennemyTeam, setEnnemyTeam] = useState(PLACEHOLDER_TEAM);
+    const [myTeam, setMyTeam] = useState(PLACEHOLDER_TEAM);
+    const [fightEngaged, setFightEngaged] = useState(false);
 
     useEffect(() => {
         setupMyTeam();
@@ -62,10 +66,6 @@ const FightModal = (): JSX.Element => {
         );
     }
 
-    if (!ennemyTeam) {
-        return <Text>Chargement ...</Text>;
-    }
-
     return (
         <ImageBackground
             source={require('../assets/images/home-background.jpg')}
@@ -79,6 +79,12 @@ const FightModal = (): JSX.Element => {
                     {getFightDuel()}
                     <TeamRecap team={myTeam} align={'right'} />
                 </View>
+                {!fightEngaged && (
+                    <StartOverlay
+                        ready={!!ennemyTeam[0]}
+                        onPressFight={() => setFightEngaged(true)}
+                    />
+                )}
             </View>
         </ImageBackground>
     );

@@ -11,7 +11,6 @@ import {
 import useGame from '../../hooks/GameProvider';
 import { PokemonToCapture } from '../../types';
 import { styles } from '../../styles/screens/Catch.style';
-import { useNavigation } from '@react-navigation/native';
 const background = require('../../assets/images/catch_background.jpeg');
 
 let timer;
@@ -30,7 +29,6 @@ export default function CatchModal({ close }: Props): JSX.Element {
     const [wildPokemon, setWildPokemon] = useState<PokemonToCapture>(undefined);
     const [timeToDisparition, setTimeToDisparition] = useState('');
     const [failed, setFailed] = useState(false);
-    const navigation = useNavigation();
 
     useEffect(() => {
         fetchPokemonToCapture();

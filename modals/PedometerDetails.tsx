@@ -3,7 +3,7 @@ import { Text, TouchableOpacity, View } from 'react-native';
 import { styles } from '../styles/modals/PedometerDetails.style';
 import { PokemonFull } from '../types';
 import { Pedometer } from 'expo-sensors';
-import { Icon } from 'react-native-elements'
+import { Icon } from 'react-native-elements';
 import useGame from '../hooks/GameProvider';
 
 type Props = {
@@ -15,18 +15,24 @@ type Props = {
 let subscription;
 
 const PedometerDetails = ({ index, close, pokemon }: Props): JSX.Element => {
-    const [isPedometerAvailable, setPedometerAvailable] = useState<string>("Vérification disponiblité podomètre...");
-    const [currentStepCount, setCurrentStepCount] = useState<number>(pokemon.currentSteps);
-    const [stepCountToReach, setStepCountToReach] = useState<number>(pokemon.stepsToReach);
+    const [isPedometerAvailable, setPedometerAvailable] = useState<string>(
+        'Vérification disponiblité podomètre...',
+    );
+    const [currentStepCount, setCurrentStepCount] = useState<number>(
+        pokemon.currentSteps,
+    );
+    const [stepCountToReach, setStepCountToReach] = useState<number>(
+        pokemon.stepsToReach,
+    );
     const [currentLevel, setCurrentLevel] = useState<number>(pokemon.lvl);
     const [nextLevel, setNextLevel] = useState<number>(pokemon.lvl + 1);
     const { setPokemonLevel } = useGame();
-    
+
     useEffect(() => {
         subscribe();
         return () => {
             unsubscribe();
-        }
+        };
     }, []);
 
     useEffect(() => {
@@ -39,15 +45,15 @@ const PedometerDetails = ({ index, close, pokemon }: Props): JSX.Element => {
         close();
     }
 
-    function savePokemonLevel(){
-        if(currentStepCount >= stepCountToReach){
+    function savePokemonLevel() {
+        if (currentStepCount >= stepCountToReach) {
             setCurrentStepCount(0);
             setStepCountToReach(stepCountToReach + 10);
             setCurrentLevel(nextLevel);
             setNextLevel(nextLevel + 1);
         }
 
-        const p2 = {...pokemon};
+        const p2 = { ...pokemon };
 
         p2.lvl = currentLevel;
         p2.currentSteps = currentStepCount;
@@ -57,25 +63,25 @@ const PedometerDetails = ({ index, close, pokemon }: Props): JSX.Element => {
     }
 
     async function subscribe() {
-        subscription = Pedometer.watchStepCount(result => {
-          setCurrentStepCount(result.steps);
+        subscription = Pedometer.watchStepCount((result) => {
+            setCurrentStepCount(result.steps);
         });
-    
+
         Pedometer.isAvailableAsync().then(
-          result => {
-            setPedometerAvailable("Podomètre disponible");
-          },
-          error => {
-            setPedometerAvailable("Podomètre indisponible : " + error);
-          }
+            () => {
+                setPedometerAvailable('Podomètre disponible');
+            },
+            (error) => {
+                setPedometerAvailable('Podomètre indisponible : ' + error);
+            },
         );
-    };
+    }
 
     async function unsubscribe() {
         subscription && subscription.remove();
         subscription = null;
-    };
-    
+    }
+
     if (!pokemon) {
         return null;
     }
@@ -86,12 +92,22 @@ const PedometerDetails = ({ index, close, pokemon }: Props): JSX.Element => {
             </View>
             <View style={styles.detailContainer}>
                 <Text style={styles.textLevel}>{currentLevel}</Text>
-                <Icon name="arrow-forward-outline" size={50} color="white" type="ionicon" tvParallaxProperties />
+                <Icon
+                    name="arrow-forward-outline"
+                    size={50}
+                    color="white"
+                    type="ionicon"
+                    tvParallaxProperties
+                />
                 <Text style={styles.textLevel}>{nextLevel}</Text>
             </View>
             <View style={styles.progressStepContainer}>
-                <Text style={styles.text}>Nombre de pas : {currentStepCount}</Text>
-                <Text style={styles.text}>Objectif pas à atteindre: {stepCountToReach}</Text>
+                <Text style={styles.text}>
+                    Nombre de pas : {currentStepCount}
+                </Text>
+                <Text style={styles.text}>
+                    Objectif pas à atteindre: {stepCountToReach}
+                </Text>
             </View>
             <View style={styles.buttonContainer}>
                 <TouchableOpacity onPress={onPressStop}>
@@ -106,5 +122,5 @@ const PedometerDetails = ({ index, close, pokemon }: Props): JSX.Element => {
         </View>
     );
 };
-  
+
 export default PedometerDetails;

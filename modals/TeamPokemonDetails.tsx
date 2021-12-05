@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
-import { Alert, Image, Modal, Text, TouchableOpacity, View } from 'react-native';
+import {
+    Alert,
+    Image,
+    Modal,
+    Text,
+    TouchableOpacity,
+    View,
+} from 'react-native';
 import { styles } from '../styles/modals/TeamPokemonDetails.style';
 import CloseIcon from '../assets/images/close.svg';
 import useGame from '../hooks/GameProvider';
-import { Pokemon } from 'pokenode-ts';
 import PedometerDetails from './PedometerDetails';
 import { PokemonFull } from 'types';
 
@@ -16,7 +22,7 @@ const TeamPokemonDetails = ({ index, close, pokemon }: Props): JSX.Element => {
     const { deletePokemonFromTeam } = useGame();
     const [pedometerVisible, setPedometerVisible] = useState(false);
 
-    function onPressLevelUp(){
+    function onPressLevelUp() {
         setPedometerVisible(true);
     }
 
@@ -107,8 +113,10 @@ const TeamPokemonDetails = ({ index, close, pokemon }: Props): JSX.Element => {
             <View style={styles.buttonContainer}>
                 <TouchableOpacity onPress={onPressDelete}>
                     <View style={styles.deleteContainer}>
-                        {/* eslint-disable-next-line react/no-unescaped-entities */}
-                        <Text style={styles.buttonLabel}>Retirer de l'équipe</Text>
+                        <Text style={styles.buttonLabel}>
+                            {/* eslint-disable-next-line react/no-unescaped-entities */}
+                            Retirer de l'équipe
+                        </Text>
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={onPressLevelUp}>

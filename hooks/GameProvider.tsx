@@ -36,7 +36,7 @@ const DEFAULT_TEAM_STATE: Pokemon[] = [
 ];
 
 const Provider = ({ children }: Props): JSX.Element => {
-    const { getPokemonById, getPokemonsList } = usePokemonAPI();
+    const { getPokemonById } = usePokemonAPI();
     const [pokemonTeam, setPokemonTeam] =
         useState<Pokemon[]>(DEFAULT_TEAM_STATE);
     const [capturedPokemons, setCapturedPokemons] = useState<Pokemon[]>([]);

@@ -12,9 +12,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Pokemon } from 'pokenode-ts';
 
 declare global {
-    namespace ReactNavigation {
-        type RootParamList = RootStackParamList;
-    }
+    namespace ReactNavigation {}
 }
 
 export type RootStackParamList = {

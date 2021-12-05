@@ -3,8 +3,6 @@ import { StyleSheet } from 'react-native';
 import chroma from 'chroma-js';
 import { viewportWidth } from '../../metrics.style';
 
-const IMAGE_SIZE = viewportWidth * 0.1;
-
 export default StyleSheet.create({
     container: {
         flexDirection: 'row',
