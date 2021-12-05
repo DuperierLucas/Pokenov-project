@@ -8,8 +8,8 @@ import { viewportHeight } from '../styles/metrics.style';
 import FightDuel from '../components/fight/FightDuel';
 
 const FightModal = (): JSX.Element => {
-    const { pokemonTeam } = useGame();
-    const [ennemyTeam, setEnnemyTeam] = useState([]);
+    const { pokemonTeam, getRandomEnnemyTeam } = useGame();
+    const [ennemyTeam, setEnnemyTeam] = useState(null);
     const [myTeam, setMyTeam] = useState([]);
 
     useEffect(() => {
@@ -33,19 +33,8 @@ const FightModal = (): JSX.Element => {
         setMyTeam(mt);
     }
 
-    function setupEnnemyTeam(): void {
-        const et = [];
-        pokemonTeam.forEach((p) => {
-            if (p) {
-                et.push({
-                    isAlive: true,
-                    ...p,
-                });
-            }
-        });
-        while (et.length < 6) {
-            et.push(null);
-        }
+    async function setupEnnemyTeam(): Promise<void> {
+        const et = await getRandomEnnemyTeam();
         setEnnemyTeam(et);
     }
 
@@ -71,6 +60,10 @@ const FightModal = (): JSX.Element => {
         return (
             <FightDuel ennemyPokemon={ennemyPokemon} myPokemon={myPokemon} />
         );
+    }
+
+    if (!ennemyTeam) {
+        return <Text>Chargement ...</Text>;
     }
 
     return (

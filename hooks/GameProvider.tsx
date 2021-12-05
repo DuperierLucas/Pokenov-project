@@ -3,7 +3,7 @@ import { Pokemon } from 'pokenode-ts';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getRandomPokemon } from '../utils/pokemons';
 import usePokemonAPI from './usePokemonApi';
-import { PokemonToCapture, PokemonFull } from '../types';
+import { PokemonToCapture, PokemonFull, TeamRecapPokemon } from '../types';
 
 type Game = {
     pokemonTeam: PokemonFull[];
@@ -17,6 +17,7 @@ type Game = {
     wildsPokemons: PokemonToCapture[];
     skipWildPokemon: () => void;
     username: string;
+    getRandomEnnemyTeam: () => Promise<TeamRecapPokemon[]>;
 };
 
 const GameContext = createContext<Game>({} as any);
@@ -35,7 +36,7 @@ const DEFAULT_TEAM_STATE: Pokemon[] = [
 ];
 
 const Provider = ({ children }: Props): JSX.Element => {
-    const { getPokemonById } = usePokemonAPI();
+    const { getPokemonById, getPokemonsList } = usePokemonAPI();
     const [pokemonTeam, setPokemonTeam] =
         useState<Pokemon[]>(DEFAULT_TEAM_STATE);
     const [capturedPokemons, setCapturedPokemons] = useState<Pokemon[]>([]);
@@ -114,6 +115,20 @@ const Provider = ({ children }: Props): JSX.Element => {
                 (p1, p2) => p1.apparitionDate - p2.apparitionDate,
             ),
         );
+    }
+
+    async function getRandomEnnemyTeam(): Promise<TeamRecapPokemon[]> {
+        const offset = Math.floor(Math.random() * 100) + 100;
+
+        const { results } = await getPokemonsList(offset, 6);
+        const fetchDetailsRequests = results.map((pokemon) =>
+            getPokemonById(pokemon.id ?? pokemon.name),
+        );
+        const pokemons = await Promise.all(fetchDetailsRequests);
+        return pokemons.map((p) => {
+            const lvl = Math.floor(Math.random() * 100) + 1;
+            return { ...p, isAlive: true, lvl };
+        });
     }
 
     function getPokemonToCapture() {
@@ -201,6 +216,7 @@ const Provider = ({ children }: Props): JSX.Element => {
         wildsPokemons,
         skipWildPokemon,
         username,
+        getRandomEnnemyTeam,
     };
 
     return (
