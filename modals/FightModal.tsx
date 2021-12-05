@@ -90,16 +90,35 @@ const FightModal = (): JSX.Element => {
     function getFightDuel() {
         const ennemyPokemon = getEnnemyPokemon();
         const myPokemon = getMyPokemon();
-
-        if (!ennemyPokemon) {
-            return <Text>Vous avez gagné !</Text>;
-        }
-        if (!myPokemon) {
-            return <Text>Vous avez perdu !</Text>;
-        }
-
         return (
-            <FightDuel ennemyPokemon={ennemyPokemon} myPokemon={myPokemon} />
+            <>
+                <FightDuel
+                    ennemyPokemon={ennemyPokemon}
+                    myPokemon={myPokemon}
+                />
+                {!ennemyPokemon && (
+                    <Text
+                        style={{
+                            position: 'absolute',
+                            bottom: viewportHeight / 2,
+                            textAlign: 'center',
+                        }}
+                    >
+                        Vous avez gagné !
+                    </Text>
+                )}
+                {!myPokemon && (
+                    <Text
+                        style={{
+                            position: 'absolute',
+                            bottom: viewportHeight / 2,
+                            textAlign: 'center',
+                        }}
+                    >
+                        Vous avez perdu !
+                    </Text>
+                )}
+            </>
         );
     }
 

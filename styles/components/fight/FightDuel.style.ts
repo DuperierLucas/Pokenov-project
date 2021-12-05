@@ -1,17 +1,6 @@
-import { colors } from '../../shared/Color';
 import { StyleSheet } from 'react-native';
-import chroma from 'chroma-js';
-import { viewportWidth } from '../../metrics.style';
 
 export default StyleSheet.create({
-    container: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-around',
-        width: viewportWidth * 0.8,
-        backgroundColor: chroma(colors.main.white).alpha(0.2).css(),
-        padding: 10,
-    },
     image: {
         width: 200,
         height: 200,
@@ -24,10 +13,14 @@ export default StyleSheet.create({
         fontWeight: 'bold',
     },
     ennemyPokemonContainer: {
-        alignItems: 'flex-end',
+        position: 'absolute',
+        bottom: 0,
+        right: 0,
         justifyContent: 'center',
     },
     myPokemonContainer: {
-        alignItems: 'flex-start',
+        position: 'absolute',
+        top: 0,
+        left: 0,
     },
 });

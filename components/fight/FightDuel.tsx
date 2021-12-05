@@ -9,8 +9,8 @@ type Props = {
 };
 
 const FightDuel = ({ ennemyPokemon, myPokemon }: Props): JSX.Element => {
-    return (
-        <View>
+    function displayEnnemyPokemon() {
+        return (
             <View style={styles.ennemyPokemonContainer}>
                 <Text style={styles.pokemonLevelLabel}>
                     lvl. {ennemyPokemon.lvl}
@@ -20,6 +20,11 @@ const FightDuel = ({ ennemyPokemon, myPokemon }: Props): JSX.Element => {
                     source={{ uri: ennemyPokemon.sprites.front_default }}
                 />
             </View>
+        );
+    }
+
+    function displayMyPokemon() {
+        return (
             <View style={styles.myPokemonContainer}>
                 <Text style={styles.pokemonLevelLabel}>
                     lvl. {myPokemon.lvl}
@@ -29,6 +34,13 @@ const FightDuel = ({ ennemyPokemon, myPokemon }: Props): JSX.Element => {
                     source={{ uri: myPokemon.sprites.back_default }}
                 />
             </View>
+        );
+    }
+
+    return (
+        <View>
+            {ennemyPokemon && displayEnnemyPokemon()}
+            {myPokemon && displayMyPokemon()}
         </View>
     );
 };
