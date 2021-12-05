@@ -37,7 +37,12 @@ const FightModal = (): JSX.Element => {
         ) {
             await sleep(2000);
             //one round of fight
-            const myTeamWin = Math.floor(Math.random() * 2) === 0;
+            const fightResult = Math.floor(
+                Math.random() *
+                    (availableTeamPokemon[0].lvl +
+                        availableEnnemyPokemon[0].lvl),
+            );
+            const myTeamWin = fightResult <= availableTeamPokemon[0].lvl + 1;
             if (myTeamWin) {
                 const eliminatedPokemon = availableEnnemyPokemon.shift();
                 const koIndex = ennemyTeam.findIndex(
