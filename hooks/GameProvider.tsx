@@ -119,12 +119,16 @@ const Provider = ({ children }: Props): JSX.Element => {
 
     async function getRandomEnnemyTeam(): Promise<TeamRecapPokemon[]> {
         const offset = Math.floor(Math.random() * 100) + 100;
+        const limit = Math.floor(Math.random() * 6) + 1;
 
-        const { results } = await getPokemonsList(offset, 6);
+        const { results } = await getPokemonsList(offset, limit);
         const fetchDetailsRequests = results.map((pokemon) =>
             getPokemonById(pokemon.id ?? pokemon.name),
         );
         const pokemons = await Promise.all(fetchDetailsRequests);
+        while (pokemons.length < 6) {
+            pokemons.push(null);
+        }
         return pokemons.map((p) => {
             const lvl = Math.floor(Math.random() * 100) + 1;
             return { ...p, isAlive: true, lvl };
