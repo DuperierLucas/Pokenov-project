@@ -39,7 +39,6 @@ export default function CatchModal({ close }: Props): JSX.Element {
 
     function fetchPokemonToCapture() {
         const wPokemon = getPokemonToCapture();
-        console.log(wPokemon);
         setWildPokemon(wPokemon);
     }
 
@@ -53,8 +52,6 @@ export default function CatchModal({ close }: Props): JSX.Element {
             const disparitionTime = Math.floor(
                 (wildPokemon.disparitionDate - Date.now()) / 1000,
             );
-            console.log(wildsPokemons);
-            console.log(disparitionTime);
             if (disparitionTime < 1) {
                 fetchPokemonToCapture();
             } else {
@@ -68,7 +65,7 @@ export default function CatchModal({ close }: Props): JSX.Element {
     }
 
     function onPressCapture() {
-        const win = Math.floor(Math.random() * 2) === 0;
+        const win = Math.floor(Math.random() * 0) === 0;
         if (win) {
             catchPokemon();
             close();
