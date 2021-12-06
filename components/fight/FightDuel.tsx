@@ -1,7 +1,8 @@
 import React from 'react';
-import { Image, View, Text } from 'react-native';
+import { Image, View, Text, Animated } from 'react-native';
 import { TeamRecapPokemon } from '../../types';
 import styles from '../../styles/components/fight/FightDuel.style';
+import useAnimation from '../../animations/components/fight/FightDuel.animations';
 
 type Props = {
     ennemyPokemon: TeamRecapPokemon;
@@ -9,9 +10,13 @@ type Props = {
 };
 
 const FightDuel = ({ ennemyPokemon, myPokemon }: Props): JSX.Element => {
+    const { animatedEnnemyStyle, animatedPokemonStyle } = useAnimation(
+        ennemyPokemon,
+        myPokemon,
+    );
     function displayEnnemyPokemon() {
         return (
-            <View style={styles.ennemyPokemonContainer}>
+            <Animated.View style={animatedEnnemyStyle}>
                 <Text style={styles.pokemonLevelLabel}>
                     lvl. {ennemyPokemon.lvl}
                 </Text>
@@ -19,13 +24,13 @@ const FightDuel = ({ ennemyPokemon, myPokemon }: Props): JSX.Element => {
                     style={[styles.image]}
                     source={{ uri: ennemyPokemon.sprites.front_default }}
                 />
-            </View>
+            </Animated.View>
         );
     }
 
     function displayMyPokemon() {
         return (
-            <View style={styles.myPokemonContainer}>
+            <Animated.View style={animatedPokemonStyle}>
                 <Text style={styles.pokemonLevelLabel}>
                     lvl. {myPokemon.lvl}
                 </Text>
@@ -33,7 +38,7 @@ const FightDuel = ({ ennemyPokemon, myPokemon }: Props): JSX.Element => {
                     style={[styles.image]}
                     source={{ uri: myPokemon.sprites.back_default }}
                 />
-            </View>
+            </Animated.View>
         );
     }
 
