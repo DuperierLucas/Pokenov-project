@@ -26,7 +26,7 @@ const FightModal = (): JSX.Element => {
 
     useEffect(() => {
         if (fightEngaged) {
-            launchFightRound();
+            setTimeout(launchFightRound, 1000);
         }
     }, [fightEngaged]);
 
@@ -66,7 +66,7 @@ const FightModal = (): JSX.Element => {
             const newTeam = [...myTeam];
             newTeam[koIndex].isAlive = false;
             setMyTeam(newTeam);
-            setMyPokemon({ ...newTeam[koIndex], isAlive: false });
+            setMyPokemon({ ...myPokemon, isAlive: false });
         }
         setTimeout(() => setEnnemyPokemon(availableEnnemyPokemon[0]), 300);
         setTimeout(() => {
@@ -141,12 +141,13 @@ const FightModal = (): JSX.Element => {
         >
             <View style={{ height: viewportHeight }}>
                 <FightHeader />
-                <View style={styles.fightContainer}>
-                    <TeamRecap team={ennemyTeam} align={'left'} />
-                    {getFightDuel()}
-                    <TeamRecap team={myTeam} align={'right'} />
-                </View>
-                {!fightEngaged && (
+                {fightEngaged ? (
+                    <View style={styles.fightContainer}>
+                        <TeamRecap team={ennemyTeam} align={'left'} />
+                        {getFightDuel()}
+                        <TeamRecap team={myTeam} align={'right'} />
+                    </View>
+                ) : (
                     <StartOverlay
                         ready={!!ennemyTeam[0]}
                         onPressFight={() => setFightEngaged(true)}

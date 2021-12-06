@@ -1,8 +1,9 @@
 import React from 'react';
-import { Image, Text, View } from 'react-native';
+import { Animated, Image, Text, View } from 'react-native';
 import { TeamRecapPokemon } from '../../types';
 import styles from '../../styles/components/fight/TeamRecap.style';
 import useGame from '../../hooks/GameProvider';
+import useAnimation from '../../animations/components/fight/TeamRecap.animations';
 type Props = {
     team: TeamRecapPokemon[];
     align: 'left' | 'right';
@@ -10,6 +11,7 @@ type Props = {
 
 const TeamRecap = ({ team, align }: Props): JSX.Element => {
     const { username } = useGame();
+    const { animatedStyle } = useAnimation(align);
     function getPokemonImage(poke) {
         return (
             <>
@@ -22,10 +24,11 @@ const TeamRecap = ({ team, align }: Props): JSX.Element => {
         );
     }
     return (
-        <View
+        <Animated.View
             style={[
                 styles.container,
                 align === 'left' ? styles.leftContainer : styles.rightContainer,
+                animatedStyle,
             ]}
         >
             <Text style={styles.name}>
@@ -39,7 +42,7 @@ const TeamRecap = ({ team, align }: Props): JSX.Element => {
                     {pokemon && getPokemonImage(pokemon)}
                 </View>
             ))}
-        </View>
+        </Animated.View>
     );
 };
 

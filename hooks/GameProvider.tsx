@@ -235,27 +235,3 @@ export const GameProvider = Provider;
 export default function useGame(): Game {
     return useContext<Game>(GameContext);
 }
-/*
-                                                ##################
-                                                ### AFK MANGER ###
-                                                ##################
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-*/
