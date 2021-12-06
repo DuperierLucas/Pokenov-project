@@ -12,16 +12,14 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Pokemon } from 'pokenode-ts';
 
 declare global {
-    namespace ReactNavigation {
-        type RootParamList = RootStackParamList;
-    }
+    namespace ReactNavigation {}
 }
 
 export type RootStackParamList = {
     Root: NavigatorScreenParams<RootTabParamList> | undefined;
     Modal: undefined;
     NotFound: undefined;
-    Login: undefined;
+    Fight: undefined;
     Catch: undefined;
 };
 
@@ -50,4 +48,8 @@ export interface PokemonFull extends Pokemon {
     lvl?: number;
     currentSteps?: number;
     stepsToReach?: number;
-};
+}
+
+export interface TeamRecapPokemon extends PokemonFull {
+    isAlive: boolean;
+}

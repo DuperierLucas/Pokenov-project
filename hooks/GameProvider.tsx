@@ -3,7 +3,7 @@ import { Pokemon } from 'pokenode-ts';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getRandomPokemon } from '../utils/pokemons';
 import usePokemonAPI from './usePokemonApi';
-import { PokemonToCapture, PokemonFull } from '../types';
+import { PokemonToCapture, PokemonFull, TeamRecapPokemon } from '../types';
 
 type Game = {
     pokemonTeam: PokemonFull[];
@@ -16,6 +16,8 @@ type Game = {
     getPokemonToCapture: () => PokemonToCapture | undefined;
     wildsPokemons: PokemonToCapture[];
     skipWildPokemon: () => void;
+    username: string;
+    getRandomEnnemyTeam: () => Promise<TeamRecapPokemon[]>;
 };
 
 const GameContext = createContext<Game>({} as any);
@@ -56,20 +58,12 @@ const Provider = ({ children }: Props): JSX.Element => {
         if (wildsPokemons.length < 1 && mounted) {
             generatePokemonsToCapture();
         }
-        console.log(
-            wildsPokemons.map((w) => {
-                return {
-                    apparition: new Date(w.apparitionDate),
-                    disparition: new Date(w.disparitionDate),
-                };
-            }),
-        );
     }, [mounted, wildsPokemons]);
 
     useEffect(() => {
         saveData();
     }, [pokemonTeam, capturedPokemons, wildsPokemons, topTeams, username]);
-    
+
     async function getData() {
         const data = await AsyncStorage.getItem('game');
         if (data) {
@@ -123,6 +117,24 @@ const Provider = ({ children }: Props): JSX.Element => {
         );
     }
 
+    async function getRandomEnnemyTeam(): Promise<TeamRecapPokemon[]> {
+        const limit = Math.floor(Math.random() * 6) + 1;
+
+        const fetchDetailsRequests = [];
+        for (let i = 0; i < limit; i++) {
+            fetchDetailsRequests.push(getPokemonById(getRandomPokemon()));
+        }
+        let pokemons = await Promise.all(fetchDetailsRequests);
+        pokemons = pokemons.map((p) => {
+            const lvl = Math.floor(Math.random() * 100) + 1;
+            return { ...p, isAlive: true, lvl };
+        });
+        while (pokemons.length < 6) {
+            pokemons.push(null);
+        }
+        return pokemons;
+    }
+
     function getPokemonToCapture() {
         const pokemonIndex = wildsPokemons.findIndex(
             (wildPokemon) =>
@@ -130,8 +142,6 @@ const Provider = ({ children }: Props): JSX.Element => {
                 wildPokemon.disparitionDate >= Date.now(),
         );
         let pokemon = null;
-        console.log(pokemonIndex);
-        console.log(wildsPokemons);
         if (
             (pokemonIndex === -1 && wildsPokemons?.length < 1) ||
             wildsPokemons[wildsPokemons.length - 1].disparitionDate < Date.now()
@@ -143,9 +153,9 @@ const Provider = ({ children }: Props): JSX.Element => {
                     wildPokemon.apparitionDate <= Date.now() &&
                     wildPokemon.disparitionDate >= Date.now(),
             );
+            return pokemon;
         }
         if (pokemonIndex > 0) {
-            console.log({ pokemonIndex });
             const newWildsPokemons = wildsPokemons.slice(pokemonIndex);
             setWildPokemons(newWildsPokemons);
         }
@@ -184,7 +194,7 @@ const Provider = ({ children }: Props): JSX.Element => {
         return true;
     }
 
-    function setPokemonLevel(pokemon: PokemonFull, slotIndex){
+    function setPokemonLevel(pokemon: PokemonFull, slotIndex) {
         const newTeam = [...pokemonTeam];
         newTeam[slotIndex] = pokemon;
         setPokemonTeam(newTeam);
@@ -209,9 +219,9 @@ const Provider = ({ children }: Props): JSX.Element => {
         getPokemonToCapture,
         wildsPokemons,
         skipWildPokemon,
+        username,
+        getRandomEnnemyTeam,
     };
-
-    
 
     return (
         <GameContext.Provider value={providerValues}>

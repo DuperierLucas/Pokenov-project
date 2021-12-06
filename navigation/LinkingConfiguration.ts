@@ -25,9 +25,9 @@ const linking: LinkingOptions<RootStackParamList> = {
                             HomeScreen: 'home',
                         },
                     },
-                    Profile: {
+                    Team: {
                         screens: {
-                            ProfileScreen: 'profile',
+                            TeamScreen: 'team',
                         },
                     },
                 },

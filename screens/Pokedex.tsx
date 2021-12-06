@@ -19,7 +19,7 @@ import { NamedAPIResourceList, Pokemon } from 'pokenode-ts';
 export default function Pokedex(): JSX.Element {
     const { getPokemons, getFromUrl } = usePokemonAPI();
 
-    const [modalVisible, setModalVisible] = useState<Boolean>(false);
+    const [modalVisible, setModalVisible] = useState<boolean>(false);
     const [currentDetailPokemon, setCurrentDetailPokemon] = useState<Pokemon>();
     const [pokemons, setPokemons] = useState<NamedAPIResourceList>();
 

@@ -24,15 +24,13 @@
         "googleSignIn": {
           "reservedClientId": "883072012214-pehnc5kvh7m4pfpplpacf4qdr9d269q2.apps.googleusercontent.com"
         }
-      },
-      "googleServicesFile": "./config/ios/firebase/GoogleService-Info.plist"
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "googleServicesFile": "./config/android/firebase/google-services.json",
       "package": "com.pokenov.ynov"
     },
     "web": {
