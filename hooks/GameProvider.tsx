@@ -187,7 +187,7 @@ const Provider = ({ children }: Props): JSX.Element => {
         }
 
         const newTeam = [...pokemonTeam];
-        pokemon.lvl = 20;
+        pokemon.lvl = 15;
         pokemon.currentSteps = 0;
         pokemon.stepsToReach = 10;
 
