@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ImageBackground, View, Text } from 'react-native';
+import { ImageBackground, View } from 'react-native';
 import FightHeader from '../components/fight/FightHeader';
 import TeamRecap from '../components/fight/TeamRecap';
 import useGame from '../hooks/GameProvider';
@@ -7,7 +7,7 @@ import styles from '../styles/modals/FightModal.style';
 import { viewportHeight } from '../styles/metrics.style';
 import FightDuel from '../components/fight/FightDuel';
 import StartOverlay from '../components/fight/StartOverlay';
-
+import EndOverlay from '../components/fight/EndOverlay';
 const PLACEHOLDER_TEAM = [null, null, null, null, null, null];
 
 const FightModal = (): JSX.Element => {
@@ -98,39 +98,6 @@ const FightModal = (): JSX.Element => {
         setEnnemyPokemon(et.filter((pokemon) => pokemon?.isAlive)[0]);
     }
 
-    function getFightDuel() {
-        return (
-            <>
-                <FightDuel
-                    ennemyPokemon={ennemyPokemon}
-                    myPokemon={myPokemon}
-                />
-                {!ennemyPokemon && (
-                    <Text
-                        style={{
-                            position: 'absolute',
-                            bottom: viewportHeight / 2,
-                            textAlign: 'center',
-                        }}
-                    >
-                        Vous avez gagné !
-                    </Text>
-                )}
-                {!myPokemon && (
-                    <Text
-                        style={{
-                            position: 'absolute',
-                            bottom: viewportHeight / 2,
-                            textAlign: 'center',
-                        }}
-                    >
-                        Vous avez perdu !
-                    </Text>
-                )}
-            </>
-        );
-    }
-
     return (
         <ImageBackground
             source={require('../assets/images/home-background.jpg')}
@@ -141,8 +108,17 @@ const FightModal = (): JSX.Element => {
                 {fightEngaged ? (
                     <View style={styles.fightContainer}>
                         <TeamRecap team={ennemyTeam} align={'left'} />
-                        {getFightDuel()}
+                        <FightDuel
+                            ennemyPokemon={ennemyPokemon}
+                            myPokemon={myPokemon}
+                        />
                         <TeamRecap team={myTeam} align={'right'} />
+                        {!myPokemon && (
+                            <EndOverlay message={'Vous avez perdu !'} />
+                        )}
+                        {!ennemyPokemon && (
+                            <EndOverlay message={'Vous avez gagné !'} />
+                        )}
                     </View>
                 ) : (
                     <StartOverlay

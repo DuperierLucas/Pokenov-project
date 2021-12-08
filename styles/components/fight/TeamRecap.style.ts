@@ -53,5 +53,12 @@ export default StyleSheet.create({
         position: 'absolute',
         top: -20,
         paddingHorizontal: 10,
+        shadowOpacity: 0.5,
+        shadowRadius: 5,
+        shadowOffset: {
+            width: 1,
+            height: 5,
+        },
+        shadowColor: colors.main.black,
     },
 });

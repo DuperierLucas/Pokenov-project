@@ -13,7 +13,7 @@ const useAnimation = (align: 'left' | 'right' | 'center'): any => {
 
     function animateContainer() {
         Animated.sequence([
-            isCenter && Animated.delay(200),
+            Animated.delay(isCenter ? 200 : 0),
             Animated.parallel([
                 Animated.timing(animOpacity, {
                     toValue: 1,

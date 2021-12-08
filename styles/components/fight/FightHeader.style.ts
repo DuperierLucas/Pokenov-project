@@ -1,6 +1,7 @@
 import { colors } from '../../shared/Color';
 import { StyleSheet } from 'react-native';
 import chroma from 'chroma-js';
+import { viewportWidth } from '../../metrics.style';
 
 export const GRADIENT_COLORS = [
     chroma(colors.main.black).alpha(1).css(),
@@ -11,7 +12,10 @@ export const GRADIENT_COLORS = [
 ];
 
 export default StyleSheet.create({
-    container: {},
+    container: {
+        position: 'absolute',
+        width: viewportWidth,
+    },
     gradient: {
         flexDirection: 'row',
         alignItems: 'center',
@@ -21,8 +25,18 @@ export default StyleSheet.create({
     },
     backButton: {
         position: 'absolute',
-        top: 35,
+        top: 40,
         left: 10,
+        backgroundColor: chroma(colors.main.white).alpha(0.2).css(),
+        alignItems: 'center',
+        borderRadius: 50,
+        padding: 5,
+    },
+    backButtonLabel: {
+        color: colors.main.white,
+        fontWeight: 'bold',
+        fontSize: 12,
+        textTransform: 'uppercase',
     },
     title: {
         alignSelf: 'center',

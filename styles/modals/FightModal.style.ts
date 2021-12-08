@@ -4,6 +4,7 @@ export default StyleSheet.create({
     fightContainer: {
         flex: 1,
         justifyContent: 'space-between',
-        paddingBottom: 60,
+        paddingBottom: 80,
+        paddingTop: 125,
     },
 });

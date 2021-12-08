@@ -118,15 +118,16 @@ const Provider = ({ children }: Props): JSX.Element => {
     }
 
     async function getRandomEnnemyTeam(): Promise<TeamRecapPokemon[]> {
-        const limit = Math.floor(Math.random() * 6) + 1;
-
+        const maxEnnemyPokemonNumber = 4;
+        const maxEnnemyPokemonLevel = 70;
+        const limit = Math.floor(Math.random() * maxEnnemyPokemonNumber) + 1;
         const fetchDetailsRequests = [];
         for (let i = 0; i < limit; i++) {
             fetchDetailsRequests.push(getPokemonById(getRandomPokemon()));
         }
         let pokemons = await Promise.all(fetchDetailsRequests);
         pokemons = pokemons.map((p) => {
-            const lvl = Math.floor(Math.random() * 100) + 1;
+            const lvl = Math.floor(Math.random() * maxEnnemyPokemonLevel) + 1;
             return { ...p, isAlive: true, lvl };
         });
         while (pokemons.length < 6) {
@@ -186,7 +187,7 @@ const Provider = ({ children }: Props): JSX.Element => {
         }
 
         const newTeam = [...pokemonTeam];
-        pokemon.lvl = 1;
+        pokemon.lvl = 20;
         pokemon.currentSteps = 0;
         pokemon.stepsToReach = 10;
 
