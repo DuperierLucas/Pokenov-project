@@ -19,6 +19,8 @@ type Props = {
     close: () => void;
 };
 
+const RONFLEX_ICON = require('../../assets/images/ronflex.png');
+
 export default function CatchModal({ close }: Props): JSX.Element {
     const {
         getPokemonToCapture,
@@ -28,7 +30,7 @@ export default function CatchModal({ close }: Props): JSX.Element {
     } = useGame();
     const [wildPokemon, setWildPokemon] = useState<PokemonToCapture>(undefined);
     const [timeToDisparition, setTimeToDisparition] = useState('');
-    const [failed, setFailed] = useState(false);
+    const [captureState, setCaptureState] = useState<0 | 1 | 2>(0);
 
     useEffect(() => {
         fetchPokemonToCapture();
@@ -43,8 +45,9 @@ export default function CatchModal({ close }: Props): JSX.Element {
     }
 
     useEffect(() => {
+        console.log(wildPokemon);
         wildPokemon && launchCountDown();
-    }, [wildPokemon]);
+    }, [wildPokemon, wildsPokemons]);
 
     function launchCountDown() {
         clearInterval(timer);
@@ -67,20 +70,25 @@ export default function CatchModal({ close }: Props): JSX.Element {
     function onPressCapture() {
         const win = Math.floor(Math.random() * 0) === 0;
         if (win) {
+            setCaptureState(1);
             catchPokemon();
-            close();
+            setTimeout(close, 1500);
         } else {
             skipWildPokemon();
-            setFailed(true);
+            setCaptureState(2);
         }
     }
 
     function getButton() {
-        if (failed) {
+        if (captureState > 0) {
             return (
                 <>
                     <View style={styles.captureButtonFailed}>
-                        <Text style={styles.captureButtonLabel}>{'Raté'}</Text>
+                        <Text style={styles.captureButtonLabel}>
+                            {captureState === 2
+                                ? 'Raté'
+                                : wildPokemon.pokemon.name + ' capturé !'}
+                        </Text>
                     </View>
                 </>
             );
@@ -131,10 +139,11 @@ export default function CatchModal({ close }: Props): JSX.Element {
             (wildsPokemons[0].apparitionDate - Date.now()) / 1000 / 60,
         );
         return (
-            <View>
+            <View style={styles.waitingPokemonContainer}>
                 <Text style={styles.title}>
                     Prochain pokémon dans {apparitionDate} min
                 </Text>
+                <Image source={RONFLEX_ICON} style={styles.sleepyPokemon} />
             </View>
         );
     }

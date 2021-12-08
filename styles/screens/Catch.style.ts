@@ -69,7 +69,7 @@ export const styles = StyleSheet.create({
         backgroundColor: colors.main.black,
         padding: 20,
         borderRadius: 40,
-        shadowColor: colors.main.white,
+        shadowColor: colors.main.black,
         shadowOffset: {
             width: 0,
             height: 5,
@@ -82,5 +82,15 @@ export const styles = StyleSheet.create({
         color: colors.main.white,
         fontWeight: 'bold',
         textTransform: 'uppercase',
+    },
+    waitingPokemonContainer: {
+        marginTop: 100,
+        justifyContent: 'center',
+        marginBottom: -100,
+    },
+    sleepyPokemon: {
+        width: viewportWidth,
+        height: viewportWidth,
+        resizeMode: 'contain',
     },
 });

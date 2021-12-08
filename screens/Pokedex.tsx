@@ -15,6 +15,7 @@ import { styles } from '../styles/screens/Pokedex.style';
 
 import usePokemonAPI from '../hooks/usePokemonApi';
 import { NamedAPIResourceList, Pokemon } from 'pokenode-ts';
+import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 
 export default function Pokedex(): JSX.Element {
     const { getPokemons, getFromUrl } = usePokemonAPI();
@@ -22,6 +23,7 @@ export default function Pokedex(): JSX.Element {
     const [modalVisible, setModalVisible] = useState<boolean>(false);
     const [currentDetailPokemon, setCurrentDetailPokemon] = useState<Pokemon>();
     const [pokemons, setPokemons] = useState<NamedAPIResourceList>();
+    const tabBarHeight = useBottomTabBarHeight();
 
     useEffect(() => {
         fetchPokemons();
@@ -104,7 +106,7 @@ export default function Pokedex(): JSX.Element {
             >
                 {getPokemonList()}
             </ScrollView>
-            <View style={styles.footer}>
+            <View style={[styles.footer, { paddingBottom: tabBarHeight + 10 }]}>
                 {previousButton()}
                 {nextButton()}
             </View>

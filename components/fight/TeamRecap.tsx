@@ -6,10 +6,11 @@ import useGame from '../../hooks/GameProvider';
 import useAnimation from '../../animations/components/fight/TeamRecap.animations';
 type Props = {
     team: TeamRecapPokemon[];
-    align: 'left' | 'right';
+    align: 'left' | 'right' | 'center';
+    playerName?: string;
 };
 
-const TeamRecap = ({ team, align }: Props): JSX.Element => {
+const TeamRecap = ({ team, align, playerName }: Props): JSX.Element => {
     const { username } = useGame();
     const { animatedStyle } = useAnimation(align);
     function getPokemonImage(poke) {
@@ -23,17 +24,16 @@ const TeamRecap = ({ team, align }: Props): JSX.Element => {
             </>
         );
     }
+    const name = playerName ?? (align === 'left' ? 'Bot' : username);
     return (
         <Animated.View
             style={[
                 styles.container,
-                align === 'left' ? styles.leftContainer : styles.rightContainer,
+                styles[`${align}Container`],
                 animatedStyle,
             ]}
         >
-            <Text style={styles.name}>
-                {align === 'left' ? 'Bot' : username}
-            </Text>
+            <Text style={styles.name}>{name}</Text>
             {team.map((pokemon, index) => (
                 <View
                     style={styles.pokemonContainer}

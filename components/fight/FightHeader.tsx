@@ -16,7 +16,7 @@ const FightHeader = (): JSX.Element => {
                     onPress={navigation.goBack}
                     style={styles.backButton}
                 >
-                    <Text>retour</Text>
+                    <Text style={styles.backButtonLabel}>quitter</Text>
                 </TouchableOpacity>
             </LinearGradient>
         </View>

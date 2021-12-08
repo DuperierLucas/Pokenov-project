@@ -26,6 +26,11 @@ export default StyleSheet.create({
         alignSelf: 'flex-end',
         flexDirection: 'row-reverse',
     },
+    centerContainer: {
+        borderRadius: IMAGE_SIZE,
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+    },
     pokemonContainer: {
         width: IMAGE_SIZE,
         height: IMAGE_SIZE,
@@ -48,5 +53,12 @@ export default StyleSheet.create({
         position: 'absolute',
         top: -20,
         paddingHorizontal: 10,
+        shadowOpacity: 0.5,
+        shadowRadius: 5,
+        shadowOffset: {
+            width: 1,
+            height: 5,
+        },
+        shadowColor: colors.main.black,
     },
 });

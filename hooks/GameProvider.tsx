@@ -18,6 +18,7 @@ type Game = {
     skipWildPokemon: () => void;
     username: string;
     getRandomEnnemyTeam: () => Promise<TeamRecapPokemon[]>;
+    generatePokemonsToCapture: () => Promise<void>;
 };
 
 const GameContext = createContext<Game>({} as any);
@@ -118,15 +119,16 @@ const Provider = ({ children }: Props): JSX.Element => {
     }
 
     async function getRandomEnnemyTeam(): Promise<TeamRecapPokemon[]> {
-        const limit = Math.floor(Math.random() * 6) + 1;
-
+        const maxEnnemyPokemonNumber = 4;
+        const maxEnnemyPokemonLevel = 70;
+        const limit = Math.floor(Math.random() * maxEnnemyPokemonNumber) + 1;
         const fetchDetailsRequests = [];
         for (let i = 0; i < limit; i++) {
             fetchDetailsRequests.push(getPokemonById(getRandomPokemon()));
         }
         let pokemons = await Promise.all(fetchDetailsRequests);
         pokemons = pokemons.map((p) => {
-            const lvl = Math.floor(Math.random() * 100) + 1;
+            const lvl = Math.floor(Math.random() * maxEnnemyPokemonLevel) + 1;
             return { ...p, isAlive: true, lvl };
         });
         while (pokemons.length < 6) {
@@ -146,7 +148,6 @@ const Provider = ({ children }: Props): JSX.Element => {
             (pokemonIndex === -1 && wildsPokemons?.length < 1) ||
             wildsPokemons[wildsPokemons.length - 1].disparitionDate < Date.now()
         ) {
-            console.log('generate');
             generatePokemonsToCapture();
             pokemon = wildsPokemons.find(
                 (wildPokemon) =>
@@ -158,6 +159,7 @@ const Provider = ({ children }: Props): JSX.Element => {
         if (pokemonIndex > 0) {
             const newWildsPokemons = wildsPokemons.slice(pokemonIndex);
             setWildPokemons(newWildsPokemons);
+            return newWildsPokemons[0];
         }
         return wildsPokemons[pokemonIndex];
     }
@@ -185,7 +187,7 @@ const Provider = ({ children }: Props): JSX.Element => {
         }
 
         const newTeam = [...pokemonTeam];
-        pokemon.lvl = 1;
+        pokemon.lvl = 15;
         pokemon.currentSteps = 0;
         pokemon.stepsToReach = 10;
 
@@ -221,6 +223,7 @@ const Provider = ({ children }: Props): JSX.Element => {
         skipWildPokemon,
         username,
         getRandomEnnemyTeam,
+        generatePokemonsToCapture,
     };
 
     return (
