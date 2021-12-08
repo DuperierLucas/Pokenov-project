@@ -19,6 +19,8 @@ type Props = {
     close: () => void;
 };
 
+const RONFLEX_ICON = require('../../assets/images/ronflex.png');
+
 export default function CatchModal({ close }: Props): JSX.Element {
     const {
         getPokemonToCapture,
@@ -132,10 +134,11 @@ export default function CatchModal({ close }: Props): JSX.Element {
             (wildsPokemons[0].apparitionDate - Date.now()) / 1000 / 60,
         );
         return (
-            <View>
+            <View style={styles.waitingPokemonContainer}>
                 <Text style={styles.title}>
                     Prochain pokémon dans {apparitionDate} min
                 </Text>
+                <Image source={RONFLEX_ICON} style={styles.sleepyPokemon} />
             </View>
         );
     }

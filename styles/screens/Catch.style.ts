@@ -83,4 +83,14 @@ export const styles = StyleSheet.create({
         fontWeight: 'bold',
         textTransform: 'uppercase',
     },
+    waitingPokemonContainer: {
+        marginTop: 100,
+        justifyContent: 'center',
+        marginBottom: -100,
+    },
+    sleepyPokemon: {
+        width: viewportWidth,
+        height: viewportWidth,
+        resizeMode: 'contain',
+    },
 });

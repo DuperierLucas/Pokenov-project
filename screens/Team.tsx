@@ -32,7 +32,10 @@ export default function Team(): JSX.Element {
     return (
         <View style={styles.container}>
             <TeamHeader />
-            <ScrollView contentContainerStyle={styles.innerContainer}>
+            <ScrollView
+                contentContainerStyle={styles.innerContainer}
+                bounces={false}
+            >
                 <View style={styles.rowContainer}>
                     <TeamSlot
                         pokemon={pokemonTeam[0]}
