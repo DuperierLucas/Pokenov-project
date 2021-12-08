@@ -43,8 +43,9 @@ export default function CatchModal({ close }: Props): JSX.Element {
     }
 
     useEffect(() => {
+        console.log(wildPokemon);
         wildPokemon && launchCountDown();
-    }, [wildPokemon]);
+    }, [wildPokemon, wildsPokemons]);
 
     function launchCountDown() {
         clearInterval(timer);

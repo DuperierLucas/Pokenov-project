@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { colors } from '../shared/Color';
+import { viewportWidth } from '../metrics.style';
 
 const ITEM_SIZE = 75;
 
@@ -10,6 +11,7 @@ export const styles = StyleSheet.create({
         borderRadius: 5,
         alignItems: 'center',
         backgroundColor: colors.main.color,
+        width: viewportWidth / 3 - 20,
     },
     containerCard: {
         alignItems: 'center',

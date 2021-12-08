@@ -34,7 +34,9 @@ export const styles = StyleSheet.create({
         width: '80%',
     },
 
-    background: {},
+    background: {
+        paddingBottom: 25,
+    },
 
     contanerPokemon: {
         position: 'relative',

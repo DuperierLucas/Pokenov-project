@@ -18,8 +18,10 @@ import Team from '../screens/Team';
 import { colors } from '../styles/shared/Color';
 import styles from '../styles/navigation.style';
 import FightModal from '../modals/FightModal';
+import { LinearGradient } from 'expo-linear-gradient';
+import chroma from 'chroma-js';
 
-export default function Navigation() {
+export default function Navigation(): JSX.Element {
     return (
         <NavigationContainer
             linking={LinkingConfiguration}
@@ -71,7 +73,25 @@ function BottomTabNavigator() {
         <BottomTab.Navigator
             initialRouteName="Home"
             screenOptions={{
-                tabBarActiveTintColor: colors.main.pink,
+                tabBarActiveTintColor: colors.main.yellow,
+                tabBarInactiveTintColor: chroma(colors.main.white)
+                    .alpha(0.5)
+                    .css(),
+                // eslint-disable-next-line react/display-name
+                tabBarBackground: () => (
+                    <LinearGradient
+                        colors={[
+                            chroma(colors.main.black).alpha(0.2).css(),
+                            colors.main.black,
+                        ]}
+                        style={{
+                            height: '100%',
+                        }}
+                    />
+                ),
+                tabBarStyle: {
+                    position: 'absolute',
+                },
             }}
         >
             <BottomTab.Screen
