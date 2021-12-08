@@ -35,6 +35,9 @@ export const styles = StyleSheet.create({
         backgroundColor: chroma(colors.main.white).alpha(0.2).css(),
         borderRadius: 25,
     },
+    settingsIconContainer: {
+        padding: 10,
+    },
     icon: {
         width: 25,
         height: 25,

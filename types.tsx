@@ -20,6 +20,7 @@ export type RootStackParamList = {
     Modal: undefined;
     NotFound: undefined;
     Fight: undefined;
+    Settings: undefined;
     Catch: undefined;
 };
 

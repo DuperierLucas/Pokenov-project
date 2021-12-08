@@ -18,6 +18,7 @@ type Game = {
     skipWildPokemon: () => void;
     username: string;
     getRandomEnnemyTeam: () => Promise<TeamRecapPokemon[]>;
+    generatePokemonsToCapture: () => Promise<void>;
 };
 
 const GameContext = createContext<Game>({} as any);
@@ -147,7 +148,6 @@ const Provider = ({ children }: Props): JSX.Element => {
             (pokemonIndex === -1 && wildsPokemons?.length < 1) ||
             wildsPokemons[wildsPokemons.length - 1].disparitionDate < Date.now()
         ) {
-            console.log('generate');
             generatePokemonsToCapture();
             pokemon = wildsPokemons.find(
                 (wildPokemon) =>
@@ -223,6 +223,7 @@ const Provider = ({ children }: Props): JSX.Element => {
         skipWildPokemon,
         username,
         getRandomEnnemyTeam,
+        generatePokemonsToCapture,
     };
 
     return (

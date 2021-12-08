@@ -27,19 +27,23 @@ const TeamPokemonDetails = ({ index, close, pokemon }: Props): JSX.Element => {
     }
 
     function onPressDelete() {
-        Alert.alert("Supprimer ce pokémon de l'équipe ?", '', [
-            {
-                text: 'Annuler',
-                style: 'cancel',
-            },
-            {
-                text: 'OK',
-                onPress: () => {
-                    deletePokemonFromTeam(index);
-                    close();
+        Alert.alert(
+            "Supprimer ce pokémon de l'équipe ?",
+            'son niveau sera perdu',
+            [
+                {
+                    text: 'Annuler',
+                    style: 'cancel',
                 },
-            },
-        ]);
+                {
+                    text: 'OK',
+                    onPress: () => {
+                        deletePokemonFromTeam(index);
+                        close();
+                    },
+                },
+            ],
+        );
     }
 
     function getStats() {

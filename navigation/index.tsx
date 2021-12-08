@@ -20,6 +20,7 @@ import styles from '../styles/navigation.style';
 import FightModal from '../modals/FightModal';
 import { LinearGradient } from 'expo-linear-gradient';
 import chroma from 'chroma-js';
+import Settings from '../screens/Settings';
 
 export default function Navigation(): JSX.Element {
     return (
@@ -56,6 +57,13 @@ function RootNavigator() {
                 component={FightModal}
                 options={() => ({
                     headerShown: false,
+                })}
+            />
+            <Stack.Screen
+                name={'Settings'}
+                component={Settings}
+                options={() => ({
+                    headerShown: true,
                 })}
             />
         </Stack.Navigator>

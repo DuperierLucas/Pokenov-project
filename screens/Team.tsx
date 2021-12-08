@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Modal, View, Text, TouchableOpacity, ScrollView } from 'react-native';
+import { Modal, View, ScrollView } from 'react-native';
 import { styles } from '../styles/screens/Team.style';
 import useGame from '../hooks/GameProvider';
 import TeamSlot from '../components/TeamSlot';
@@ -9,8 +9,6 @@ import { Pokemon } from 'pokenode-ts';
 import TeamHeader from '../components/TeamHeader';
 
 export default function Team(): JSX.Element {
-    const { resetGame } = useGame();
-
     const { pokemonTeam } = useGame();
     const [pokemonDetailVisible, setPokemonDetailVisible] = useState(false);
     const [addPokemonVisible, setAddPokemonVisible] = useState(false);
@@ -94,12 +92,6 @@ export default function Team(): JSX.Element {
                         close={() => setAddPokemonVisible(false)}
                     />
                 </Modal>
-                <TouchableOpacity
-                    onPress={resetGame}
-                    style={{ backgroundColor: 'red' }}
-                >
-                    <Text>Remettre à 0 le jeu</Text>
-                </TouchableOpacity>
             </ScrollView>
         </View>
     );
