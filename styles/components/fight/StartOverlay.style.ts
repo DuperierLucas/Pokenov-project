@@ -9,16 +9,22 @@ export default StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: chroma(colors.main.black).alpha(0.7).css(),
     },
+    recapContainer: {
+        position: 'absolute',
+        top: 100,
+    },
     button: {
         padding: 15,
         borderRadius: 20,
         backgroundColor: colors.main.yellow,
     },
     backButton: {
-        marginTop: 10,
+        marginTop: 50,
         padding: 10,
         borderRadius: 20,
         backgroundColor: colors.main.white,
+        position: 'absolute',
+        bottom: 100,
     },
     buttonLabel: {
         textTransform: 'uppercase',
@@ -32,5 +38,17 @@ export default StyleSheet.create({
     loader: {
         marginTop: 5,
         fontSize: 12,
+    },
+    presentationLabel: {
+        color: colors.main.white,
+        shadowColor: colors.main.white,
+        shadowOpacity: 0.3,
+        shadowRadius: 5,
+        shadowOffset: {
+            width: 0,
+            height: 5,
+        },
+        fontWeight: 'bold',
+        padding: 10,
     },
 });

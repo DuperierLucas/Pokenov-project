@@ -99,8 +99,6 @@ const FightModal = (): JSX.Element => {
     }
 
     function getFightDuel() {
-        //const ennemyPokemon = getEnnemyPokemon();
-        //const myPokemon = getMyPokemon();
         return (
             <>
                 <FightDuel
@@ -140,7 +138,6 @@ const FightModal = (): JSX.Element => {
             resizeMode={'cover'}
         >
             <View style={{ height: viewportHeight }}>
-                <FightHeader />
                 {fightEngaged ? (
                     <View style={styles.fightContainer}>
                         <TeamRecap team={ennemyTeam} align={'left'} />
@@ -153,6 +150,7 @@ const FightModal = (): JSX.Element => {
                         onPressFight={() => setFightEngaged(true)}
                     />
                 )}
+                <FightHeader />
             </View>
         </ImageBackground>
     );

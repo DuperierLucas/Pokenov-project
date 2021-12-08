@@ -158,6 +158,7 @@ const Provider = ({ children }: Props): JSX.Element => {
         if (pokemonIndex > 0) {
             const newWildsPokemons = wildsPokemons.slice(pokemonIndex);
             setWildPokemons(newWildsPokemons);
+            return newWildsPokemons[0];
         }
         return wildsPokemons[pokemonIndex];
     }

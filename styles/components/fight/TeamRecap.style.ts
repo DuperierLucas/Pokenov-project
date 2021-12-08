@@ -26,6 +26,11 @@ export default StyleSheet.create({
         alignSelf: 'flex-end',
         flexDirection: 'row-reverse',
     },
+    centerContainer: {
+        borderRadius: IMAGE_SIZE,
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+    },
     pokemonContainer: {
         width: IMAGE_SIZE,
         height: IMAGE_SIZE,
