@@ -56,7 +56,7 @@ const Provider = ({ children }: Props): JSX.Element => {
     }
 
     useEffect(() => {
-        if (wildsPokemons.length < 1 && mounted) {
+        if (!getPokemonToCapture() && mounted) {
             generatePokemonsToCapture();
         }
     }, [mounted, wildsPokemons]);
