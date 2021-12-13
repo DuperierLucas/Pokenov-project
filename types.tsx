@@ -54,3 +54,7 @@ export interface PokemonFull extends Pokemon {
 export interface TeamRecapPokemon extends PokemonFull {
     isAlive: boolean;
 }
+
+export type FightHistoryEntry = {
+    result: 'win' | 'loose';
+};

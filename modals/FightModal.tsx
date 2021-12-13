@@ -11,7 +11,8 @@ import EndOverlay from '../components/fight/EndOverlay';
 const PLACEHOLDER_TEAM = [null, null, null, null, null, null];
 
 const FightModal = (): JSX.Element => {
-    const { pokemonTeam, getRandomEnnemyTeam } = useGame();
+    const { pokemonTeam, getRandomEnnemyTeam, saveFightHistoryEntry } =
+        useGame();
     const [ennemyTeam, setEnnemyTeam] = useState(PLACEHOLDER_TEAM);
     const [myTeam, setMyTeam] = useState(PLACEHOLDER_TEAM);
     const [fightEngaged, setFightEngaged] = useState(false);
@@ -41,6 +42,14 @@ const FightModal = (): JSX.Element => {
             availableTeamPokemon?.length < 1 ||
             availableEnnemyPokemon?.length < 1
         ) {
+            if (
+                availableTeamPokemon?.length < 1 &&
+                availableEnnemyPokemon?.length < 1
+            ) {
+                return;
+            }
+            const result = myPokemon ? 'win' : 'loose';
+            saveFightHistoryEntry(result);
             return;
         }
         //one round of fight

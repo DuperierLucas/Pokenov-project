@@ -3,10 +3,16 @@ import { Pokemon } from 'pokenode-ts';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getRandomPokemon } from '../utils/pokemons';
 import usePokemonAPI from './usePokemonApi';
-import { PokemonToCapture, PokemonFull, TeamRecapPokemon } from '../types';
+import {
+    PokemonToCapture,
+    PokemonFull,
+    TeamRecapPokemon,
+    FightHistoryEntry,
+} from '../types';
 
 type Game = {
     pokemonTeam: PokemonFull[];
+    fightHistory: FightHistoryEntry[];
     capturedPokemons: Pokemon[];
     catchPokemon: () => void;
     addPokemonToTeam: (pokemon: PokemonFull, slotIndex: number) => boolean;
@@ -19,6 +25,7 @@ type Game = {
     username: string;
     getRandomEnnemyTeam: () => Promise<TeamRecapPokemon[]>;
     generatePokemonsToCapture: () => Promise<void>;
+    saveFightHistoryEntry: (result: 'win' | 'loose') => void;
 };
 
 const GameContext = createContext<Game>({} as any);
@@ -42,6 +49,7 @@ const Provider = ({ children }: Props): JSX.Element => {
         useState<Pokemon[]>(DEFAULT_TEAM_STATE);
     const [capturedPokemons, setCapturedPokemons] = useState<Pokemon[]>([]);
     const [wildsPokemons, setWildPokemons] = useState<PokemonToCapture[]>([]);
+    const [fightHistory, setFightHistory] = useState<FightHistoryEntry[]>([]);
     const [topTeams, setTopTeams] = useState([]);
     const [username, setUsername] = useState<string>('Anonyme');
     const [mounted, setMounted] = useState(false);
@@ -63,7 +71,14 @@ const Provider = ({ children }: Props): JSX.Element => {
 
     useEffect(() => {
         saveData();
-    }, [pokemonTeam, capturedPokemons, wildsPokemons, topTeams, username]);
+    }, [
+        pokemonTeam,
+        capturedPokemons,
+        wildsPokemons,
+        topTeams,
+        username,
+        fightHistory,
+    ]);
 
     async function getData() {
         const data = await AsyncStorage.getItem('game');
@@ -74,6 +89,7 @@ const Provider = ({ children }: Props): JSX.Element => {
             setWildPokemons(parsedData.wildsPokemons);
             setTopTeams(parsedData.topTeams);
             setUsername(parsedData.username);
+            setFightHistory(parsedData.fightHistory);
         }
     }
 
@@ -84,6 +100,7 @@ const Provider = ({ children }: Props): JSX.Element => {
             username,
             wildsPokemons,
             topTeams,
+            fightHistory,
         });
         await AsyncStorage.setItem('game', data);
     }
@@ -94,6 +111,7 @@ const Provider = ({ children }: Props): JSX.Element => {
         setTopTeams([]);
         setCapturedPokemons([]);
         setPokemonTeam([]);
+        setFightHistory([]);
     }
 
     async function generatePokemonsToCapture() {
@@ -210,6 +228,12 @@ const Provider = ({ children }: Props): JSX.Element => {
         setPokemonTeam(newTeam);
     }
 
+    function saveFightHistoryEntry(result: 'win' | 'loose'): void {
+        const newHistory = [...fightHistory];
+        newHistory.push({ result });
+        setFightHistory(newHistory);
+    }
+
     const providerValues: Game = {
         pokemonTeam,
         capturedPokemons,
@@ -224,6 +248,8 @@ const Provider = ({ children }: Props): JSX.Element => {
         username,
         getRandomEnnemyTeam,
         generatePokemonsToCapture,
+        fightHistory,
+        saveFightHistoryEntry,
     };
 
     return (
