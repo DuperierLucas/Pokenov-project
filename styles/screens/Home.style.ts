@@ -11,6 +11,7 @@ export const styles = StyleSheet.create({
     },
     carouselContainer: {
         paddingBottom: 10,
+        width: viewportWidth,
     },
     innerContainer: {
         alignItems: 'center',
@@ -24,9 +25,10 @@ export const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     title: {
-        marginTop: 20,
+        marginTop: 35,
         fontSize: 20,
         fontWeight: 'bold',
+        textAlign: 'center',
     },
     separator: {
         marginVertical: 30,
