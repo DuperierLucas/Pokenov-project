@@ -1,9 +1,6 @@
 # Pokenov, quand pokémon débarque sur mobile
 
 
--------------------------------------------------------------------------------------
-
-
 ## Fonctionnalités
 
 ### 1. Capturer des pokémons
@@ -42,7 +39,7 @@ Une fois les pokémons capturés, sélectionne les plus vaillants qui feront par
 * Tu peux consulter tes statistiques dans la page d'accueil (petit bouton de stats) : nombre de victoires, de défaites, de pokémons capturés, de pokémon dans la team, un classement (à venir) etc...
 
 
--------------------------------------------------------------------------------------
+-------------------------------------------
 
 
 ## Composants natifs
