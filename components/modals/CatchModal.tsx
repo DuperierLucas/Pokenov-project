@@ -100,7 +100,7 @@ export default function CatchModal({ close }: Props): JSX.Element {
                         onPress={onPressCapture}
                     >
                         <Text style={styles.captureButtonLabel}>
-                            {'Capturer'}
+                            {'Capturé'}
                         </Text>
                     </TouchableOpacity>
                     <Text style={styles.disparitionTime}>

@@ -21,9 +21,11 @@ const FightHistory = (): JSX.Element => {
     }
 
     function getCarousel() {
-        return fightHistory.map((fightHistoryEntry, index) =>
-            renderHistoryEntry(fightHistoryEntry.result, index),
-        );
+        if (fightHistory) {
+            return fightHistory.map((fightHistoryEntry, index) =>
+                renderHistoryEntry(fightHistoryEntry.result, index),
+            );
+        }
     }
 
     return (
