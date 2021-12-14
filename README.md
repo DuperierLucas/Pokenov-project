@@ -45,5 +45,12 @@ Une fois les pokémons capturés, sélectionne les plus vaillants qui feront par
 * Async storage pour conserver les données sur l'appareil et permettre le jeu en solo
 
 * Notifications + deeplink vers la capture du pokémon
+** Attention : pour recevoir les notifications, il faut que tu te créer un compte sur Expo, que tu crées un projet nommé "pokenov" puis avant de démarrer l'app : **
+```
+expo login
+Username/Email: [tonUserName]
+Password: [tonPassword]
+expo start
+```
 
 * Podomètre pour faire évoluer les pokémons : il se lance dès qu'on clique sur "LEVEL UP". Il faut marcher jusqu'à atteindre le nombre de pas total pour faire monter le pokémon au niveau suivant. Attention ! Pour regarder le nombre de pas effectués, il faut s'arrêter.
