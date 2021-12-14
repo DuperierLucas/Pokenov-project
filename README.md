@@ -45,7 +45,7 @@ Une fois les pokémons capturés, sélectionne les plus vaillants qui feront par
 * Async storage pour conserver les données sur l'appareil et permettre le jeu en solo
 
 * Notifications + deeplink vers la capture du pokémon
-** Attention : pour recevoir les notifications, il faut que tu te créer un compte sur Expo, que tu crées un projet nommé "pokenov" puis avant de démarrer l'app : **
+* **Attention : pour recevoir les notifications, il faut que tu te créer un compte sur Expo, que tu crées un projet nommé "pokenov" puis avant de démarrer l'app :**
 ```
 expo login
 Username/Email: [tonUserName]
