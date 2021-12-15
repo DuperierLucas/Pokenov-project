@@ -3,6 +3,8 @@ import { Pokemon } from 'pokenode-ts';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getRandomPokemon } from '../utils/pokemons';
 import usePokemonAPI from './usePokemonApi';
+import { scheduleAndCancelPushNotification } from '../utils/notifications';
+
 import {
     PokemonToCapture,
     PokemonFull,
@@ -129,7 +131,7 @@ const Provider = ({ children }: Props): JSX.Element => {
                     baseDate.getTime() + 1000 * (index + 1) * 10 * 60,
             };
             randomPokemons.push(poke);
-            //schedulePushNotification(i, pokemon);
+            scheduleAndCancelPushNotification(poke);
         }
 
         setWildPokemons(

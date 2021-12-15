@@ -45,7 +45,6 @@ export default function CatchModal({ close }: Props): JSX.Element {
     }
 
     useEffect(() => {
-        console.log(wildPokemon);
         wildPokemon && launchCountDown();
     }, [wildPokemon, wildsPokemons]);
 
@@ -100,7 +99,7 @@ export default function CatchModal({ close }: Props): JSX.Element {
                         onPress={onPressCapture}
                     >
                         <Text style={styles.captureButtonLabel}>
-                            {'Capturé'}
+                            {'Capturer'}
                         </Text>
                     </TouchableOpacity>
                     <Text style={styles.disparitionTime}>
