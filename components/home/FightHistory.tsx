@@ -6,6 +6,10 @@ import useGame from '../../hooks/GameProvider';
 const FightHistory = (): JSX.Element => {
     const { fightHistory } = useGame();
 
+    if (!fightHistory) {
+        return;
+    }
+
     function renderHistoryEntry(result: 'win' | 'loose') {
         return (
             <View>
