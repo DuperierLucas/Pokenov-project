@@ -10,6 +10,15 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import FightHistory from '../components/home/FightHistory';
+import * as Notifications from 'expo-notifications';
+
+Notifications.setNotificationHandler({
+    handleNotification: async () => ({
+        shouldShowAlert: true,
+        shouldPlaySound: true,
+        shouldSetBadge: true,
+    }),
+});
 import { Audio } from 'expo-av';
 
 const sound = new Audio.Sound();
@@ -18,7 +27,19 @@ import DisplayStats from '../modals/DisplayStats';
 export default function Home(): JSX.Element {
     const [statsVisible, setStatshVisible] = useState(false);
 
-    const navigation = useNavigation();
+    const navigation = useNavigation<any>();
+
+    useEffect(() => {
+        //Deeplink sur la capture quand l'app est lancée
+        const notificationInteractionSubscription =
+            Notifications.addNotificationResponseReceivedListener(() => {
+                navigation.navigate('Team', { modaleVisible: true });
+            });
+
+        return () => {
+            notificationInteractionSubscription.remove();
+        };
+    }, []);
 
     function onPressDisplayStats() {
         setStatshVisible(true);
@@ -53,6 +74,7 @@ export default function Home(): JSX.Element {
         sound.unloadAsync();
         navigation.navigate('Fight' as any);
     }
+
     return (
         <View style={styles.container}>
             <ImageBackground

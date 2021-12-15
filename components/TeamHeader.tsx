@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Image, Modal, Text, TouchableOpacity, View } from 'react-native';
 import { styles } from '../styles/screens/Team.style';
 import CatchModal from './modals/CatchModal';
@@ -6,10 +6,21 @@ import { Icon } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
 
 const GRASS_ICON = require('../assets/images/grass.png');
+interface Props {
+    modaleVisible?: boolean;
+}
 
-const TeamHeader = (): JSX.Element => {
-    const [catchVisible, setCatchVisible] = useState(false);
+const TeamHeader = (props: Props): JSX.Element => {
+    const { modaleVisible } = props;
+    const [catchVisible, setCatchVisible] = useState(
+        modaleVisible ? modaleVisible : false,
+    );
     const navigation = useNavigation();
+
+    useEffect(() => {
+        setCatchVisible(modaleVisible);
+    }, [modaleVisible]);
+
     function onPressCatch() {
         setCatchVisible(true);
     }

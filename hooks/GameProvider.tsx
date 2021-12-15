@@ -11,6 +11,9 @@ import {
     TeamRecapPokemon,
     FightHistoryEntry,
 } from '../types';
+import {
+    cancelAllScheduledNotificationsAsync,
+} from 'expo-notifications';
 
 type Game = {
     pokemonTeam: PokemonFull[];
@@ -119,6 +122,7 @@ const Provider = ({ children }: Props): JSX.Element => {
     async function generatePokemonsToCapture() {
         const randomPokemons: PokemonToCapture[] = [];
         const startTime = new Date();
+        await cancelAllScheduledNotificationsAsync();
         for (let i = 0; i < 10; i++) {
             const index = i;
             const randomId = getRandomPokemon();
@@ -126,12 +130,16 @@ const Provider = ({ children }: Props): JSX.Element => {
             const baseDate = new Date(startTime);
             const poke = {
                 pokemon: randomPokemon,
-                apparitionDate: baseDate.getTime() + 1000 * index * 10 * 60,
+                apparitionDate: baseDate.getTime() + 1000 * index * 1 * 60,
                 disparitionDate:
                     baseDate.getTime() + 1000 * (index + 1) * 10 * 60,
             };
             randomPokemons.push(poke);
-            scheduleAndCancelPushNotification(poke);
+            try {
+                await scheduleAndCancelPushNotification(poke);
+            } catch (e) {
+                console.log(e);
+            }
         }
 
         setWildPokemons(

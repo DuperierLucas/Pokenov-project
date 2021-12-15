@@ -8,7 +8,8 @@ import AddToTeam from '../modals/AddToTeam';
 import { Pokemon } from 'pokenode-ts';
 import TeamHeader from '../components/TeamHeader';
 
-export default function Team(): JSX.Element {
+export default function Team(props): JSX.Element {
+    const { route } = props;
     const { pokemonTeam } = useGame();
     const [pokemonDetailVisible, setPokemonDetailVisible] = useState(false);
     const [addPokemonVisible, setAddPokemonVisible] = useState(false);
@@ -31,7 +32,7 @@ export default function Team(): JSX.Element {
 
     return (
         <View style={styles.container}>
-            <TeamHeader />
+            <TeamHeader modaleVisible={route?.params?.modaleVisible} />
             <ScrollView
                 contentContainerStyle={styles.innerContainer}
                 bounces={false}
