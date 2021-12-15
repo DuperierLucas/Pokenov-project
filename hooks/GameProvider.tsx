@@ -122,13 +122,16 @@ const Provider = ({ children }: Props): JSX.Element => {
             const randomId = getRandomPokemon();
             const randomPokemon = await getPokemonById(randomId);
             const baseDate = new Date(startTime);
-            randomPokemons.push({
+            const poke = {
                 pokemon: randomPokemon,
                 apparitionDate: baseDate.getTime() + 1000 * index * 10 * 60,
                 disparitionDate:
                     baseDate.getTime() + 1000 * (index + 1) * 10 * 60,
-            });
+            };
+            randomPokemons.push(poke);
+            //schedulePushNotification(i, pokemon);
         }
+
         setWildPokemons(
             randomPokemons.sort(
                 (p1, p2) => p1.apparitionDate - p2.apparitionDate,
