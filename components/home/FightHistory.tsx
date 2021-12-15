@@ -7,7 +7,7 @@ const FightHistory = (): JSX.Element => {
     const { fightHistory } = useGame();
 
     if (!fightHistory) {
-        return;
+        return null;
     }
 
     function renderHistoryEntry(result: 'win' | 'loose') {
