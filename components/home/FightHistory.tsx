@@ -10,17 +10,17 @@ const FightHistory = (): JSX.Element => {
         return null;
     }
 
-    function renderHistoryEntry(result: 'win' | 'loose') {
+    function renderHistoryEntry(result: 'win' | 'loose', key) {
         return (
-            <View>
+            <View key={key}>
                 <Text>{result === 'win' ? 'Victoire' : 'Défaite'}</Text>
             </View>
         );
     }
 
     function getCarousel() {
-        return fightHistory.map((fightHistoryEntry) =>
-            renderHistoryEntry(fightHistoryEntry.result),
+        return fightHistory.map((fightHistoryEntry, index) =>
+            renderHistoryEntry(fightHistoryEntry.result, index),
         );
     }
 
