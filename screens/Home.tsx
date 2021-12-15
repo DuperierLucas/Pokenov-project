@@ -15,19 +15,14 @@ import { Audio } from 'expo-av';
 const sound = new Audio.Sound();
 import DisplayStats from '../modals/DisplayStats';
 
-const [statsVisible, setStatshVisible] = useState(false);
-
-function onPressDisplayStats() {
-    setStatshVisible(true);
-}
-
 export default function Home(): JSX.Element {
     const [statsVisible, setStatshVisible] = useState(false);
+
+    const navigation = useNavigation();
 
     function onPressDisplayStats() {
         setStatshVisible(true);
     }
-    const navigation = useNavigation();
 
     useEffect(() => {
         Audio.setAudioModeAsync({
