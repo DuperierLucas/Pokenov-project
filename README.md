@@ -47,3 +47,5 @@ Une fois les pokémons capturés, sélectionne les plus vaillants qui feront par
 * Notifications + deeplink vers la capture du pokémon
 
 * Podomètre pour faire évoluer les pokémons : il se lance dès qu'on clique sur "LEVEL UP". Il faut marcher jusqu'à atteindre le nombre de pas total pour faire monter le pokémon au niveau suivant. Attention ! Pour regarder le nombre de pas effectués, il faut s'arrêter.
+
+* Audio : tu pourras entendre le fabuleux générique de Pokémon !
