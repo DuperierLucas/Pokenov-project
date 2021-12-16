@@ -26,7 +26,7 @@ export const styles = StyleSheet.create({
     statFooter: {},
 
     statBackBtn: {
-        backgroundColor: colors.main.buttonSuccess,
+        backgroundColor: colors.main.white,
 
         padding: 10,
         borderRadius: 5,

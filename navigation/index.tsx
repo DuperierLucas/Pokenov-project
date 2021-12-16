@@ -128,6 +128,7 @@ function BottomTabNavigator() {
                 name="Team"
                 component={Team}
                 options={() => ({
+                    title: 'Equipe',
                     headerShown: false,
                     tabBarIcon: ({ color }) => (
                         <MaterialCommunityIcons

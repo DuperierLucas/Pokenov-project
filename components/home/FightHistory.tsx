@@ -13,7 +13,9 @@ const FightHistory = (): JSX.Element => {
     function renderHistoryEntry(result: 'win' | 'loose', key) {
         return (
             <View key={key}>
-                <Text>{result === 'win' ? 'Victoire' : 'Défaite'}</Text>
+                <Text style={styles[result]}>
+                    {result === 'win' ? 'Victoire' : 'Défaite'}
+                </Text>
             </View>
         );
     }

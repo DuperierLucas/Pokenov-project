@@ -90,7 +90,7 @@ export default function Home(): JSX.Element {
                             source={require('../assets/images/battle-icon.png')}
                             style={{ width: 60, height: 60 }}
                         />
-                        <Text style={styles.battleButtonText}>Fight</Text>
+                        <Text style={styles.battleButtonText}>Combat</Text>
                     </View>
                 </TouchableOpacity>
             </ImageBackground>

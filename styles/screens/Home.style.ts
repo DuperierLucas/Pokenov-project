@@ -29,6 +29,7 @@ export const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         textAlign: 'center',
+        color: colors.main.white,
     },
     separator: {
         marginVertical: 30,
@@ -101,7 +102,7 @@ export const styles = StyleSheet.create({
         },
         shadowOpacity: 0.5,
         shadowRadius: 2.62,
-        backgroundColor: colors.main.yellow,
+        backgroundColor: colors.main.modal,
         padding: 10,
         borderRadius: 50,
         alignItems: 'center',
@@ -110,5 +111,19 @@ export const styles = StyleSheet.create({
     statIcon: {
         width: 30,
         height: 30,
+    },
+
+    win: {
+        backgroundColor: colors.main.background,
+        padding: 10,
+        margin: 5,
+        borderRadius: 10,
+    },
+
+    loose: {
+        backgroundColor: colors.light.red,
+        padding: 10,
+        margin: 5,
+        borderRadius: 10,
     },
 });
