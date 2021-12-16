@@ -51,6 +51,18 @@
         "wasm",
         "svg"
       ]
-    }
+    },
+    "plugins": [
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/pokeball.png",
+          "color": "#ffffff",
+          "sounds": [
+            "./assets/sounds/catchme1.wav"
+          ]
+        }
+      ]
+    ]
   }
 }

@@ -1,21 +1,20 @@
-import React, { useState } from 'react';
-import { Image, Modal, Text, TouchableOpacity, View } from 'react-native';
+import React from 'react';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { styles } from '../styles/screens/Team.style';
-import CatchModal from './modals/CatchModal';
 import { Icon } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
 
 const GRASS_ICON = require('../assets/images/grass.png');
 
 const TeamHeader = (): JSX.Element => {
-    const [catchVisible, setCatchVisible] = useState(false);
-    const navigation = useNavigation();
+    const navigation = useNavigation<any>();
+
     function onPressCatch() {
-        setCatchVisible(true);
+        navigation.navigate('Catch');
     }
 
     function onPressSettings() {
-        navigation.navigate('Settings' as any);
+        navigation.navigate('Settings');
     }
 
     return (
@@ -44,11 +43,6 @@ const TeamHeader = (): JSX.Element => {
                     <Image source={GRASS_ICON} style={styles.icon} />
                 </TouchableOpacity>
             </View>
-            {catchVisible && (
-                <Modal animationType="fade" visible={catchVisible}>
-                    <CatchModal close={() => setCatchVisible(false)} />
-                </Modal>
-            )}
         </>
     );
 };

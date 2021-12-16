@@ -2,7 +2,6 @@ import { StatusBar } from 'expo-status-bar';
 import { GameProvider } from './hooks/GameProvider';
 import React from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-
 import useCachedResources from './hooks/useCachedResources';
 import Navigation from './navigation';
 
