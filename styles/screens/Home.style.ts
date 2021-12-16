@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
     },
     carouselContainer: {
         paddingBottom: 10,
-        width: viewportWidth,
+        minWidth: viewportWidth,
     },
     innerContainer: {
         alignItems: 'center',
