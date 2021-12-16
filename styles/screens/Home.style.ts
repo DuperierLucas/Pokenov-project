@@ -29,6 +29,7 @@ export const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         textAlign: 'center',
+        color: colors.main.white,
     },
     separator: {
         marginVertical: 30,
@@ -88,5 +89,41 @@ export const styles = StyleSheet.create({
         textTransform: 'uppercase',
         textShadowRadius: 5,
         textShadowColor: colors.main.white,
+    },
+
+    statButton: {
+        position: 'absolute',
+        left: viewportWidth * 0.1,
+        top: viewportHeight * 0.25,
+        shadowColor: colors.main.black,
+        shadowOffset: {
+            width: 0,
+            height: 5,
+        },
+        shadowOpacity: 0.5,
+        shadowRadius: 2.62,
+        backgroundColor: colors.main.modal,
+        padding: 10,
+        borderRadius: 50,
+        alignItems: 'center',
+    },
+
+    statIcon: {
+        width: 30,
+        height: 30,
+    },
+
+    win: {
+        backgroundColor: colors.main.background,
+        padding: 10,
+        margin: 5,
+        borderRadius: 10,
+    },
+
+    loose: {
+        backgroundColor: colors.light.red,
+        padding: 10,
+        margin: 5,
+        borderRadius: 10,
     },
 });
