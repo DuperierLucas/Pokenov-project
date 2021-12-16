@@ -7,7 +7,7 @@ type Props = {
     message: string;
 };
 
-const StartOverlay = ({ message }: Props): JSX.Element => {
+const EndOverlay = ({ message }: Props): JSX.Element => {
     const navigation = useNavigation();
     const [endLoaded, setEndLoaded] = useState(false);
 
@@ -33,4 +33,4 @@ const StartOverlay = ({ message }: Props): JSX.Element => {
     );
 };
 
-export default StartOverlay;
+export default EndOverlay;

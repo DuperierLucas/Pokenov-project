@@ -6,17 +6,21 @@ import useGame from '../../hooks/GameProvider';
 const FightHistory = (): JSX.Element => {
     const { fightHistory } = useGame();
 
-    function renderHistoryEntry(result: 'win' | 'loose') {
+    if (!fightHistory) {
+        return null;
+    }
+
+    function renderHistoryEntry(result: 'win' | 'loose', key) {
         return (
-            <View>
+            <View key={key}>
                 <Text>{result === 'win' ? 'Victoire' : 'Défaite'}</Text>
             </View>
         );
     }
 
     function getCarousel() {
-        return fightHistory.map((fightHistoryEntry) =>
-            renderHistoryEntry(fightHistoryEntry.result),
+        return fightHistory.map((fightHistoryEntry, index) =>
+            renderHistoryEntry(fightHistoryEntry.result, index),
         );
     }
 
