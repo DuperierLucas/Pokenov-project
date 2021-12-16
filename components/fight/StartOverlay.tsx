@@ -4,6 +4,7 @@ import styles from '../../styles/components/fight/StartOverlay.style';
 import { useNavigation } from '@react-navigation/native';
 import TeamRecap from './TeamRecap';
 import useGame from '../../hooks/GameProvider';
+import { Audio } from 'expo-av';
 
 type Props = {
     ready: boolean;
@@ -12,14 +13,39 @@ type Props = {
 
 const PLACEHOLDER_TEAM = [null, null, null, null, null, null];
 
+const soundBattle = new Audio.Sound();
+
 const StartOverlay = ({ ready, onPressFight }: Props): JSX.Element => {
     const navigation = useNavigation();
     const { pokemonTeam } = useGame();
     const [myTeam, setMyTeam] = useState(PLACEHOLDER_TEAM);
 
     useEffect(() => {
+        Audio.setAudioModeAsync({
+            allowsRecordingIOS: false,
+            interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX,
+            playsInSilentModeIOS: true,
+            interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DUCK_OTHERS,
+            shouldDuckAndroid: true,
+            staysActiveInBackground: true,
+            playThroughEarpieceAndroid: true
+        });
+
+        soundBattle.loadAsync(require('../../assets/sounds/battle.mp3'), {
+            shouldPlay: true
+        }, false);
+        soundBattle.setStatusAsync({ isLooping: false })
+
+        soundBattle.playAsync();
+
         setupMyTeam();
     }, []);
+
+    function returnHome() {
+        soundBattle.unloadAsync();
+        soundBattle.stopAsync();
+        navigation.goBack();
+    }
 
     function setupMyTeam(): void {
         const mt = [];
@@ -65,7 +91,7 @@ const StartOverlay = ({ ready, onPressFight }: Props): JSX.Element => {
             {!ready && <Text style={styles.loader}>chargement ...</Text>}
             <TouchableOpacity
                 style={styles.backButton}
-                onPress={navigation.goBack}
+                onPress={returnHome}
             >
                 <Text style={styles.backButtonLabel}>Retour</Text>
             </TouchableOpacity>
