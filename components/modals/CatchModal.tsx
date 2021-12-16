@@ -11,6 +11,7 @@ import {
 import useGame from '../../hooks/GameProvider';
 import { PokemonToCapture } from '../../types';
 import { styles } from '../../styles/screens/Catch.style';
+import { useNavigation } from '@react-navigation/native';
 const background = require('../../assets/images/catch_background.jpeg');
 
 let timer;
@@ -31,6 +32,7 @@ export default function CatchModal({ close }: Props): JSX.Element {
     const [wildPokemon, setWildPokemon] = useState<PokemonToCapture>(undefined);
     const [timeToDisparition, setTimeToDisparition] = useState('');
     const [captureState, setCaptureState] = useState<0 | 1 | 2>(0);
+    const navigation = useNavigation<any>();
 
     useEffect(() => {
         fetchPokemonToCapture();
@@ -156,7 +158,10 @@ export default function CatchModal({ close }: Props): JSX.Element {
                     style={styles.backgroundImage}
                 />
                 {wildPokemon ? displayPokemon() : displayWaitingTimer()}
-                <TouchableOpacity style={styles.closeButton} onPress={close}>
+                <TouchableOpacity
+                    style={styles.closeButton}
+                    onPress={() => navigation.navigate('Team')}
+                >
                     <Text style={styles.closeButtonLabel}>Retour</Text>
                 </TouchableOpacity>
             </View>

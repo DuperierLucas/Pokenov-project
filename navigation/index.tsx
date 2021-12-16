@@ -21,6 +21,7 @@ import FightModal from '../modals/FightModal';
 import { LinearGradient } from 'expo-linear-gradient';
 import chroma from 'chroma-js';
 import Settings from '../screens/Settings';
+import CatchModal from '../components/modals/CatchModal';
 
 export default function Navigation(): JSX.Element {
     return (
@@ -55,6 +56,13 @@ function RootNavigator() {
             <Stack.Screen
                 name={'Fight'}
                 component={FightModal}
+                options={() => ({
+                    headerShown: false,
+                })}
+            />
+            <Stack.Screen
+                name={'Catch'}
+                component={CatchModal}
                 options={() => ({
                     headerShown: false,
                 })}

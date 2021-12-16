@@ -33,7 +33,7 @@ export default function Home(): JSX.Element {
         //Deeplink sur la capture quand l'app est lancée
         const notificationInteractionSubscription =
             Notifications.addNotificationResponseReceivedListener(() => {
-                navigation.navigate('Team', { modaleVisible: true });
+                navigation.navigate('Catch');
             });
 
         return () => {
