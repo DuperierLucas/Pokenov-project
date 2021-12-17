@@ -1,5 +1,6 @@
 # Pokenov, quand pokémon débarque sur mobile
-
+### Développé par Anthony BUISSON, Lucas DUPERIER et Emma TARFI
+###
 ## Setup
 - Clone le projet
 - Lancer la commande `yarn`
