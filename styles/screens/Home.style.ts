@@ -9,6 +9,11 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         position: 'relative',
     },
+    placeholder: {
+        flex: 1,
+        width: viewportWidth,
+        textAlign: 'center',
+    },
     carouselContainer: {
         paddingBottom: 10,
         minWidth: viewportWidth,
@@ -88,7 +93,7 @@ export const styles = StyleSheet.create({
         color: colors.main.white,
         textTransform: 'uppercase',
         textShadowRadius: 5,
-        textShadowColor: colors.main.white,
+        textShadowColor: chroma(colors.main.white).alpha(0.5).css(),
     },
 
     statButton: {

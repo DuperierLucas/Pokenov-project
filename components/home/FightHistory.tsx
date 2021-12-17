@@ -5,9 +5,9 @@ import useGame from '../../hooks/GameProvider';
 
 const FightHistory = (): JSX.Element => {
     const { fightHistory } = useGame();
-
-    if (!fightHistory) {
-        return null;
+    console.log(fightHistory);
+    if (!fightHistory || fightHistory?.length < 1) {
+        return <Text style={styles.placeholder}>Aucun combat enregistré</Text>;
     }
 
     function renderHistoryEntry(result: 'win' | 'loose', key) {

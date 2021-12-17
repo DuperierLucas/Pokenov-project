@@ -15,37 +15,47 @@ export default function DisplayStats({ close }: Props): JSX.Element {
 
     const highestLevelPokemon = () => {
         if (pokemonTeam.length >= 1)
-            return Math.max.apply(
-                Math,
-                pokemonTeam.map((pokemon) => pokemon.lvl),
-            );
-        else return 'Votre équipe est vide';
+            return Math.max(...pokemonTeam.map((pokemon) => pokemon.lvl));
+        else return '-';
     };
 
     const nbFight = (status) => {
         return fightHistory.filter((fight) => fight.result == status).length;
     };
 
-    console.log(fightHistory.filter((fight) => fight.result == 'win').length);
-
     return (
         <View style={styles.statCard}>
             <View>
                 <Text style={styles.statTitle}>Statistiques</Text>
-                <View style={styles.statItem}>
-                    <Text>Pokemons possédé : {capturedPokemons.length}</Text>
+                <View style={styles.statContainer}>
+                    <View style={styles.statItem}>
+                        <Text style={[styles.statItem, styles.statNumber]}>
+                            {capturedPokemons.length}
+                        </Text>
+                        <Text style={styles.statItem}>Pokemons possédé(s)</Text>
+                    </View>
+                    <View style={styles.statItem}>
+                        <Text style={[styles.statItem, styles.statNumber]}>
+                            {highestLevelPokemon()}
+                        </Text>
+                        <Text style={styles.statItem}>
+                            Niveau max de pokémon
+                        </Text>
+                    </View>
                 </View>
-                <View style={styles.statItem}>
-                    <Text>
-                        Pokémon le plus haut niveau : lvl{' '}
-                        {highestLevelPokemon()}
-                    </Text>
-                </View>
-                <View style={styles.statItem}>
-                    <Text>Combats Gagnés : {nbFight('win')}</Text>
-                </View>
-                <View style={styles.statItem}>
-                    <Text>Combats Perdus : {nbFight('loose')}</Text>
+                <View style={styles.statContainer}>
+                    <View style={styles.statItem}>
+                        <Text style={[styles.statItem, styles.statNumber]}>
+                            {nbFight('win')}
+                        </Text>
+                        <Text style={styles.statItem}>Combats Gagnés</Text>
+                    </View>
+                    <View style={styles.statItem}>
+                        <Text style={[styles.statItem, styles.statNumber]}>
+                            {nbFight('loose')}
+                        </Text>
+                        <Text style={styles.statItem}>Combats Perdus</Text>
+                    </View>
                 </View>
             </View>
             <View style={styles.statFooter}>

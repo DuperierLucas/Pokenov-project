@@ -11,6 +11,10 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import FightHistory from '../components/home/FightHistory';
 import * as Notifications from 'expo-notifications';
+import DisplayStats from '../modals/DisplayStats';
+import { Audio } from 'expo-av';
+
+const sound = new Audio.Sound();
 
 Notifications.setNotificationHandler({
     handleNotification: async () => ({
@@ -19,13 +23,9 @@ Notifications.setNotificationHandler({
         shouldSetBadge: true,
     }),
 });
-import { Audio } from 'expo-av';
-
-const sound = new Audio.Sound();
-import DisplayStats from '../modals/DisplayStats';
 
 export default function Home(): JSX.Element {
-    const [statsVisible, setStatshVisible] = useState(false);
+    const [statsVisible, setStatsVisible] = useState(false);
 
     const navigation = useNavigation<any>();
 
@@ -42,31 +42,33 @@ export default function Home(): JSX.Element {
     }, []);
 
     function onPressDisplayStats() {
-        setStatshVisible(true);
+        setStatsVisible(true);
     }
 
-    useEffect(() => {
-        Audio.setAudioModeAsync({
+    async function setupAudio() {
+        await Audio.setAudioModeAsync({
             allowsRecordingIOS: false,
             interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX,
             playsInSilentModeIOS: true,
             interruptionModeAndroid:
                 Audio.INTERRUPTION_MODE_ANDROID_DUCK_OTHERS,
             shouldDuckAndroid: true,
-            staysActiveInBackground: true,
+            staysActiveInBackground: false,
             playThroughEarpieceAndroid: true,
         });
 
-        sound.loadAsync(
+        await sound.loadAsync(
             require('../assets/sounds/billycrawford.mp3'),
             {
                 shouldPlay: true,
             },
             false,
         );
-        sound.setStatusAsync({ isLooping: false });
-
         sound.playAsync();
+    }
+
+    useEffect(() => {
+        setupAudio();
     }, []);
 
     function openFight() {
@@ -118,7 +120,7 @@ export default function Home(): JSX.Element {
             </ImageBackground>
             {statsVisible && (
                 <Modal animationType="fade" visible={statsVisible}>
-                    <DisplayStats close={() => setStatshVisible(false)} />
+                    <DisplayStats close={() => setStatsVisible(false)} />
                 </Modal>
             )}
         </View>

@@ -25,18 +25,24 @@ const StartOverlay = ({ ready, onPressFight }: Props): JSX.Element => {
             allowsRecordingIOS: false,
             interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX,
             playsInSilentModeIOS: true,
-            interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DUCK_OTHERS,
+            interruptionModeAndroid:
+                Audio.INTERRUPTION_MODE_ANDROID_DUCK_OTHERS,
             shouldDuckAndroid: true,
-            staysActiveInBackground: true,
-            playThroughEarpieceAndroid: true
+            staysActiveInBackground: false,
+            playThroughEarpieceAndroid: true,
         });
 
-        soundBattle.loadAsync(require('../../assets/sounds/battle.mp3'), {
-            shouldPlay: true
-        }, false);
-        soundBattle.setStatusAsync({ isLooping: false })
-
-        soundBattle.playAsync();
+        soundBattle
+            .loadAsync(
+                require('../../assets/sounds/battle.mp3'),
+                {
+                    shouldPlay: true,
+                },
+                false,
+            )
+            .then(() => {
+                soundBattle.playAsync();
+            });
 
         setupMyTeam();
     }, []);
@@ -89,10 +95,7 @@ const StartOverlay = ({ ready, onPressFight }: Props): JSX.Element => {
                 <Text style={styles.buttonLabel}>Lancer le combat</Text>
             </TouchableOpacity>
             {!ready && <Text style={styles.loader}>chargement ...</Text>}
-            <TouchableOpacity
-                style={styles.backButton}
-                onPress={returnHome}
-            >
+            <TouchableOpacity style={styles.backButton} onPress={returnHome}>
                 <Text style={styles.backButtonLabel}>Retour</Text>
             </TouchableOpacity>
         </View>

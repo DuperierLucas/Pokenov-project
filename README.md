@@ -1,10 +1,16 @@
 # Pokenov, quand pokémon débarque sur mobile
 
+## Setup
+- Clone le projet
+- Lancer la commande `yarn`
+- Lancer la commande `expo start`
+- OU
+- Télécharger l'apk
 
 ## Fonctionnalités
 
 ### 1. Capturer des pokémons
-* Toutes les heures, un pokémon est disponible à la capture, soit présent au bon moment pour ne pas rater les plus rares d'entre eux !
+* Toutes les 10 minutes, un pokémon est disponible à la capture, soit présent au bon moment pour ne pas rater les plus rares d'entre eux !
 * Envoie une pokéball pour tenter de le capturer.
 * Tu recevras une notification lorsqu'un nouveau pokémon sauvage apparaitra. Un deeplink s'y trouvera pour accéder directement à l'écran de capture de l'appli.
 
@@ -45,7 +51,7 @@ Une fois les pokémons capturés, sélectionne les plus vaillants qui feront par
 * Async storage pour conserver les données sur l'appareil et permettre le jeu en solo
 
 * Notifications + deeplink vers la capture du pokémon
-
+  (peut ne pas fonctionner sur android si l'économie de batterie est activée pour l'application)
 * Podomètre pour faire évoluer les pokémons : il se lance dès qu'on clique sur "LEVEL UP". Il faut marcher jusqu'à atteindre le nombre de pas total pour faire monter le pokémon au niveau suivant. Attention ! Pour regarder le nombre de pas effectués, il faut s'arrêter.
 
-* Audio : tu pourras entendre le fabuleux générique de Pokémon !
+* Audio : tu pourras entendre le fabuleux générique de Pokémon ! (attention les oreilles)

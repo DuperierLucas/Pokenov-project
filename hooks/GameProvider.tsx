@@ -11,9 +11,7 @@ import {
     TeamRecapPokemon,
     FightHistoryEntry,
 } from '../types';
-import {
-    cancelAllScheduledNotificationsAsync,
-} from 'expo-notifications';
+import { cancelAllScheduledNotificationsAsync } from 'expo-notifications';
 
 type Game = {
     pokemonTeam: PokemonFull[];
@@ -89,12 +87,12 @@ const Provider = ({ children }: Props): JSX.Element => {
         const data = await AsyncStorage.getItem('game');
         if (data) {
             const parsedData = JSON.parse(data);
-            setPokemonTeam(parsedData.pokemonTeam);
-            setCapturedPokemons(parsedData.capturedPokemons);
-            setWildPokemons(parsedData.wildsPokemons);
-            setTopTeams(parsedData.topTeams);
-            setUsername(parsedData.username);
-            setFightHistory(parsedData.fightHistory);
+            setPokemonTeam(parsedData.pokemonTeam || DEFAULT_TEAM_STATE);
+            setCapturedPokemons(parsedData.capturedPokemons || []);
+            setWildPokemons(parsedData.wildsPokemons || []);
+            setTopTeams(parsedData.topTeams || []);
+            setUsername(parsedData.username || '');
+            setFightHistory(parsedData.fightHistory || []);
         }
     }
 
@@ -130,7 +128,7 @@ const Provider = ({ children }: Props): JSX.Element => {
             const baseDate = new Date(startTime);
             const poke = {
                 pokemon: randomPokemon,
-                apparitionDate: baseDate.getTime() + 1000 * index * 1 * 60,
+                apparitionDate: baseDate.getTime() + 1000 * index * 10 * 60,
                 disparitionDate:
                     baseDate.getTime() + 1000 * (index + 1) * 10 * 60,
             };

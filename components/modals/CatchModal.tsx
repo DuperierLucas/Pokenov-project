@@ -16,13 +16,9 @@ const background = require('../../assets/images/catch_background.jpeg');
 
 let timer;
 
-type Props = {
-    close: () => void;
-};
-
 const RONFLEX_ICON = require('../../assets/images/ronflex.png');
 
-export default function CatchModal({ close }: Props): JSX.Element {
+export default function CatchModal(): JSX.Element {
     const {
         getPokemonToCapture,
         catchPokemon,
