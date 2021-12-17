@@ -73,7 +73,7 @@ export default function CatchModal({ close }: Props): JSX.Element {
         if (win) {
             setCaptureState(1);
             catchPokemon();
-            setTimeout(close, 1500);
+            setTimeout(navigation.goBack, 1500);
         } else {
             skipWildPokemon();
             setCaptureState(2);
