@@ -81,7 +81,7 @@ export default function Home(): JSX.Element {
                 source={require('../assets/images/home-background.jpg')}
                 style={styles.background}
             >
-                <Text style={styles.title}>Classement</Text>
+                <Text style={styles.title}>Historique</Text>
                 <FightHistory />
 
                 <TouchableOpacity
