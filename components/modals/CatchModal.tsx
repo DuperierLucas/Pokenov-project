@@ -69,7 +69,7 @@ export default function CatchModal({ close }: Props): JSX.Element {
     }
 
     function onPressCapture() {
-        const win = Math.floor(Math.random() * 0) === 0;
+        const win = Math.floor(Math.random() * 2) === 0;
         if (win) {
             setCaptureState(1);
             catchPokemon();
